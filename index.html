@@ -7,53 +7,58 @@
   <style>
     body{font-family:Arial,sans-serif;background:#0f1115;color:#fff;margin:0}
     header{padding:24px;text-align:center;background:#171a21}
-    .wrap{max-width:1100px;margin:0 auto;padding:24px}
-    .toolbar{display:grid;grid-template-columns:1fr 220px;gap:12px;margin-bottom:20px}
-    input,select{padding:12px;border-radius:10px;border:1px solid #2a3240;background:#10151d;color:#fff}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px}
-    .card{background:#171c24;border:1px solid #263041;border-radius:16px;padding:16px}
-    .meta{color:#b9c1d0;font-size:14px}
-    a{color:#7dcfff}
+    .wrap{max-width:1200px;margin:0 auto;padding:24px}
+    table{width:100%;border-collapse:collapse;margin-top:20px}
+    th,td{border:1px solid #263041;padding:8px;text-align:left}
+    th{background:#1c2430}
+    tr:nth-child(even){background:#141922}
+    input,select{padding:10px;border-radius:8px;border:1px solid #2a3240;background:#10151d;color:#fff;margin-right:10px}
   </style>
 </head>
 <body>
   <header>
     <h1>TCG Event Hub</h1>
-    <p>Auto-updated from official event sources where available.</p>
+    <p>Automated event verification list</p>
   </header>
+
   <div class="wrap">
-    <div class="toolbar">
-      <input id="q" placeholder="Search title, game, format, city..." />
-      <select id="game">
-        <option value="all">All games</option>
+
+    <div>
+      <input id="search" placeholder="Search events..." />
+      <select id="gameFilter">
+        <option value="all">All Games</option>
       </select>
     </div>
-    <div id="grid" class="grid"></div>
+
+    <table id="eventsTable">
+      <thead>
+        <tr>
+          <th>Month</th>
+          <th>Game</th>
+          <th>Event Type</th>
+          <th>Event Name</th>
+          <th>Date</th>
+          <th>Source</th>
+          <th>Image</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
   </div>
-  <script>
-    let allEvents = [];
-    const q = document.getElementById('q');
-    const game = document.getElementById('game');
-    const grid = document.getElementById('grid');
 
-    function card(e){
-      return `<div class="card">
-        <div class="meta">${e.game || ''} · ${e.event_type || e.raw_category || 'Event'}</div>
-        <h3>${e.title || ''}</h3>
-        <div class="meta">${[e.start_date, e.city, e.region, e.country].filter(Boolean).join(' · ')}</div>
-        <div class="meta">${[e.venue, e.location_text, e.format].filter(Boolean).join(' · ')}</div>
-        ${e.url ? `<p><a href="${e.url}" target="_blank" rel="noopener">Source</a></p>` : ''}
-      </div>`;
-    }
+<script>
+let allEvents=[]
+const tbody=document.querySelector("#eventsTable tbody")
+const search=document.getElementById("search")
+const gameFilter=document.getElementById("gameFilter")
 
-    function render(){
-      const term = q.value.trim().toLowerCase();
-      const selected = game.value;
-      const filtered = allEvents.filter(e => {
-        const text = [e.game, e.title, e.event_type, e.format, e.city, e.region, e.country, e.venue, e.raw_category].filter(Boolean).join(' ').toLowerCase();
-        const okTerm = !term || text.includes(term);
-        const okGame = selected === 'all' || e.game === selected;
-        return okTerm && okGame;
-      });
-      grid.innerHTML = filtered.map(card).join('') || '<p>No events found.</p>';
+function render(){
+  const term=search.value.toLowerCase()
+  const game=gameFilter.value
+
+  const filtered=allEvents.filter(e=>{
+    const matchSearch=(e.event_name||"").toLowerCase().includes(term)
+    const matchGame=(game==="all"||e.game_type===game)
+    return matchSearch && matchGame
 </html>
