@@ -143,7 +143,7 @@ def extract_first_isoish_date(text: str) -> str | None:
             except Exception:
                 pass
 
-    range_match = re.search(r"([A-Z][a-z]{2,8})\s+(\d{1,2})\s*[-–]\s*\d{1,2}", value)
+    range_match = re.search(r"([A-Z][a-z]{2,8})\s+(\d{1,2})\s*[-–]\s*\d{1,2}(?:,\s*20\d{2})?", value)
     if range_match:
         month_name = range_match.group(1)
         first_day = range_match.group(2)
@@ -196,7 +196,7 @@ async def scrape_locator_style_events(
     source: str,
     type_keywords: dict[str, str],
 ) -> List[Event]:
-    text = await fetch_page_text(url, wait_ms=6000)
+    text = await fetch_page_text(url, wait_ms=7000)
     lines = clean_lines(text)
 
     events: List[Event] = []
@@ -239,29 +239,8 @@ async def scrape_locator_style_events(
             subtype = infer_event_type(all_text, type_keywords)
             event_type = f"Play - {subtype}" if subtype else "Play"
 
-            venue = detail_lines[1] if len(detail_lines) >= 2 else None
-            location_text = detail_lines[2] if len(detail_lines) >= 3 else None
-
-            for candidate in detail_lines:
-                if any(
-                    token in candidate.lower()
-                    for token in [
-                        "ave", "st ", "street", "road", "rd", "blvd",
-                        "parkway", "pkwy", "nc", "va", "usa", "united states"
-                    ]
-                ):
-                    location_text = candidate
-                    break
-
-            for candidate in detail_lines:
-                if (
-                    candidate != location_text
-                    and len(candidate) > 2
-                    and "view details" not in candidate.lower()
-                    and "$" not in candidate
-                ):
-                    venue = candidate
-                    break
+            venue = detail_lines[0] if len(detail_lines) >= 1 else None
+            location_text = detail_lines[1] if len(detail_lines) >= 2 else None
 
             events.append(
                 Event(
@@ -278,44 +257,16 @@ async def scrape_locator_style_events(
             )
 
             i += max(2, len(detail_lines))
-        else:
-            i += 1
+            continue
+
+        i += 1
 
     return events
 
 
-async def scrape_wpn_events() -> List[Event]:
-    url = "https://wpn.wizards.com/en/events"
-    html = await fetch_html(url)
-    soup = BeautifulSoup(html, "html.parser")
-    text = soup.get_text("\n", strip=True)
-
-    events: List[Event] = []
-    for line in clean_lines(text):
-        subtype = infer_event_type(
-            line,
-            {
-                "Commander": "Commander",
-                "Draft": "Draft",
-                "Modern": "Modern",
-                "Standard": "Standard",
-                "cEDH": "cEDH",
-            },
-        )
-        if subtype:
-            events.append(
-                Event(
-                    source="WPN",
-                    game="Magic: The Gathering",
-                    title=line.strip(),
-                    event_type=f"Play - {subtype}",
-                    raw_category="Magic WPN program",
-                    url=url,
-                )
-            )
-    return events
-
-
+# -----------------------------
+# RELEASE SOURCES
+# -----------------------------
 async def scrape_mtg_releases() -> List[Event]:
     url = "https://magic.wizards.com/en/news/announcements/everything-announced-for-magic-the-gathering-in-2026"
     html = await fetch_html(url)
@@ -353,37 +304,6 @@ async def scrape_mtg_releases() -> List[Event]:
     add_release("Magic: The Gathering | Star Trek", "November 1 2026", "Article lists November 2026")
 
     return events
-
-
-async def scrape_magic_locator() -> List[Event]:
-    return await scrape_locator_style_events(
-        url="https://locator.wizards.com/",
-        game="Magic: The Gathering",
-        source="Wizards Locator",
-        type_keywords={
-            "Commander": "Commander",
-            "Draft": "Draft",
-            "Modern": "Modern",
-            "Standard": "Standard",
-            "cEDH": "cEDH",
-        },
-    )
-
-
-async def scrape_dnd_locator() -> List[Event]:
-    return await scrape_locator_style_events(
-        url="https://locator.wizards.com/",
-        game="Dungeons & Dragons",
-        source="Wizards Locator",
-        type_keywords={
-            "Adventurers League": "Adventurers League",
-            "Ladies D&D": "Ladies Night",
-            "Ladies D&D Night": "Ladies Night",
-            "Ladies Night": "Ladies Night",
-            "Book Release": "Book Release",
-            "D&D": "D&D Event",
-        },
-    )
 
 
 async def scrape_dnd_releases() -> List[Event]:
@@ -425,6 +345,146 @@ async def scrape_dnd_releases() -> List[Event]:
     return events
 
 
+async def scrape_lorcana_releases() -> List[Event]:
+    url = "https://www.disneylorcana.com/en-GB/news"
+    html = await fetch_html(url)
+    soup = BeautifulSoup(html, "html.parser")
+
+    image_url = None
+    og_image = soup.find("meta", attrs={"property": "og:image"})
+    if og_image and og_image.get("content"):
+        image_url = og_image["content"]
+
+    events: List[Event] = []
+
+    def add_release(title: str, raw_date: str, notes: str | None = None):
+        events.append(
+            Event(
+                source="Disney Lorcana News",
+                game="Disney Lorcana",
+                title=title,
+                event_type="Release",
+                start_date=parse_date_to_iso(raw_date),
+                url=url,
+                image_url=image_url,
+                image_alt=title,
+                notes=notes,
+                location_text="Official Disney Lorcana news page",
+            )
+        )
+
+    add_release("Winterspell Prerelease", "February 13 2026", "Official Disney Lorcana prerelease date")
+    add_release("Winterspell Wide Release", "February 20 2026", "Official Disney Lorcana wide release date")
+    add_release("Disney Lorcana Collector’s Guide Sets 1-4", "February 1 2026", "Official Disney Lorcana product release date")
+    add_release("Disney Lorcana Collector’s Guide Sets 5-8", "February 1 2026", "Official Disney Lorcana product release date")
+    add_release("Disney Lorcana Notebook", "February 1 2026", "Official Disney Lorcana product release date")
+    add_release("Scrooge McDuck Gift Box", "March 13 2026", "Official Disney Lorcana product release date")
+    add_release("Collection Starter Set – Stitch Edition", "March 13 2026", "Official Disney Lorcana product release date")
+    add_release("2-Player Starter Set", "May 8 2026", "Official Disney Lorcana product release date")
+
+    return events
+
+
+async def scrape_riftbound_releases() -> List[Event]:
+    url = "https://riftbound.leagueoflegends.com/en-us/news/announcements/2026-roadmap/"
+    html = await fetch_html(url)
+    soup = BeautifulSoup(html, "html.parser")
+
+    image_url = None
+    og_image = soup.find("meta", attrs={"property": "og:image"})
+    if og_image and og_image.get("content"):
+        image_url = og_image["content"]
+
+    events: List[Event] = []
+
+    def add_release(title: str, raw_date: str, notes: str | None = None):
+        events.append(
+            Event(
+                source="Riftbound 2026 Roadmap",
+                game="Riftbound",
+                title=title,
+                event_type="Release",
+                start_date=parse_date_to_iso(raw_date),
+                url=url,
+                image_url=image_url,
+                image_alt=title,
+                notes=notes,
+                location_text="Official Riftbound roadmap",
+            )
+        )
+
+    add_release("Spiritforged Pre-Rift", "February 6 2026", "Roadmap lists 6-12th as Spiritforged Pre-Rift")
+    add_release("Spiritforged English Release", "February 13 2026", "Roadmap lists 13th as Spiritforged English Release")
+
+    return events
+
+
+# -----------------------------
+# PLAY SOURCES
+# -----------------------------
+async def scrape_wpn_events() -> List[Event]:
+    url = "https://wpn.wizards.com/en/events"
+    html = await fetch_html(url)
+    soup = BeautifulSoup(html, "html.parser")
+    text = soup.get_text("\n", strip=True)
+
+    events: List[Event] = []
+    for line in clean_lines(text):
+        subtype = infer_event_type(
+            line,
+            {
+                "Commander": "Commander",
+                "Draft": "Draft",
+                "Modern": "Modern",
+                "Standard": "Standard",
+                "cEDH": "cEDH",
+            },
+        )
+        if subtype:
+            events.append(
+                Event(
+                    source="WPN",
+                    game="Magic: The Gathering",
+                    title=line.strip(),
+                    event_type=f"Play - {subtype}",
+                    raw_category="Magic WPN program",
+                    url=url,
+                )
+            )
+    return events
+
+
+async def scrape_magic_locator() -> List[Event]:
+    return await scrape_locator_style_events(
+        url="https://locator.wizards.com/",
+        game="Magic: The Gathering",
+        source="Wizards Locator",
+        type_keywords={
+            "Commander": "Commander",
+            "Draft": "Draft",
+            "Modern": "Modern",
+            "Standard": "Standard",
+            "cEDH": "cEDH",
+        },
+    )
+
+
+async def scrape_dnd_locator() -> List[Event]:
+    return await scrape_locator_style_events(
+        url="https://locator.wizards.com/",
+        game="Dungeons & Dragons",
+        source="Wizards Locator",
+        type_keywords={
+            "Adventurers League": "Adventurers League",
+            "Ladies D&D": "Ladies Night",
+            "Ladies D&D Night": "Ladies Night",
+            "Ladies Night": "Ladies Night",
+            "Book Release": "Book Release",
+            "D&D": "D&D Event",
+        },
+    )
+
+
 async def scrape_pokemon_locator() -> List[Event]:
     return await scrape_locator_style_events(
         url="https://events.pokemon.com/EventLocator/?locale=en-us",
@@ -441,38 +501,110 @@ async def scrape_pokemon_locator() -> List[Event]:
 
 
 async def scrape_lorcana_locator() -> List[Event]:
-    return await scrape_locator_style_events(
-        url="https://tcg.ravensburgerplay.com/events",
-        game="Disney Lorcana",
-        source="Ravensburger Play Hub",
-        type_keywords={
-            "Set Championship": "Set Championship",
-            "Weekly Play": "Weekly Play",
-            "Draft": "Draft",
-            "Sealed": "Sealed",
-            "Constructed": "Constructed",
-            "Challenge": "Challenge",
-            "Casual": "Casual Play",
-        },
-    )
+    url = "https://tcg.ravensburgerplay.com/events"
+    text = await fetch_page_text(url, wait_ms=7000)
+    lines = clean_lines(text)
+
+    events: List[Event] = []
+    i = 0
+
+    while i < len(lines):
+        line = lines[i]
+
+        if looks_like_day_date(line) or looks_like_short_month_date(line):
+            raw_date = line
+            parsed_date = parse_date_to_iso(raw_date)
+
+            title = lines[i + 1] if i + 1 < len(lines) else "Disney Lorcana Event"
+            detail_1 = lines[i + 2] if i + 2 < len(lines) else ""
+            detail_2 = lines[i + 3] if i + 3 < len(lines) else ""
+
+            subtype = infer_event_type(
+                " | ".join([title, detail_1, detail_2]),
+                {
+                    "Set Championship": "Set Championship",
+                    "Weekly Play": "Weekly Play",
+                    "Draft": "Draft",
+                    "Sealed": "Sealed",
+                    "Constructed": "Constructed",
+                    "Challenge": "Challenge",
+                    "Casual": "Casual Play",
+                },
+            )
+
+            events.append(
+                Event(
+                    source="Ravensburger Play Hub",
+                    game="Disney Lorcana",
+                    title=title,
+                    event_type=f"Play - {subtype}" if subtype else "Play",
+                    start_date=parsed_date,
+                    venue=detail_1 or None,
+                    location_text=detail_2 or None,
+                    notes=raw_date,
+                    url=url,
+                )
+            )
+            i += 4
+            continue
+
+        i += 1
+
+    return events
 
 
 async def scrape_riftbound_events() -> List[Event]:
-    return await scrape_locator_style_events(
-        url="https://locator.riftbound.uvsgames.com/events",
-        game="Riftbound",
-        source="Riftbound Locator",
-        type_keywords={
-            "Starter Deck": "Starter Deck Event",
-            "Learn to Play": "Learn to Play",
-            "Sealed": "Sealed",
-            "Draft": "Draft",
-            "Constructed": "Constructed",
-            "Casual": "Casual Play",
-            "Tournament": "Tournament",
-            "Weekly": "Weekly Play",
-        },
-    )
+    url = "https://locator.riftbound.uvsgames.com/events"
+    text = await fetch_page_text(url, wait_ms=7000)
+    lines = clean_lines(text)
+
+    events: List[Event] = []
+    i = 0
+
+    while i < len(lines):
+        line = lines[i]
+
+        if looks_like_day_date(line) or looks_like_short_month_date(line):
+            raw_date = line
+            parsed_date = parse_date_to_iso(raw_date)
+
+            title = lines[i + 1] if i + 1 < len(lines) else "Riftbound Event"
+            detail_1 = lines[i + 2] if i + 2 < len(lines) else ""
+            detail_2 = lines[i + 3] if i + 3 < len(lines) else ""
+
+            subtype = infer_event_type(
+                " | ".join([title, detail_1, detail_2]),
+                {
+                    "Starter Deck": "Starter Deck Event",
+                    "Learn to Play": "Learn to Play",
+                    "Sealed": "Sealed",
+                    "Draft": "Draft",
+                    "Constructed": "Constructed",
+                    "Casual": "Casual Play",
+                    "Tournament": "Tournament",
+                    "Weekly": "Weekly Play",
+                },
+            )
+
+            events.append(
+                Event(
+                    source="Riftbound Locator",
+                    game="Riftbound",
+                    title=title,
+                    event_type=f"Play - {subtype}" if subtype else "Play",
+                    start_date=parsed_date,
+                    venue=detail_1 or None,
+                    location_text=detail_2 or None,
+                    notes=raw_date,
+                    url=url,
+                )
+            )
+            i += 4
+            continue
+
+        i += 1
+
+    return events
 
 
 async def scrape_star_wars_locator() -> List[Event]:
@@ -632,15 +764,18 @@ async def scrape_gundam_events() -> List[Event]:
                     title = lines[0]
 
                 event_period = None
-                for line in lines:
-                    if (
-                        "Event Period" in line
-                        or "Period" in line
-                        or "Date" in line
-                        or re.search(r"[A-Z][a-z]{2,8}\s+\d{1,2}", line)
-                    ):
-                        event_period = line
-                        break
+                for idx, line in enumerate(lines):
+                    normalized = line.strip()
+                    if normalized in {"Event Period", "Period", "Date"}:
+                        if idx + 1 < len(lines):
+                            event_period = lines[idx + 1].strip()
+                            break
+
+                if not event_period:
+                    for line in lines:
+                        if re.search(r"[A-Z][a-z]{2,8}\s+\d{1,2}\s*[-–]\s*\d{1,2}(?:,\s*20\d{2})?", line):
+                            event_period = line.strip()
+                            break
 
                 image_url = None
                 og_image = page_soup.find("meta", attrs={"property": "og:image"})
@@ -700,11 +835,16 @@ async def scrape_gundam_events() -> List[Event]:
 
 async def scrape_all() -> List[Event]:
     batches = await asyncio.gather(
-        scrape_wpn_events(),
+        # Releases
         scrape_mtg_releases(),
+        scrape_dnd_releases(),
+        scrape_lorcana_releases(),
+        scrape_riftbound_releases(),
+
+        # Play
+        scrape_wpn_events(),
         scrape_magic_locator(),
         scrape_dnd_locator(),
-        scrape_dnd_releases(),
         scrape_pokemon_locator(),
         scrape_lorcana_locator(),
         scrape_riftbound_events(),
