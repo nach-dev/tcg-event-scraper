@@ -7,21 +7,49 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #0f1115;
-      color: #fff;
+      background: linear-gradient(180deg, #160b22 0%, #211036 45%, #12081b 100%);
+      color: #f5edff;
       margin: 0;
     }
 
     header {
-      padding: 24px;
+      padding: 28px 24px;
       text-align: center;
-      background: #171a21;
+      background: rgba(52, 22, 83, 0.88);
+      border-bottom: 1px solid #5d2d8a;
+      box-shadow: 0 4px 20px rgba(0,0,0,.25);
+    }
+
+    h1 {
+      margin: 0 0 8px;
     }
 
     .wrap {
-      max-width: 1400px;
+      max-width: 1450px;
       margin: 0 auto;
       padding: 24px;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .tab {
+      padding: 10px 16px;
+      border: 1px solid #6d3ea0;
+      background: #2a1541;
+      color: #f5edff;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .tab.active {
+      background: #7d49b5;
+      border-color: #b48cff;
+      color: #fff;
     }
 
     .toolbar {
@@ -33,10 +61,10 @@
 
     input, select {
       padding: 10px;
-      border-radius: 8px;
-      border: 1px solid #2a3240;
-      background: #10151d;
-      color: #fff;
+      border-radius: 10px;
+      border: 1px solid #6d3ea0;
+      background: #1f1231;
+      color: #f5edff;
     }
 
     input {
@@ -49,27 +77,28 @@
       border-collapse: collapse;
       margin-top: 12px;
       font-size: 14px;
+      background: rgba(27, 15, 43, 0.85);
     }
 
     th, td {
-      border: 1px solid #263041;
+      border: 1px solid #4f2d73;
       padding: 10px;
       text-align: left;
       vertical-align: top;
     }
 
     th {
-      background: #1c2430;
+      background: #361c57;
       position: sticky;
       top: 0;
     }
 
     tr:nth-child(even) {
-      background: #141922;
+      background: rgba(56, 28, 87, 0.35);
     }
 
     a {
-      color: #7dcfff;
+      color: #d2b8ff;
     }
 
     img {
@@ -77,17 +106,19 @@
       max-height: 80px;
       border-radius: 6px;
       display: block;
+      border: 1px solid #5f3490;
+      background: #fff;
     }
 
     .meta {
       margin: 10px 0 0;
-      color: #b7c0cf;
+      color: #d7c3f4;
       font-size: 13px;
     }
 
     .empty {
       padding: 24px 0;
-      color: #b7c0cf;
+      color: #d7c3f4;
     }
 
     .desc {
@@ -95,15 +126,40 @@
       white-space: normal;
       line-height: 1.35;
     }
+
+    .badge-release,
+    .badge-play {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .badge-release {
+      background: #5f2f91;
+      color: #f5edff;
+    }
+
+    .badge-play {
+      background: #3d2460;
+      color: #f5edff;
+    }
   </style>
 </head>
 <body>
   <header>
     <h1>TCG Event Hub</h1>
-    <p>Automated verification list for TCG and tabletop events</p>
+    <p>Automated verification list for releases and play events</p>
   </header>
 
   <div class="wrap">
+    <div class="tabs">
+      <button class="tab active" data-mode="all">All</button>
+      <button class="tab" data-mode="release">Releases</button>
+      <button class="tab" data-mode="play">Play</button>
+    </div>
+
     <div class="toolbar">
       <input id="search" type="text" placeholder="Search events, games, descriptions, notes, locations..." />
       <select id="gameFilter">
@@ -134,15 +190,35 @@
 
   <script>
     let allEvents = [];
+    let currentMode = "all";
 
     const tbody = document.querySelector("#eventsTable tbody");
     const search = document.getElementById("search");
     const gameFilter = document.getElementById("gameFilter");
     const summary = document.getElementById("summary");
     const emptyState = document.getElementById("emptyState");
+    const tabs = document.querySelectorAll(".tab");
 
     function safe(value) {
       return value ?? "";
+    }
+
+    function isRelease(eventType) {
+      return (eventType || "").toLowerCase() === "release";
+    }
+
+    function isPlay(eventType) {
+      return (eventType || "").toLowerCase().startsWith("play");
+    }
+
+    function badge(eventType) {
+      if (isRelease(eventType)) {
+        return `<span class="badge-release">${safe(eventType)}</span>`;
+      }
+      if (isPlay(eventType)) {
+        return `<span class="badge-play">${safe(eventType)}</span>`;
+      }
+      return safe(eventType);
     }
 
     function render() {
@@ -169,7 +245,14 @@
         const matchSearch = !term || haystack.includes(term);
         const matchGame = selectedGame === "all" || e.game_type === selectedGame;
 
-        return matchSearch && matchGame;
+        let matchMode = true;
+        if (currentMode === "release") {
+          matchMode = isRelease(e.event_type);
+        } else if (currentMode === "play") {
+          matchMode = isPlay(e.event_type);
+        }
+
+        return matchSearch && matchGame && matchMode;
       });
 
       tbody.innerHTML = "";
@@ -186,7 +269,7 @@
         tr.innerHTML = `
           <td>${safe(e.month)}</td>
           <td>${safe(e.game_type)}</td>
-          <td>${safe(e.event_type)}</td>
+          <td>${badge(e.event_type)}</td>
           <td>${safe(e.event_name)}</td>
           <td>${safe(e.event_date)}</td>
           <td class="desc">${safe(e.event_description)}</td>
@@ -212,6 +295,15 @@
       summary.textContent = `${filtered.length} event${filtered.length === 1 ? "" : "s"} shown`;
     }
 
+    tabs.forEach(tab => {
+      tab.addEventListener("click", () => {
+        tabs.forEach(t => t.classList.remove("active"));
+        tab.classList.add("active");
+        currentMode = tab.dataset.mode;
+        render();
+      });
+    });
+
     fetch("./site/data/events-by-month.json")
       .then(response => {
         if (!response.ok) {
@@ -223,7 +315,6 @@
         allEvents = Object.values(data).flat();
 
         const games = [...new Set(allEvents.map(e => e.game_type).filter(Boolean))].sort();
-
         games.forEach(game => {
           const opt = document.createElement("option");
           opt.value = game;
@@ -235,7 +326,7 @@
       })
       .catch(error => {
         console.error("Failed to load event data:", error);
-        summary.textContent = "Failed to load event data. Check that ./site/data/events-by-month.json exists in GitHub Pages.";
+        summary.textContent = "Failed to load event data.";
         emptyState.style.display = "block";
       });
 
