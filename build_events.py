@@ -19,16 +19,11 @@ def event_month(value: str | None) -> str:
     if not value:
         return "unknown"
 
-    # Preferred format: 2026-03-21
-    if len(value) >= 7 and value[4] == "-" and value[7 - 1] == "3":
-        pass
-
     try:
         return datetime.strptime(value[:10], "%Y-%m-%d").strftime("%Y-%m")
     except Exception:
         pass
 
-    # Fallbacks for readable date strings
     for fmt in [
         "%A, %B %d, %I:%M %p",
         "%A, %B %d, %Y %I:%M %p",
