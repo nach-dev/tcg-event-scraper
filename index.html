@@ -19,7 +19,7 @@
     }
 
     .wrap {
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
       padding: 24px;
     }
@@ -40,7 +40,7 @@
     }
 
     input {
-      min-width: 280px;
+      min-width: 300px;
       flex: 1;
     }
 
@@ -73,8 +73,8 @@
     }
 
     img {
-      max-width: 60px;
-      max-height: 60px;
+      max-width: 80px;
+      max-height: 80px;
       border-radius: 6px;
       display: block;
     }
@@ -89,17 +89,23 @@
       padding: 24px 0;
       color: #b7c0cf;
     }
+
+    .desc {
+      max-width: 420px;
+      white-space: normal;
+      line-height: 1.35;
+    }
   </style>
 </head>
 <body>
   <header>
     <h1>TCG Event Hub</h1>
-    <p>Automated event verification list</p>
+    <p>Automated verification list for TCG and tabletop events</p>
   </header>
 
   <div class="wrap">
     <div class="toolbar">
-      <input id="search" type="text" placeholder="Search events, game, type, notes, location..." />
+      <input id="search" type="text" placeholder="Search events, games, descriptions, notes, locations..." />
       <select id="gameFilter">
         <option value="all">All Games</option>
       </select>
@@ -115,6 +121,7 @@
           <th>Event Type</th>
           <th>Event Name</th>
           <th>Date</th>
+          <th>Description</th>
           <th>Source</th>
           <th>Image</th>
         </tr>
@@ -149,6 +156,7 @@
           e.event_type,
           e.event_name,
           e.event_date,
+          e.event_description,
           e.source_site,
           e.source_url,
           e.location_text,
@@ -181,6 +189,7 @@
           <td>${safe(e.event_type)}</td>
           <td>${safe(e.event_name)}</td>
           <td>${safe(e.event_date)}</td>
+          <td class="desc">${safe(e.event_description)}</td>
           <td>
             ${
               e.source_url
@@ -202,6 +211,7 @@
 
       summary.textContent = `${filtered.length} event${filtered.length === 1 ? "" : "s"} shown`;
     }
+
     fetch("./site/data/events-by-month.json")
       .then(response => {
         if (!response.ok) {
@@ -225,7 +235,7 @@
       })
       .catch(error => {
         console.error("Failed to load event data:", error);
-        summary.textContent = "Failed to load event data. Check that ./data/events-by-month.json exists in GitHub Pages.";
+        summary.textContent = "Failed to load event data. Check that ./site/data/events-by-month.json exists in GitHub Pages.";
         emptyState.style.display = "block";
       });
 
@@ -234,4 +244,3 @@
   </script>
 </body>
 </html>
-
