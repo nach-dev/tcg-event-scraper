@@ -1,8 +1,7 @@
 from __future__ import annotations
 
-from datetime import date
 from typing import Optional
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 
 class Event(BaseModel):
@@ -21,6 +20,8 @@ class Event(BaseModel):
     url: Optional[str] = None
     notes: Optional[str] = None
     raw_category: Optional[str] = None
+    image_url: Optional[str] = None
+    image_alt: Optional[str] = None
 
     def dedupe_key(self) -> str:
         return "|".join(
