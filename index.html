@@ -202,8 +202,7 @@
 
       summary.textContent = `${filtered.length} event${filtered.length === 1 ? "" : "s"} shown`;
     }
-
-    fetch("./data/events-by-month.json")
+    fetch("./site/data/events-by-month.json")
       .then(response => {
         if (!response.ok) {
           throw new Error(`HTTP ${response.status} loading events-by-month.json`);
@@ -235,3 +234,4 @@
   </script>
 </body>
 </html>
+
