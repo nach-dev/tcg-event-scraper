@@ -236,7 +236,8 @@ async def scrape_locator_style_events(
             detail_blob = " | ".join(detail_lines)
             all_text = " | ".join([title, raw_date, detail_blob])
 
-            event_type = infer_event_type(all_text, type_keywords)
+            subtype = infer_event_type(all_text, type_keywords)
+            event_type = f"Play - {subtype}" if subtype else "Play"
 
             venue = detail_lines[1] if len(detail_lines) >= 2 else None
             location_text = detail_lines[2] if len(detail_lines) >= 3 else None
@@ -245,18 +246,8 @@ async def scrape_locator_style_events(
                 if any(
                     token in candidate.lower()
                     for token in [
-                        "ave",
-                        "st ",
-                        "street",
-                        "road",
-                        "rd",
-                        "blvd",
-                        "parkway",
-                        "pkwy",
-                        "nc",
-                        "va",
-                        "usa",
-                        "united states",
+                        "ave", "st ", "street", "road", "rd", "blvd",
+                        "parkway", "pkwy", "nc", "va", "usa", "united states"
                     ]
                 ):
                     location_text = candidate
@@ -301,16 +292,66 @@ async def scrape_wpn_events() -> List[Event]:
 
     events: List[Event] = []
     for line in clean_lines(text):
-        if any(x in line for x in ["Commander", "Draft", "Modern", "Standard", "cEDH"]):
+        subtype = infer_event_type(
+            line,
+            {
+                "Commander": "Commander",
+                "Draft": "Draft",
+                "Modern": "Modern",
+                "Standard": "Standard",
+                "cEDH": "cEDH",
+            },
+        )
+        if subtype:
             events.append(
                 Event(
                     source="WPN",
                     game="Magic: The Gathering",
                     title=line.strip(),
+                    event_type=f"Play - {subtype}",
                     raw_category="Magic WPN program",
                     url=url,
                 )
             )
+    return events
+
+
+async def scrape_mtg_releases() -> List[Event]:
+    url = "https://magic.wizards.com/en/news/announcements/everything-announced-for-magic-the-gathering-in-2026"
+    html = await fetch_html(url)
+    soup = BeautifulSoup(html, "html.parser")
+
+    image_url = None
+    og_image = soup.find("meta", attrs={"property": "og:image"})
+    if og_image and og_image.get("content"):
+        image_url = og_image["content"]
+
+    events: List[Event] = []
+
+    def add_release(title: str, raw_date: str, notes: str | None = None):
+        events.append(
+            Event(
+                source="Magic: The Gathering",
+                game="Magic: The Gathering",
+                title=title,
+                event_type="Release",
+                start_date=parse_date_to_iso(raw_date),
+                url=url,
+                image_url=image_url,
+                image_alt=title,
+                notes=notes,
+                location_text="MTG 2026 announcement page",
+            )
+        )
+
+    add_release("Lorwyn Eclipsed", "January 23 2026", "Official exact release date")
+    add_release("Magic: The Gathering | Teenage Mutant Ninja Turtles", "March 1 2026", "Article lists March 2026")
+    add_release("Secrets of Strixhaven", "April 1 2026", "Article lists April 2026")
+    add_release("Magic: The Gathering | Marvel Super Heroes", "June 1 2026", "Article lists June 2026")
+    add_release("Magic: The Gathering | The Hobbit", "August 1 2026", "Article lists August 2026")
+    add_release("Reality Fracture", "October 1 2026", "Article lists October 2026")
+    add_release("Magic: The Gathering | Star Trek", "November 1 2026", "Article lists November 2026")
+
     return events
 
 
@@ -349,7 +390,6 @@ async def scrape_dnd_releases() -> List[Event]:
     url = "https://www.dndbeyond.com/posts/2136-d-d-2026-calendar-release"
     html = await fetch_html(url)
     soup = BeautifulSoup(html, "html.parser")
-    text = soup.get_text("\n", strip=True)
 
     image_url = None
     og_image = soup.find("meta", attrs={"property": "og:image"})
@@ -358,13 +398,13 @@ async def scrape_dnd_releases() -> List[Event]:
 
     events: List[Event] = []
 
-    def add_release(title: str, event_type: str, raw_date: str, notes: str | None = None):
+    def add_release(title: str, raw_date: str, notes: str | None = None):
         events.append(
             Event(
                 source="D&D Beyond",
                 game="Dungeons & Dragons",
                 title=title,
-                event_type=event_type,
+                event_type="Release",
                 start_date=parse_date_to_iso(raw_date),
                 url=url,
                 image_url=image_url,
@@ -374,48 +414,13 @@ async def scrape_dnd_releases() -> List[Event]:
             )
         )
 
-    add_release(
-        "Ravenloft: The Horrors Within",
-        "Book Pre-Order",
-        "April 13 2026",
-        "Pre-order date",
-    )
-    add_release(
-        "Ravenloft: The Horrors Within",
-        "Master Tier Release",
-        "June 2 2026",
-        "Master Tier release",
-    )
-    add_release(
-        "Ravenloft: The Horrors Within",
-        "Hero Tier Release",
-        "June 9 2026",
-        "Hero Tier release",
-    )
-    add_release(
-        "Ravenloft: The Horrors Within",
-        "Wide Release",
-        "June 16 2026",
-        "Wide release",
-    )
-    add_release(
-        "D&D Reference Cards",
-        "Product Release",
-        "August 1 2026",
-        "Article says arriving in August 2026",
-    )
-    add_release(
-        "Arcana Unleashed",
-        "Book Release",
-        "September 1 2026",
-        "Article says debut in September 2026",
-    )
-    add_release(
-        "Arcana Unleashed: Deadfall",
-        "Adventure Book Release",
-        "September 1 2026",
-        "Article says debut in September 2026",
-    )
+    add_release("Ravenloft: The Horrors Within", "April 13 2026", "Pre-order date")
+    add_release("Ravenloft: The Horrors Within", "June 2 2026", "Master Tier release")
+    add_release("Ravenloft: The Horrors Within", "June 9 2026", "Hero Tier release")
+    add_release("Ravenloft: The Horrors Within", "June 16 2026", "Wide release")
+    add_release("D&D Reference Cards", "August 1 2026", "Article says arriving in August 2026")
+    add_release("Arcana Unleashed", "September 1 2026", "Article says debut in September 2026")
+    add_release("Arcana Unleashed: Deadfall", "September 1 2026", "Article says debut in September 2026")
 
     return events
 
@@ -522,7 +527,7 @@ async def scrape_one_piece_events() -> List[Event]:
             if not title and lines:
                 title = lines[0]
 
-            event_type = infer_event_type(
+            subtype = infer_event_type(
                 title or text,
                 {
                     "Treasure Cup": "Treasure Cup",
@@ -549,7 +554,7 @@ async def scrape_one_piece_events() -> List[Event]:
                     source="ONE PIECE Official",
                     game="One Piece",
                     title=title or "One Piece Event",
-                    event_type=event_type,
+                    event_type=f"Play - {subtype}" if subtype else "Play",
                     start_date=extract_first_isoish_date(date_line or text),
                     url=url,
                     image_url=image_url,
@@ -569,6 +574,7 @@ async def scrape_one_piece_events() -> List[Event]:
                         source="ONE PIECE Official",
                         game="One Piece",
                         title=line.strip(),
+                        event_type="Play",
                         url=root_url,
                     )
                 )
@@ -645,7 +651,7 @@ async def scrape_gundam_events() -> List[Event]:
                     if img and img.get("src"):
                         image_url = absolute_url(detail_url, img["src"])
 
-                event_type = infer_event_type(
+                subtype = infer_event_type(
                     title or text,
                     {
                         "Store Tournament": "Store Tournament",
@@ -662,7 +668,7 @@ async def scrape_gundam_events() -> List[Event]:
                         source="GUNDAM Official",
                         game="Gundam Card Game",
                         title=title or detail_url.rsplit("/", 1)[-1],
-                        event_type=event_type,
+                        event_type=f"Play - {subtype}" if subtype else "Play",
                         start_date=extract_first_isoish_date(event_period or text),
                         url=detail_url,
                         image_url=image_url,
@@ -683,6 +689,7 @@ async def scrape_gundam_events() -> List[Event]:
                         source="GUNDAM Official",
                         game="Gundam Card Game",
                         title=line.strip(),
+                        event_type="Play",
                         url=root_url,
                         location_text="Official Gundam event page",
                     )
@@ -694,6 +701,7 @@ async def scrape_gundam_events() -> List[Event]:
 async def scrape_all() -> List[Event]:
     batches = await asyncio.gather(
         scrape_wpn_events(),
+        scrape_mtg_releases(),
         scrape_magic_locator(),
         scrape_dnd_locator(),
         scrape_dnd_releases(),
