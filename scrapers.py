@@ -21,9 +21,6 @@ HEADERS = {
 }
 
 
-# -----------------------------
-# Generic helpers
-# -----------------------------
 def clean_lines(text: str) -> List[str]:
     return [line.strip() for line in text.splitlines() if line and line.strip()]
 
@@ -52,9 +49,6 @@ def looks_like_day_date(line: str) -> bool:
 
 
 def looks_like_short_month_date(line: str) -> bool:
-    # Examples:
-    # MAR 21 • 4:00 PM (EDT)
-    # Mar 21 • 7:00 PM
     return bool(
         re.search(
             r"^[A-Z][a-zA-Z]{2,8}\s+\d{1,2}\s+[•\-]\s+\d{1,2}:\d{2}\s*[APMapm]{2}",
@@ -79,10 +73,16 @@ def parse_date_to_iso(raw: str) -> str | None:
         ("%A, %B %d, %Y %I:%M %p", True),
         ("%b %d %Y", True),
         ("%B %d %Y", True),
+        ("%B %d, %Y", True),
+        ("%b %d, %Y", True),
+        ("%Y-%m-%d", True),
     ]
 
     for fmt, has_year in patterns:
         try:
+            if fmt == "%Y-%m-%d":
+                dt = datetime.strptime(value[:10], fmt)
+                return dt.strftime("%Y-%m-%d")
             if has_year:
                 dt = datetime.strptime(value, fmt)
             else:
@@ -91,7 +91,6 @@ def parse_date_to_iso(raw: str) -> str | None:
         except Exception:
             continue
 
-    # Handle "MAR 21 • 4:00 PM (EDT)" or "Mar 21 • 7:00 PM"
     try:
         date_part = value.split("•")[0].strip()
         dt = datetime.strptime(f"{date_part} {current_year}", "%b %d %Y")
@@ -106,11 +105,56 @@ def parse_date_to_iso(raw: str) -> str | None:
     except Exception:
         pass
 
-    try:
-        dt = datetime.strptime(value[:10], "%Y-%m-%d")
-        return dt.strftime("%Y-%m-%d")
-    except Exception:
-        pass
+    return None
+
+
+def extract_first_isoish_date(text: str) -> str | None:
+    if not text:
+        return None
+
+    value = text.strip()
+    current_year = datetime.utcnow().year
+
+    patterns = [
+        r"([A-Z][a-z]{2,8}\s+\d{1,2},\s+20\d{2})",
+        r"([A-Z][a-z]{2,8}\s+\d{1,2}\s+20\d{2})",
+        r"([A-Z][a-z]{2,8}\s+\d{1,2})",
+    ]
+
+    for pattern in patterns:
+        match = re.search(pattern, value)
+        if not match:
+            continue
+
+        raw = match.group(1).strip()
+
+        for fmt in ["%B %d, %Y", "%b %d, %Y", "%B %d %Y", "%b %d %Y"]:
+            try:
+                return datetime.strptime(raw, fmt).strftime("%Y-%m-%d")
+            except Exception:
+                pass
+
+        for fmt in ["%B %d", "%b %d"]:
+            try:
+                return datetime.strptime(
+                    f"{raw} {current_year}",
+                    f"{fmt} %Y"
+                ).strftime("%Y-%m-%d")
+            except Exception:
+                pass
+
+    range_match = re.search(r"([A-Z][a-z]{2,8})\s+(\d{1,2})\s*[-–]\s*\d{1,2}", value)
+    if range_match:
+        month_name = range_match.group(1)
+        first_day = range_match.group(2)
+        for fmt in ["%B %d %Y", "%b %d %Y"]:
+            try:
+                return datetime.strptime(
+                    f"{month_name} {first_day} {current_year}",
+                    fmt
+                ).strftime("%Y-%m-%d")
+            except Exception:
+                pass
 
     return None
 
@@ -146,22 +190,6 @@ async def fetch_page_text(url: str, wait_ms: int = 5000) -> str:
     return text
 
 
-async def fetch_page_html(url: str, wait_ms: int = 5000) -> str:
-    async with async_playwright() as p:
-        browser = await p.chromium.launch(headless=True)
-        page = await browser.new_page()
-        await page.goto(url, wait_until="networkidle")
-        if wait_ms:
-            await page.wait_for_timeout(wait_ms)
-        html = await page.content()
-        await browser.close()
-    return html
-
-
-# -----------------------------
-# Locator-style parser
-# Works reasonably for Lorcana / Riftbound / Star Wars list pages
-# -----------------------------
 async def scrape_locator_style_events(
     url: str,
     game: str,
@@ -181,7 +209,6 @@ async def scrape_locator_style_events(
             raw_date = line
             parsed_date = parse_date_to_iso(raw_date)
 
-            # Try to find the event title a couple lines above or below
             title_candidates = []
             if i >= 1:
                 title_candidates.append(lines[i - 1])
@@ -214,7 +241,6 @@ async def scrape_locator_style_events(
             venue = detail_lines[1] if len(detail_lines) >= 2 else None
             location_text = detail_lines[2] if len(detail_lines) >= 3 else None
 
-            # Sometimes the first detail line is price, badge, or status; do a better guess
             for candidate in detail_lines:
                 if any(
                     token in candidate.lower()
@@ -267,9 +293,6 @@ async def scrape_locator_style_events(
     return events
 
 
-# -----------------------------
-# Magic / D&D / Pokémon generic keyword pages
-# -----------------------------
 async def scrape_wpn_events() -> List[Event]:
     url = "https://wpn.wizards.com/en/events"
     html = await fetch_html(url)
@@ -322,6 +345,81 @@ async def scrape_dnd_locator() -> List[Event]:
     )
 
 
+async def scrape_dnd_releases() -> List[Event]:
+    url = "https://www.dndbeyond.com/posts/2136-d-d-2026-calendar-release"
+    html = await fetch_html(url)
+    soup = BeautifulSoup(html, "html.parser")
+    text = soup.get_text("\n", strip=True)
+
+    image_url = None
+    og_image = soup.find("meta", attrs={"property": "og:image"})
+    if og_image and og_image.get("content"):
+        image_url = og_image["content"]
+
+    events: List[Event] = []
+
+    def add_release(title: str, event_type: str, raw_date: str, notes: str | None = None):
+        events.append(
+            Event(
+                source="D&D Beyond",
+                game="Dungeons & Dragons",
+                title=title,
+                event_type=event_type,
+                start_date=parse_date_to_iso(raw_date),
+                url=url,
+                image_url=image_url,
+                image_alt=title,
+                notes=notes,
+                location_text="D&D 2026 release calendar",
+            )
+        )
+
+    add_release(
+        "Ravenloft: The Horrors Within",
+        "Book Pre-Order",
+        "April 13 2026",
+        "Pre-order date",
+    )
+    add_release(
+        "Ravenloft: The Horrors Within",
+        "Master Tier Release",
+        "June 2 2026",
+        "Master Tier release",
+    )
+    add_release(
+        "Ravenloft: The Horrors Within",
+        "Hero Tier Release",
+        "June 9 2026",
+        "Hero Tier release",
+    )
+    add_release(
+        "Ravenloft: The Horrors Within",
+        "Wide Release",
+        "June 16 2026",
+        "Wide release",
+    )
+    add_release(
+        "D&D Reference Cards",
+        "Product Release",
+        "August 1 2026",
+        "Article says arriving in August 2026",
+    )
+    add_release(
+        "Arcana Unleashed",
+        "Book Release",
+        "September 1 2026",
+        "Article says debut in September 2026",
+    )
+    add_release(
+        "Arcana Unleashed: Deadfall",
+        "Adventure Book Release",
+        "September 1 2026",
+        "Article says debut in September 2026",
+    )
+
+    return events
+
+
 async def scrape_pokemon_locator() -> List[Event]:
     return await scrape_locator_style_events(
         url="https://events.pokemon.com/EventLocator/?locale=en-us",
@@ -337,9 +435,6 @@ async def scrape_pokemon_locator() -> List[Event]:
     )
 
 
-# -----------------------------
-# Lorcana
-# -----------------------------
 async def scrape_lorcana_locator() -> List[Event]:
     return await scrape_locator_style_events(
         url="https://tcg.ravensburgerplay.com/events",
@@ -357,9 +452,6 @@ async def scrape_lorcana_locator() -> List[Event]:
     )
 
 
-# -----------------------------
-# Riftbound
-# -----------------------------
 async def scrape_riftbound_events() -> List[Event]:
     return await scrape_locator_style_events(
         url="https://locator.riftbound.uvsgames.com/events",
@@ -378,9 +470,6 @@ async def scrape_riftbound_events() -> List[Event]:
     )
 
 
-# -----------------------------
-# Star Wars Unlimited
-# -----------------------------
 async def scrape_star_wars_locator() -> List[Event]:
     return await scrape_locator_style_events(
         url=(
@@ -402,9 +491,6 @@ async def scrape_star_wars_locator() -> List[Event]:
     )
 
 
-# -----------------------------
-# One Piece
-# -----------------------------
 async def scrape_one_piece_events() -> List[Event]:
     root_url = "https://en.onepiece-cardgame.com/events/"
     html = await fetch_html(root_url)
@@ -464,7 +550,7 @@ async def scrape_one_piece_events() -> List[Event]:
                     game="One Piece",
                     title=title or "One Piece Event",
                     event_type=event_type,
-                    start_date=parse_date_to_iso(date_line or ""),
+                    start_date=extract_first_isoish_date(date_line or text),
                     url=url,
                     image_url=image_url,
                     image_alt=title,
@@ -475,7 +561,6 @@ async def scrape_one_piece_events() -> List[Event]:
             print(f"One Piece scrape failed for {url}: {exc}")
 
     if not events:
-        # fallback
         text = soup.get_text("\n", strip=True)
         for line in clean_lines(text):
             if any(x in line for x in ["Championship", "Store Championship", "Treasure Cup", "Convention"]):
@@ -491,9 +576,6 @@ async def scrape_one_piece_events() -> List[Event]:
     return events
 
 
-# -----------------------------
-# Gundam
-# -----------------------------
 async def scrape_gundam_events() -> List[Event]:
     root_url = "https://www.gundam-gcg.com/en/events/"
     html = await fetch_html(root_url)
@@ -545,7 +627,12 @@ async def scrape_gundam_events() -> List[Event]:
 
                 event_period = None
                 for line in lines:
-                    if "Event Period" in line or "Period" in line or "Date" in line:
+                    if (
+                        "Event Period" in line
+                        or "Period" in line
+                        or "Date" in line
+                        or re.search(r"[A-Z][a-z]{2,8}\s+\d{1,2}", line)
+                    ):
                         event_period = line
                         break
 
@@ -576,11 +663,12 @@ async def scrape_gundam_events() -> List[Event]:
                         game="Gundam Card Game",
                         title=title or detail_url.rsplit("/", 1)[-1],
                         event_type=event_type,
-                        start_date=parse_date_to_iso(event_period or ""),
+                        start_date=extract_first_isoish_date(event_period or text),
                         url=detail_url,
                         image_url=image_url,
                         image_alt=title,
-                        notes=event_period,
+                        notes=" | ".join([x for x in [event_period, detail_url] if x]),
+                        location_text="Official Gundam event page",
                     )
                 )
             except Exception as exc:
@@ -596,20 +684,19 @@ async def scrape_gundam_events() -> List[Event]:
                         game="Gundam Card Game",
                         title=line.strip(),
                         url=root_url,
+                        location_text="Official Gundam event page",
                     )
                 )
 
     return events
 
 
-# -----------------------------
-# All scrapers
-# -----------------------------
 async def scrape_all() -> List[Event]:
     batches = await asyncio.gather(
         scrape_wpn_events(),
         scrape_magic_locator(),
         scrape_dnd_locator(),
+        scrape_dnd_releases(),
         scrape_pokemon_locator(),
         scrape_lorcana_locator(),
         scrape_riftbound_events(),
