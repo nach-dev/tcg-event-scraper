@@ -22,21 +22,7 @@ def event_month(value: str | None) -> str:
     try:
         return datetime.strptime(value[:10], "%Y-%m-%d").strftime("%Y-%m")
     except Exception:
-        pass
-
-    for fmt in [
-        "%A, %B %d, %I:%M %p",
-        "%A, %B %d, %Y %I:%M %p",
-        "%b %d %Y",
-        "%B %d %Y",
-    ]:
-        try:
-            dt = datetime.strptime(value, fmt)
-            return dt.strftime("%Y-%m")
-        except Exception:
-            continue
-
-    return "unknown"
+        return "unknown"
 
 
 def main() -> None:
@@ -44,6 +30,14 @@ def main() -> None:
 
     rows = []
     for e in events:
+        description_parts = [
+            e.event_type or e.format or e.raw_category,
+            e.venue,
+            e.location_text,
+            e.notes,
+        ]
+        description = " | ".join([x for x in description_parts if x])
+
         rows.append(
             {
                 "month": event_month(e.start_date),
@@ -51,6 +45,7 @@ def main() -> None:
                 "event_type": e.event_type or e.format or e.raw_category,
                 "event_name": e.title,
                 "event_date": e.start_date,
+                "event_description": description,
                 "source_site": e.source,
                 "source_url": e.url,
                 "image_url": getattr(e, "image_url", None),
@@ -92,6 +87,7 @@ def main() -> None:
                 "event_type",
                 "event_name",
                 "event_date",
+                "event_description",
                 "source_site",
                 "source_url",
                 "image_url",
