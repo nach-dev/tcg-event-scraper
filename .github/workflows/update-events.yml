@@ -28,13 +28,19 @@ jobs:
           pip install -r requirements.txt
           python -m playwright install chromium
 
-      - name: Run scraper
+      - name: Build event files
         run: python build_events.py
+
+      - name: Show generated files
+        run: |
+          ls -R
+          echo "---- site/data ----"
+          ls -la site/data || true
 
       - name: Commit updated data
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .
-          git diff --cached --quiet || git commit -m "Auto update event data"
+          git add site/data/*
+          git diff --cached --quiet || git commit -m "Update event data"
           git push
