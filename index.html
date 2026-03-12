@@ -5,14 +5,90 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>TCG Event Hub</title>
   <style>
-    body{font-family:Arial,sans-serif;background:#0f1115;color:#fff;margin:0}
-    header{padding:24px;text-align:center;background:#171a21}
-    .wrap{max-width:1200px;margin:0 auto;padding:24px}
-    table{width:100%;border-collapse:collapse;margin-top:20px}
-    th,td{border:1px solid #263041;padding:8px;text-align:left}
-    th{background:#1c2430}
-    tr:nth-child(even){background:#141922}
-    input,select{padding:10px;border-radius:8px;border:1px solid #2a3240;background:#10151d;color:#fff;margin-right:10px}
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f1115;
+      color: #fff;
+      margin: 0;
+    }
+
+    header {
+      padding: 24px;
+      text-align: center;
+      background: #171a21;
+    }
+
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .toolbar {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    input, select {
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #2a3240;
+      background: #10151d;
+      color: #fff;
+    }
+
+    input {
+      min-width: 280px;
+      flex: 1;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 14px;
+    }
+
+    th, td {
+      border: 1px solid #263041;
+      padding: 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #1c2430;
+      position: sticky;
+      top: 0;
+    }
+
+    tr:nth-child(even) {
+      background: #141922;
+    }
+
+    a {
+      color: #7dcfff;
+    }
+
+    img {
+      max-width: 60px;
+      max-height: 60px;
+      border-radius: 6px;
+      display: block;
+    }
+
+    .meta {
+      margin: 10px 0 0;
+      color: #b7c0cf;
+      font-size: 13px;
+    }
+
+    .empty {
+      padding: 24px 0;
+      color: #b7c0cf;
+    }
   </style>
 </head>
 <body>
@@ -22,13 +98,14 @@
   </header>
 
   <div class="wrap">
-
-    <div>
-      <input id="search" placeholder="Search events..." />
+    <div class="toolbar">
+      <input id="search" type="text" placeholder="Search events, game, type, notes, location..." />
       <select id="gameFilter">
         <option value="all">All Games</option>
       </select>
     </div>
+
+    <div class="meta" id="summary"></div>
 
     <table id="eventsTable">
       <thead>
@@ -45,20 +122,116 @@
       <tbody></tbody>
     </table>
 
+    <div id="emptyState" class="empty" style="display:none;">No events found.</div>
   </div>
 
-<script>
-let allEvents=[]
-const tbody=document.querySelector("#eventsTable tbody")
-const search=document.getElementById("search")
-const gameFilter=document.getElementById("gameFilter")
+  <script>
+    let allEvents = [];
 
-function render(){
-  const term=search.value.toLowerCase()
-  const game=gameFilter.value
+    const tbody = document.querySelector("#eventsTable tbody");
+    const search = document.getElementById("search");
+    const gameFilter = document.getElementById("gameFilter");
+    const summary = document.getElementById("summary");
+    const emptyState = document.getElementById("emptyState");
 
-  const filtered=allEvents.filter(e=>{
-    const matchSearch=(e.event_name||"").toLowerCase().includes(term)
-    const matchGame=(game==="all"||e.game_type===game)
-    return matchSearch && matchGame
+    function safe(value) {
+      return value ?? "";
+    }
+
+    function render() {
+      const term = search.value.trim().toLowerCase();
+      const selectedGame = gameFilter.value;
+
+      const filtered = allEvents.filter(e => {
+        const haystack = [
+          e.month,
+          e.game_type,
+          e.event_type,
+          e.event_name,
+          e.event_date,
+          e.source_site,
+          e.source_url,
+          e.location_text,
+          e.notes
+        ]
+          .filter(Boolean)
+          .join(" ")
+          .toLowerCase();
+
+        const matchSearch = !term || haystack.includes(term);
+        const matchGame = selectedGame === "all" || e.game_type === selectedGame;
+
+        return matchSearch && matchGame;
+      });
+
+      tbody.innerHTML = "";
+
+      if (!filtered.length) {
+        emptyState.style.display = "block";
+      } else {
+        emptyState.style.display = "none";
+      }
+
+      filtered.forEach(e => {
+        const tr = document.createElement("tr");
+
+        tr.innerHTML = `
+          <td>${safe(e.month)}</td>
+          <td>${safe(e.game_type)}</td>
+          <td>${safe(e.event_type)}</td>
+          <td>${safe(e.event_name)}</td>
+          <td>${safe(e.event_date)}</td>
+          <td>
+            ${
+              e.source_url
+                ? `<a href="${e.source_url}" target="_blank" rel="noopener noreferrer">${safe(e.source_site)}</a>`
+                : safe(e.source_site)
+            }
+          </td>
+          <td>
+            ${
+              e.image_url
+                ? `<img src="${e.image_url}" alt="${safe(e.image_alt)}" />`
+                : ""
+            }
+          </td>
+        `;
+
+        tbody.appendChild(tr);
+      });
+
+      summary.textContent = `${filtered.length} event${filtered.length === 1 ? "" : "s"} shown`;
+    }
+
+    fetch("./data/events-by-month.json")
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status} loading events-by-month.json`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        allEvents = Object.values(data).flat();
+
+        const games = [...new Set(allEvents.map(e => e.game_type).filter(Boolean))].sort();
+
+        games.forEach(game => {
+          const opt = document.createElement("option");
+          opt.value = game;
+          opt.textContent = game;
+          gameFilter.appendChild(opt);
+        });
+
+        render();
+      })
+      .catch(error => {
+        console.error("Failed to load event data:", error);
+        summary.textContent = "Failed to load event data. Check that ./data/events-by-month.json exists in GitHub Pages.";
+        emptyState.style.display = "block";
+      });
+
+    search.addEventListener("input", render);
+    gameFilter.addEventListener("change", render);
+  </script>
+</body>
 </html>
