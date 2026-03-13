@@ -25,6 +25,28 @@ def event_month(value: str | None) -> str:
         return "unknown"
 
 
+def display_date(event_date: str | None, notes: str | None) -> str:
+    if event_date:
+        try:
+            return datetime.strptime(event_date[:10], "%Y-%m-%d").strftime("%b %d, %Y")
+        except Exception:
+            return event_date
+
+    if notes and "month-only" in notes.lower():
+        return notes.replace("month-only:", "").strip()
+
+    return ""
+
+
+def event_kind(event_type: str | None) -> str:
+    value = (event_type or "").lower()
+    if value == "release":
+        return "release"
+    if value.startswith("play"):
+        return "play"
+    return "other"
+
+
 def main() -> None:
     events = asyncio.run(scrape_all())
 
@@ -41,10 +63,12 @@ def main() -> None:
         rows.append(
             {
                 "month": event_month(e.start_date),
+                "kind": event_kind(e.event_type),
                 "game_type": e.game,
                 "event_type": e.event_type or e.format or e.raw_category,
                 "event_name": e.title,
                 "event_date": e.start_date,
+                "event_date_display": display_date(e.start_date, e.notes),
                 "event_description": description,
                 "source_site": e.source,
                 "source_url": e.url,
@@ -58,6 +82,7 @@ def main() -> None:
 
     rows.sort(
         key=lambda r: (
+            r["kind"] or "",
             r["month"] or "9999-99",
             r["game_type"] or "",
             r["event_date"] or "9999-99-99",
@@ -83,10 +108,12 @@ def main() -> None:
             f,
             fieldnames=[
                 "month",
+                "kind",
                 "game_type",
                 "event_type",
                 "event_name",
                 "event_date",
+                "event_date_display",
                 "event_description",
                 "source_site",
                 "source_url",
