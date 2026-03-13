@@ -419,13 +419,20 @@ async def scrape_one_piece_releases() -> List[Event]:
 
 
 async def scrape_gundam_releases() -> List[Event]:
-    url = "https://www.gundam-gcg.com/en/news/1stanniversary.html"
+    url = "https://www.gundam-gcg.com/en/products/"
     html = await fetch_html(url)
     soup = BeautifulSoup(html, "html.parser")
     og = soup.find("meta", attrs={"property": "og:image"})
     image_url = og["content"] if og and og.get("content") else None
 
     return [
+        make_release("GUNDAM Official", "Gundam Card Game", "Celestial Drive [ST07]", "2026-01-16", url, "official exact date", image_url),
+        make_release("GUNDAM Official", "Gundam Card Game", "Flash of Radiance [ST08]", "2026-01-16", url, "official exact date", image_url),
+        make_release("GUNDAM Official", "Gundam Card Game", "Steel Requiem [GD03]", "2026-01-30", url, "official exact date", image_url),
+        make_release("GUNDAM Official", "Gundam Card Game", "Premium Card Collection GUNDAM ASSEMBLE Set -Mobile Suit Gundam IRON-BLOODED ORPHANS- [PC01A]", "2026-02-27", url, "official exact date", image_url),
+        make_release("GUNDAM Official", "Gundam Card Game", "Premium Card Collection GUNDAM ASSEMBLE Set -Mobile Suit Gundam GQuuuuuuX- [PC02A]", "2026-02-27", url, "official exact date", image_url),
+        make_release("GUNDAM Official", "Gundam Card Game", "Destiny Ignition [ST09]", "2026-03-27", url, "official exact date", image_url),
+        make_release("GUNDAM Official", "Gundam Card Game", "Phantom Aria [GD04]", "2026-04-24", url, "official exact date", image_url),
         make_release("GUNDAM Official", "Gundam Card Game", "Freedom Ascension [GD05]", "2026-07-24", url, "official exact date", image_url),
     ]
 
