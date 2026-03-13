@@ -21,6 +21,9 @@ HEADERS = {
 }
 
 
+# -----------------------------
+# Helpers
+# -----------------------------
 def clean_lines(text: str) -> List[str]:
     return [line.strip() for line in text.splitlines() if line and line.strip()]
 
@@ -108,6 +111,22 @@ def parse_date_to_iso(raw: str) -> str | None:
     return None
 
 
+def month_only_to_iso(value: str) -> str | None:
+    candidates = [
+        ("%B %Y", value),
+        ("%b %Y", value),
+        ("%B, %Y", value),
+        ("%b, %Y", value),
+    ]
+    for fmt, raw in candidates:
+        try:
+            dt = datetime.strptime(raw, fmt)
+            return dt.strftime("%Y-%m-01")
+        except Exception:
+            continue
+    return None
+
+
 def extract_first_isoish_date(text: str) -> str | None:
     if not text:
         return None
@@ -156,6 +175,10 @@ def extract_first_isoish_date(text: str) -> str | None:
             except Exception:
                 pass
 
+    month_match = re.search(r"\b([A-Z][a-z]{2,8}\s+20\d{2})\b", value)
+    if month_match:
+        return month_only_to_iso(month_match.group(1))
+
     return None
 
 
@@ -165,6 +188,29 @@ def infer_event_type(text: str, keyword_map: dict[str, str]) -> str | None:
         if needle.lower() in lowered:
             return normalized
     return None
+
+
+def make_release(
+    source: str,
+    game: str,
+    title: str,
+    date_iso: str | None,
+    url: str,
+    notes: str | None = None,
+    image_url: str | None = None,
+) -> Event:
+    return Event(
+        source=source,
+        game=game,
+        title=title,
+        event_type="Release",
+        start_date=date_iso,
+        url=url,
+        image_url=image_url,
+        image_alt=title,
+        notes=notes,
+        location_text=f"{game} official release source",
+    )
 
 
 async def fetch_html(url: str) -> str:
@@ -265,162 +311,135 @@ async def scrape_locator_style_events(
 
 
 # -----------------------------
-# RELEASE SOURCES
+# Release sources
 # -----------------------------
 async def scrape_mtg_releases() -> List[Event]:
     url = "https://magic.wizards.com/en/news/announcements/everything-announced-for-magic-the-gathering-in-2026"
     html = await fetch_html(url)
     soup = BeautifulSoup(html, "html.parser")
+    og = soup.find("meta", attrs={"property": "og:image"})
+    image_url = og["content"] if og and og.get("content") else None
 
-    image_url = None
-    og_image = soup.find("meta", attrs={"property": "og:image"})
-    if og_image and og_image.get("content"):
-        image_url = og_image["content"]
-
-    events: List[Event] = []
-
-    def add_release(title: str, raw_date: str, notes: str | None = None):
-        events.append(
-            Event(
-                source="Magic: The Gathering",
-                game="Magic: The Gathering",
-                title=title,
-                event_type="Release",
-                start_date=parse_date_to_iso(raw_date),
-                url=url,
-                image_url=image_url,
-                image_alt=title,
-                notes=notes,
-                location_text="MTG 2026 announcement page",
-            )
-        )
-
-    add_release("Lorwyn Eclipsed", "January 23 2026", "Official exact release date")
-    add_release("Magic: The Gathering | Teenage Mutant Ninja Turtles", "March 1 2026", "Article lists March 2026")
-    add_release("Secrets of Strixhaven", "April 1 2026", "Article lists April 2026")
-    add_release("Magic: The Gathering | Marvel Super Heroes", "June 1 2026", "Article lists June 2026")
-    add_release("Magic: The Gathering | The Hobbit", "August 1 2026", "Article lists August 2026")
-    add_release("Reality Fracture", "October 1 2026", "Article lists October 2026")
-    add_release("Magic: The Gathering | Star Trek", "November 1 2026", "Article lists November 2026")
-
-    return events
+    return [
+        make_release("Wizards of the Coast", "Magic: The Gathering", "Lorwyn Eclipsed", "2026-01-23", url, "official exact date", image_url),
+        make_release("Wizards of the Coast", "Magic: The Gathering", "Magic: The Gathering | Teenage Mutant Ninja Turtles", "2026-03-01", url, "month-only: March 2026", image_url),
+        make_release("Wizards of the Coast", "Magic: The Gathering", "Secrets of Strixhaven", "2026-04-24", url, "official exact date", image_url),
+        make_release("Wizards of the Coast", "Magic: The Gathering", "Magic: The Gathering | Marvel Super Heroes", "2026-06-26", url, "official exact date", image_url),
+        make_release("Wizards of the Coast", "Magic: The Gathering", "Magic: The Gathering | The Hobbit", "2026-08-01", url, "month-only: August 2026", image_url),
+        make_release("Wizards of the Coast", "Magic: The Gathering", "Reality Fracture", "2026-10-01", url, "month-only: October 2026", image_url),
+        make_release("Wizards of the Coast", "Magic: The Gathering", "Magic: The Gathering | Star Trek", "2026-11-01", url, "month-only: November 2026", image_url),
+    ]
 
 
 async def scrape_dnd_releases() -> List[Event]:
     url = "https://www.dndbeyond.com/posts/2136-d-d-2026-calendar-release"
     html = await fetch_html(url)
     soup = BeautifulSoup(html, "html.parser")
+    og = soup.find("meta", attrs={"property": "og:image"})
+    image_url = og["content"] if og and og.get("content") else None
 
-    image_url = None
-    og_image = soup.find("meta", attrs={"property": "og:image"})
-    if og_image and og_image.get("content"):
-        image_url = og_image["content"]
-
-    events: List[Event] = []
-
-    def add_release(title: str, raw_date: str, notes: str | None = None):
-        events.append(
-            Event(
-                source="D&D Beyond",
-                game="Dungeons & Dragons",
-                title=title,
-                event_type="Release",
-                start_date=parse_date_to_iso(raw_date),
-                url=url,
-                image_url=image_url,
-                image_alt=title,
-                notes=notes,
-                location_text="D&D 2026 release calendar",
-            )
-        )
-
-    add_release("Ravenloft: The Horrors Within", "April 13 2026", "Pre-order date")
-    add_release("Ravenloft: The Horrors Within", "June 2 2026", "Master Tier release")
-    add_release("Ravenloft: The Horrors Within", "June 9 2026", "Hero Tier release")
-    add_release("Ravenloft: The Horrors Within", "June 16 2026", "Wide release")
-    add_release("D&D Reference Cards", "August 1 2026", "Article says arriving in August 2026")
-    add_release("Arcana Unleashed", "September 1 2026", "Article says debut in September 2026")
-    add_release("Arcana Unleashed: Deadfall", "September 1 2026", "Article says debut in September 2026")
-
-    return events
+    return [
+        make_release("D&D Beyond", "Dungeons & Dragons", "Ravenloft: The Horrors Within", "2026-04-13", url, "pre-order", image_url),
+        make_release("D&D Beyond", "Dungeons & Dragons", "Ravenloft: The Horrors Within", "2026-06-02", url, "Master Tier release", image_url),
+        make_release("D&D Beyond", "Dungeons & Dragons", "Ravenloft: The Horrors Within", "2026-06-09", url, "Hero Tier release", image_url),
+        make_release("D&D Beyond", "Dungeons & Dragons", "Ravenloft: The Horrors Within", "2026-06-16", url, "wide release", image_url),
+        make_release("D&D Beyond", "Dungeons & Dragons", "D&D Reference Cards", "2026-08-01", url, "month-only: August 2026", image_url),
+        make_release("D&D Beyond", "Dungeons & Dragons", "Arcana Unleashed", "2026-09-01", url, "month-only: September 2026", image_url),
+        make_release("D&D Beyond", "Dungeons & Dragons", "Arcana Unleashed: Deadfall", "2026-09-01", url, "month-only: September 2026", image_url),
+    ]
 
 
 async def scrape_lorcana_releases() -> List[Event]:
     url = "https://www.disneylorcana.com/en-GB/news"
     html = await fetch_html(url)
     soup = BeautifulSoup(html, "html.parser")
+    og = soup.find("meta", attrs={"property": "og:image"})
+    image_url = og["content"] if og and og.get("content") else None
 
-    image_url = None
-    og_image = soup.find("meta", attrs={"property": "og:image"})
-    if og_image and og_image.get("content"):
-        image_url = og_image["content"]
-
-    events: List[Event] = []
-
-    def add_release(title: str, raw_date: str, notes: str | None = None):
-        events.append(
-            Event(
-                source="Disney Lorcana News",
-                game="Disney Lorcana",
-                title=title,
-                event_type="Release",
-                start_date=parse_date_to_iso(raw_date),
-                url=url,
-                image_url=image_url,
-                image_alt=title,
-                notes=notes,
-                location_text="Official Disney Lorcana news page",
-            )
-        )
-
-    add_release("Winterspell Prerelease", "February 13 2026", "Official Disney Lorcana prerelease date")
-    add_release("Winterspell Wide Release", "February 20 2026", "Official Disney Lorcana wide release date")
-    add_release("Disney Lorcana Collector’s Guide Sets 1-4", "February 1 2026", "Official Disney Lorcana product release date")
-    add_release("Disney Lorcana Collector’s Guide Sets 5-8", "February 1 2026", "Official Disney Lorcana product release date")
-    add_release("Disney Lorcana Notebook", "February 1 2026", "Official Disney Lorcana product release date")
-    add_release("Scrooge McDuck Gift Box", "March 13 2026", "Official Disney Lorcana product release date")
-    add_release("Collection Starter Set – Stitch Edition", "March 13 2026", "Official Disney Lorcana product release date")
-    add_release("2-Player Starter Set", "May 8 2026", "Official Disney Lorcana product release date")
-
-    return events
+    return [
+        make_release("Disney Lorcana News", "Disney Lorcana", "Disney Lorcana Collector’s Guides (Sets 1–4 and 5–8)", "2026-02-01", url, "official exact date", image_url),
+        make_release("Disney Lorcana News", "Disney Lorcana", "Winterspell Prerelease", "2026-02-13", url, "official exact date", image_url),
+        make_release("Disney Lorcana News", "Disney Lorcana", "Winterspell", "2026-02-20", url, "official exact date", image_url),
+        make_release("Disney Lorcana News", "Disney Lorcana", "Scrooge McDuck Gift Box", "2026-03-13", url, "official exact date", image_url),
+        make_release("Disney Lorcana News", "Disney Lorcana", "Collection Starter Set – Stitch Edition", "2026-03-13", url, "official exact date", image_url),
+        make_release("Disney Lorcana News", "Disney Lorcana", "Wilds Unknown Prerelease", "2026-05-08", url, "secondary-confirmed exact date", image_url),
+        make_release("Disney Lorcana News", "Disney Lorcana", "Wilds Unknown", "2026-05-15", url, "secondary-confirmed exact date", image_url),
+        make_release("Disney Lorcana News", "Disney Lorcana", "2-Player Starter Set", "2026-05-08", url, "official exact date", image_url),
+        make_release("Disney Lorcana News", "Disney Lorcana", "Attack of the Vine", "2026-08-01", url, "month-only: August 2026", image_url),
+        make_release("Disney Lorcana News", "Disney Lorcana", "Unnamed Fourth Set", "2026-11-01", url, "month-only: Nov/Dec 2026", image_url),
+    ]
 
 
 async def scrape_riftbound_releases() -> List[Event]:
     url = "https://riftbound.leagueoflegends.com/en-us/news/announcements/2026-roadmap/"
     html = await fetch_html(url)
     soup = BeautifulSoup(html, "html.parser")
+    og = soup.find("meta", attrs={"property": "og:image"})
+    image_url = og["content"] if og and og.get("content") else None
 
-    image_url = None
-    og_image = soup.find("meta", attrs={"property": "og:image"})
-    if og_image and og_image.get("content"):
-        image_url = og_image["content"]
+    return [
+        make_release("Riftbound Roadmap", "Riftbound", "Spiritforged Pre-Rift", "2026-02-06", url, "official exact start date", image_url),
+        make_release("Riftbound Roadmap", "Riftbound", "Spiritforged English Release", "2026-02-13", url, "official exact date", image_url),
+    ]
 
-    events: List[Event] = []
 
-    def add_release(title: str, raw_date: str, notes: str | None = None):
-        events.append(
-            Event(
-                source="Riftbound 2026 Roadmap",
-                game="Riftbound",
-                title=title,
-                event_type="Release",
-                start_date=parse_date_to_iso(raw_date),
-                url=url,
-                image_url=image_url,
-                image_alt=title,
-                notes=notes,
-                location_text="Official Riftbound roadmap",
-            )
-        )
+async def scrape_star_wars_releases() -> List[Event]:
+    url = "https://starwarsunlimited.com/articles/a-message-from-the-team"
+    html = await fetch_html(url)
+    soup = BeautifulSoup(html, "html.parser")
+    og = soup.find("meta", attrs={"property": "og:image"})
+    image_url = og["content"] if og and og.get("content") else None
 
-    add_release("Spiritforged Pre-Rift", "February 6 2026", "Roadmap lists 6-12th as Spiritforged Pre-Rift")
-    add_release("Spiritforged English Release", "February 13 2026", "Roadmap lists 13th as Spiritforged English Release")
+    return [
+        make_release("Star Wars: Unlimited", "Star Wars: Unlimited", "A Lawless Time", "2026-03-13", url, "official exact date", image_url),
+        make_release("Star Wars: Unlimited", "Star Wars: Unlimited", "Ashes of the Empire", "2026-01-01", url, "year-only official confirmation; month/day unconfirmed", image_url),
+        make_release("Star Wars: Unlimited", "Star Wars: Unlimited", "Homeworlds", "2026-01-01", url, "year-only official confirmation; month/day unconfirmed", image_url),
+        make_release("Star Wars: Unlimited", "Star Wars: Unlimited", "Icons", "2026-01-01", url, "year-only official confirmation; month/day unconfirmed", image_url),
+    ]
 
-    return events
+
+async def scrape_one_piece_releases() -> List[Event]:
+    url = "https://en.onepiece-cardgame.com/products/"
+    html = await fetch_html(url)
+    soup = BeautifulSoup(html, "html.parser")
+
+    return [
+        make_release("ONE PIECE Official", "One Piece", "BOOSTER PACK -THE AZURE SEA’S SEVEN- [OP14-EB04]", "2026-01-16", url, "official exact date"),
+        make_release("ONE PIECE Official", "One Piece", "STARTER DECK -Egghead- [ST-29]", "2026-01-16", url, "official exact date"),
+        make_release("ONE PIECE Official", "One Piece", "Tin Pack Set Vol.2 [TS-02]", "2026-01-30", url, "official exact date"),
+        make_release("ONE PIECE Official", "One Piece", "EXTRA BOOSTER -ONE PIECE HEROINES EDITION- [EB-03]", "2026-02-20", url, "official exact date"),
+        make_release("ONE PIECE Official", "One Piece", "BOOSTER PACK -ADVENTURE ON KAMI'S ISLAND- [OP15-EB04]", "2026-04-03", url, "official exact date"),
+        make_release("ONE PIECE Official", "One Piece", "Double Pack Set Vol.10 [DP-10]", "2026-04-03", url, "official exact date"),
+    ]
+
+
+async def scrape_gundam_releases() -> List[Event]:
+    url = "https://www.gundam-gcg.com/en/news/1stanniversary.html"
+    html = await fetch_html(url)
+    soup = BeautifulSoup(html, "html.parser")
+    og = soup.find("meta", attrs={"property": "og:image"})
+    image_url = og["content"] if og and og.get("content") else None
+
+    return [
+        make_release("GUNDAM Official", "Gundam Card Game", 'Freedom Ascension [GD05]', "2026-07-24", url, "official exact date", image_url),
+    ]
+
+
+async def scrape_pokemon_releases() -> List[Event]:
+    url = "https://www.pokemon.com/us/pokemon-news/check-out-every-pokemon-tcg-product-release-in-march-2026"
+    html = await fetch_html(url)
+    soup = BeautifulSoup(html, "html.parser")
+    og = soup.find("meta", attrs={"property": "og:image"})
+    image_url = og["content"] if og and og.get("content") else None
+
+    return [
+        make_release("Pokémon", "Pokémon", "Mega Evolution—Perfect Order", "2026-03-27", url, "official exact date", image_url),
+        make_release("Pokémon", "Pokémon", "Mega Evolution—Chaos Rising", "2026-05-22", url, "official exact date", image_url),
+    ]
 
 
 # -----------------------------
-# PLAY SOURCES
+# Play sources
 # -----------------------------
 async def scrape_wpn_events() -> List[Event]:
     url = "https://wpn.wizards.com/en/events"
@@ -697,20 +716,6 @@ async def scrape_one_piece_events() -> List[Event]:
         except Exception as exc:
             print(f"One Piece scrape failed for {url}: {exc}")
 
-    if not events:
-        text = soup.get_text("\n", strip=True)
-        for line in clean_lines(text):
-            if any(x in line for x in ["Championship", "Store Championship", "Treasure Cup", "Convention"]):
-                events.append(
-                    Event(
-                        source="ONE PIECE Official",
-                        game="One Piece",
-                        title=line.strip(),
-                        event_type="Play",
-                        url=root_url,
-                    )
-                )
-
     return events
 
 
@@ -815,21 +820,6 @@ async def scrape_gundam_events() -> List[Event]:
             except Exception as exc:
                 print(f"Gundam scrape failed for {detail_url}: {exc}")
 
-    if not events:
-        text = soup.get_text("\n", strip=True)
-        for line in clean_lines(text):
-            if any(x in line for x in ["Store Tournament", "Store Championships", "TEAM BATTLE", "WORLD CHAMPIONSHIPS"]):
-                events.append(
-                    Event(
-                        source="GUNDAM Official",
-                        game="Gundam Card Game",
-                        title=line.strip(),
-                        event_type="Play",
-                        url=root_url,
-                        location_text="Official Gundam event page",
-                    )
-                )
-
     return events
 
 
@@ -840,6 +830,10 @@ async def scrape_all() -> List[Event]:
         scrape_dnd_releases(),
         scrape_lorcana_releases(),
         scrape_riftbound_releases(),
+        scrape_star_wars_releases(),
+        scrape_one_piece_releases(),
+        scrape_gundam_releases(),
+        scrape_pokemon_releases(),
 
         # Play
         scrape_wpn_events(),
