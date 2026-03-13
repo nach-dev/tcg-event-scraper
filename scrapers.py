@@ -162,7 +162,10 @@ def extract_first_isoish_date(text: str) -> str | None:
             except Exception:
                 pass
 
-    range_match = re.search(r"([A-Z][a-z]{2,8})\s+(\d{1,2})\s*[-–]\s*\d{1,2}(?:,\s*20\d{2})?", value)
+    range_match = re.search(
+        r"([A-Z][a-z]{2,8})\s+(\d{1,2})\s*[-–]\s*\d{1,2}(?:,\s*20\d{2})?",
+        value,
+    )
     if range_match:
         month_name = range_match.group(1)
         first_day = range_match.group(2)
@@ -378,8 +381,12 @@ async def scrape_riftbound_releases() -> List[Event]:
     image_url = og["content"] if og and og.get("content") else None
 
     return [
-        make_release("Riftbound Roadmap", "Riftbound", "Spiritforged Pre-Rift", "2026-02-06", url, "official exact start date", image_url),
-        make_release("Riftbound Roadmap", "Riftbound", "Spiritforged English Release", "2026-02-13", url, "official exact date", image_url),
+        make_release("Riftbound 2026 Roadmap", "Riftbound", "Spiritforged Pre-Rift", "2026-02-06", url, "official exact start date", image_url),
+        make_release("Riftbound 2026 Roadmap", "Riftbound", "Spiritforged (English)", "2026-02-13", url, "official exact date", image_url),
+        make_release("Riftbound 2026 Roadmap", "Riftbound", "Unleashed (China)", "2026-04-10", url, "secondary-confirmed exact date; roadmap confirms Unleashed in 2026", image_url),
+        make_release("Riftbound 2026 Roadmap", "Riftbound", "Unleashed (Global English)", "2026-05-08", url, "secondary-confirmed exact date; roadmap confirms Unleashed in 2026", image_url),
+        make_release("Riftbound 2026 Roadmap", "Riftbound", "Vendetta", "2026-07-31", url, "secondary-confirmed exact date; official sources confirm later-2026 release window", image_url),
+        make_release("Riftbound 2026 Roadmap", "Riftbound", "Radiance", "2026-10-23", url, "secondary-confirmed exact date; official sources confirm year-end release", image_url),
     ]
 
 
@@ -391,18 +398,16 @@ async def scrape_star_wars_releases() -> List[Event]:
     image_url = og["content"] if og and og.get("content") else None
 
     return [
-        make_release("Star Wars: Unlimited", "Star Wars: Unlimited", "A Lawless Time", "2026-03-13", url, "official exact date", image_url),
-        make_release("Star Wars: Unlimited", "Star Wars: Unlimited", "Ashes of the Empire", "2026-01-01", url, "year-only official confirmation; month/day unconfirmed", image_url),
-        make_release("Star Wars: Unlimited", "Star Wars: Unlimited", "Homeworlds", "2026-01-01", url, "year-only official confirmation; month/day unconfirmed", image_url),
-        make_release("Star Wars: Unlimited", "Star Wars: Unlimited", "Icons", "2026-01-01", url, "year-only official confirmation; month/day unconfirmed", image_url),
+        make_release("Star Wars Unlimited", "Star Wars: Unlimited", "A Lawless Time", "2026-03-13", url, "official exact date", image_url),
+        make_release("Star Wars Unlimited", "Star Wars: Unlimited", "Twin Suns Decks", "2026-05-01", url, "month-only: May 2026", image_url),
+        make_release("Star Wars Unlimited", "Star Wars: Unlimited", "Ashes of the Empire", "2026-06-01", url, "season-only: Summer 2026", image_url),
+        make_release("Star Wars Unlimited", "Star Wars: Unlimited", "Homeworlds", "2026-10-01", url, "quarter-only: Q4 2026", image_url),
+        make_release("Star Wars Unlimited", "Star Wars: Unlimited", "Icons", "2026-12-01", url, "officially named as 2026 set; exact month/day not verified in source", image_url),
     ]
 
 
 async def scrape_one_piece_releases() -> List[Event]:
     url = "https://en.onepiece-cardgame.com/products/"
-    html = await fetch_html(url)
-    soup = BeautifulSoup(html, "html.parser")
-
     return [
         make_release("ONE PIECE Official", "One Piece", "BOOSTER PACK -THE AZURE SEA’S SEVEN- [OP14-EB04]", "2026-01-16", url, "official exact date"),
         make_release("ONE PIECE Official", "One Piece", "STARTER DECK -Egghead- [ST-29]", "2026-01-16", url, "official exact date"),
@@ -421,7 +426,7 @@ async def scrape_gundam_releases() -> List[Event]:
     image_url = og["content"] if og and og.get("content") else None
 
     return [
-        make_release("GUNDAM Official", "Gundam Card Game", 'Freedom Ascension [GD05]', "2026-07-24", url, "official exact date", image_url),
+        make_release("GUNDAM Official", "Gundam Card Game", "Freedom Ascension [GD05]", "2026-07-24", url, "official exact date", image_url),
     ]
 
 
