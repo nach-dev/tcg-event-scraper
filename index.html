@@ -285,11 +285,34 @@
       return safe(eventType);
     }
 
+    function normalizeDateForSort(e) {
+      return e.event_date || "9999-99-99";
+    }
+
+    function compareEvents(a, b) {
+      const aDate = normalizeDateForSort(a);
+      const bDate = normalizeDateForSort(b);
+
+      if (aDate !== bDate) {
+        return aDate.localeCompare(bDate);
+      }
+
+      const aGame = a.game_type || "";
+      const bGame = b.game_type || "";
+      if (aGame !== bGame) {
+        return aGame.localeCompare(bGame);
+      }
+
+      const aName = a.event_name || "";
+      const bName = b.event_name || "";
+      return aName.localeCompare(bName);
+    }
+
     function filterEvents() {
       const term = search.value.trim().toLowerCase();
       const selectedGame = gameFilter.value;
 
-      return allEvents.filter(e => {
+      const filtered = allEvents.filter(e => {
         const haystack = [
           e.month,
           e.kind,
@@ -320,6 +343,9 @@
 
         return matchSearch && matchGame && matchMode;
       });
+
+      filtered.sort(compareEvents);
+      return filtered;
     }
 
     function renderReleaseCards(events) {
@@ -369,6 +395,33 @@
       });
     }
 
+    function renderAllTable(events) {
+      tbody.innerHTML = "";
+
+      events.forEach(e => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${safe(e.month)}</td>
+          <td>${safe(e.game_type)}</td>
+          <td>${badge(e.event_type)}</td>
+          <td>${safe(e.event_name)}</td>
+          <td>${safe(e.event_date_display || e.event_date)}</td>
+          <td class="desc">${safe(e.event_description)}</td>
+          <td>
+            ${
+              e.source_url
+                ? `<a href="${e.source_url}" target="_blank" rel="noopener noreferrer">${safe(e.source_site)}</a>`
+                : safe(e.source_site)
+            }
+          </td>
+          <td>
+            ${e.image_url ? `<img class="play-image" src="${e.image_url}" alt="${safe(e.image_alt)}">` : ""}
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
     function render() {
       const filtered = filterEvents();
 
@@ -385,9 +438,12 @@
       if (currentMode === "release") {
         releaseView.classList.remove("hidden");
         renderReleaseCards(filtered);
-      } else {
+      } else if (currentMode === "play") {
         playView.classList.remove("hidden");
         renderPlayTable(filtered);
+      } else {
+        playView.classList.remove("hidden");
+        renderAllTable(filtered);
       }
 
       summary.textContent = `${filtered.length} event${filtered.length === 1 ? "" : "s"} shown`;
@@ -411,6 +467,7 @@
       })
       .then(data => {
         allEvents = Object.values(data).flat();
+        allEvents.sort(compareEvents);
 
         const games = [...new Set(allEvents.map(e => e.game_type).filter(Boolean))].sort();
         games.forEach(game => {
