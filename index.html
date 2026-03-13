@@ -20,10 +20,6 @@
       box-shadow: 0 4px 20px rgba(0,0,0,.25);
     }
 
-    h1 {
-      margin: 0 0 8px;
-    }
-
     .wrap {
       max-width: 1450px;
       margin: 0 auto;
@@ -72,6 +68,79 @@
       flex: 1;
     }
 
+    .meta {
+      margin: 10px 0 16px;
+      color: #d7c3f4;
+      font-size: 13px;
+    }
+
+    .empty {
+      padding: 24px 0;
+      color: #d7c3f4;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .release-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 10px;
+    }
+
+    .release-card {
+      background: rgba(35, 18, 54, 0.92);
+      border: 1px solid #5b3488;
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.18);
+    }
+
+    .release-card img {
+      width: 100%;
+      max-height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 12px;
+      border: 1px solid #6d3ea0;
+      background: #fff;
+    }
+
+    .release-date {
+      color: #d8c1ff;
+      font-size: 13px;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .release-game {
+      color: #c598ff;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    .release-title {
+      font-size: 22px;
+      font-weight: 700;
+      margin: 0 0 10px;
+      line-height: 1.2;
+    }
+
+    .release-desc {
+      color: #e9defb;
+      line-height: 1.45;
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+
+    .release-link a {
+      color: #d2b8ff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
@@ -101,24 +170,13 @@
       color: #d2b8ff;
     }
 
-    img {
+    .play-image {
       max-width: 80px;
       max-height: 80px;
       border-radius: 6px;
       display: block;
       border: 1px solid #5f3490;
       background: #fff;
-    }
-
-    .meta {
-      margin: 10px 0 0;
-      color: #d7c3f4;
-      font-size: 13px;
-    }
-
-    .empty {
-      padding: 24px 0;
-      color: #d7c3f4;
     }
 
     .desc {
@@ -155,13 +213,13 @@
 
   <div class="wrap">
     <div class="tabs">
-      <button class="tab active" data-mode="all">All</button>
-      <button class="tab" data-mode="release">Releases</button>
+      <button class="tab active" data-mode="release">Releases</button>
       <button class="tab" data-mode="play">Play</button>
+      <button class="tab" data-mode="all">All</button>
     </div>
 
     <div class="toolbar">
-      <input id="search" type="text" placeholder="Search events, games, descriptions, notes, locations..." />
+      <input id="search" type="text" placeholder="Search games, names, descriptions, notes..." />
       <select id="gameFilter">
         <option value="all">All Games</option>
       </select>
@@ -169,35 +227,41 @@
 
     <div class="meta" id="summary"></div>
 
-    <table id="eventsTable">
-      <thead>
-        <tr>
-          <th>Month</th>
-          <th>Game</th>
-          <th>Event Type</th>
-          <th>Event Name</th>
-          <th>Date</th>
-          <th>Description</th>
-          <th>Source</th>
-          <th>Image</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
+    <div id="releaseView" class="release-grid"></div>
 
-    <div id="emptyState" class="empty" style="display:none;">No events found.</div>
+    <div id="playView" class="hidden">
+      <table id="eventsTable">
+        <thead>
+          <tr>
+            <th>Month</th>
+            <th>Game</th>
+            <th>Event Type</th>
+            <th>Event Name</th>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Source</th>
+            <th>Image</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div id="emptyState" class="empty hidden">No events found.</div>
   </div>
 
   <script>
     let allEvents = [];
-    let currentMode = "all";
+    let currentMode = "release";
 
-    const tbody = document.querySelector("#eventsTable tbody");
     const search = document.getElementById("search");
     const gameFilter = document.getElementById("gameFilter");
     const summary = document.getElementById("summary");
     const emptyState = document.getElementById("emptyState");
     const tabs = document.querySelectorAll(".tab");
+    const releaseView = document.getElementById("releaseView");
+    const playView = document.getElementById("playView");
+    const tbody = document.querySelector("#eventsTable tbody");
 
     function safe(value) {
       return value ?? "";
@@ -221,17 +285,19 @@
       return safe(eventType);
     }
 
-    function render() {
+    function filterEvents() {
       const term = search.value.trim().toLowerCase();
       const selectedGame = gameFilter.value;
 
-      const filtered = allEvents.filter(e => {
+      return allEvents.filter(e => {
         const haystack = [
           e.month,
+          e.kind,
           e.game_type,
           e.event_type,
           e.event_name,
           e.event_date,
+          e.event_date_display,
           e.event_description,
           e.source_site,
           e.source_url,
@@ -247,31 +313,46 @@
 
         let matchMode = true;
         if (currentMode === "release") {
-          matchMode = isRelease(e.event_type);
+          matchMode = e.kind === "release" || isRelease(e.event_type);
         } else if (currentMode === "play") {
-          matchMode = isPlay(e.event_type);
+          matchMode = e.kind === "play" || isPlay(e.event_type);
         }
 
         return matchSearch && matchGame && matchMode;
       });
+    }
 
+    function renderReleaseCards(events) {
+      releaseView.innerHTML = "";
+
+      events.forEach(e => {
+        const card = document.createElement("div");
+        card.className = "release-card";
+        card.innerHTML = `
+          ${e.image_url ? `<img src="${safe(e.image_url)}" alt="${safe(e.image_alt)}">` : ""}
+          <div class="release-game">${safe(e.game_type)}</div>
+          <div class="release-date">${safe(e.event_date_display || e.month)}</div>
+          <div class="release-title">${safe(e.event_name)}</div>
+          <div class="release-desc">${safe(e.event_description)}</div>
+          <div class="release-link">
+            ${e.source_url ? `<a href="${safe(e.source_url)}" target="_blank" rel="noopener noreferrer">${safe(e.source_site || "Source")}</a>` : safe(e.source_site)}
+          </div>
+        `;
+        releaseView.appendChild(card);
+      });
+    }
+
+    function renderPlayTable(events) {
       tbody.innerHTML = "";
 
-      if (!filtered.length) {
-        emptyState.style.display = "block";
-      } else {
-        emptyState.style.display = "none";
-      }
-
-      filtered.forEach(e => {
+      events.forEach(e => {
         const tr = document.createElement("tr");
-
         tr.innerHTML = `
           <td>${safe(e.month)}</td>
           <td>${safe(e.game_type)}</td>
           <td>${badge(e.event_type)}</td>
           <td>${safe(e.event_name)}</td>
-          <td>${safe(e.event_date)}</td>
+          <td>${safe(e.event_date_display || e.event_date)}</td>
           <td class="desc">${safe(e.event_description)}</td>
           <td>
             ${
@@ -281,16 +362,33 @@
             }
           </td>
           <td>
-            ${
-              e.image_url
-                ? `<img src="${e.image_url}" alt="${safe(e.image_alt)}" />`
-                : ""
-            }
+            ${e.image_url ? `<img class="play-image" src="${e.image_url}" alt="${safe(e.image_alt)}">` : ""}
           </td>
         `;
-
         tbody.appendChild(tr);
       });
+    }
+
+    function render() {
+      const filtered = filterEvents();
+
+      releaseView.classList.add("hidden");
+      playView.classList.add("hidden");
+      emptyState.classList.add("hidden");
+
+      if (!filtered.length) {
+        emptyState.classList.remove("hidden");
+        summary.textContent = "0 events shown";
+        return;
+      }
+
+      if (currentMode === "release") {
+        releaseView.classList.remove("hidden");
+        renderReleaseCards(filtered);
+      } else {
+        playView.classList.remove("hidden");
+        renderPlayTable(filtered);
+      }
 
       summary.textContent = `${filtered.length} event${filtered.length === 1 ? "" : "s"} shown`;
     }
@@ -327,7 +425,7 @@
       .catch(error => {
         console.error("Failed to load event data:", error);
         summary.textContent = "Failed to load event data.";
-        emptyState.style.display = "block";
+        emptyState.classList.remove("hidden");
       });
 
     search.addEventListener("input", render);
