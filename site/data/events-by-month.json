@@ -252,33 +252,17 @@
       "month": "2026-04",
       "kind": "play",
       "game_type": "Disney Lorcana",
-      "event_type": "Play - Weekly Play",
+      "event_type": "Play",
       "event_name": "Upcoming",
       "event_date": "2026-04-08",
       "event_date_display": "Apr 08, 2026",
-      "event_description": "Play - Weekly Play | Wednesday Evening Weekly Play (Constructed) | Brints Collectibles | APR 8 • 12:00 PM (UTC)",
+      "event_description": "Play | Gamepark Easter Pack Rush | Gamepark | APR 8 • 4:30 PM (UTC)",
       "source_site": "Ravensburger Play Hub",
       "source_url": "https://tcg.ravensburgerplay.com/events",
       "image_url": null,
       "image_alt": null,
-      "location_text": "Brints Collectibles",
-      "notes": "APR 8 • 12:00 PM (UTC)"
-    },
-    {
-      "month": "2026-04",
-      "kind": "play",
-      "game_type": "Disney Lorcana",
-      "event_type": "Play - Weekly Play",
-      "event_name": "Upcoming",
-      "event_date": "2026-04-08",
-      "event_date_display": "Apr 08, 2026",
-      "event_description": "Play - Weekly Play | Weekly Play (Constructed) | Dadi e Mattoncini Jesi | APR 8 • 8:30 AM (UTC)",
-      "source_site": "Ravensburger Play Hub",
-      "source_url": "https://tcg.ravensburgerplay.com/events",
-      "image_url": null,
-      "image_alt": null,
-      "location_text": "Dadi e Mattoncini Jesi",
-      "notes": "APR 8 • 8:30 AM (UTC)"
+      "location_text": "Gamepark",
+      "notes": "APR 8 • 4:30 PM (UTC)"
     },
     {
       "month": "2026-04",
@@ -288,13 +272,13 @@
       "event_name": "Upcoming",
       "event_date": "2026-04-08",
       "event_date_display": "Apr 08, 2026",
-      "event_description": "Play | Winterspell League | Behold Games | APR 8 • 8:30 AM (UTC)",
+      "event_description": "Play | TTG Locals | Top Table Gaming | APR 8 • 4:30 PM (UTC)",
       "source_site": "Ravensburger Play Hub",
       "source_url": "https://tcg.ravensburgerplay.com/events",
       "image_url": null,
       "image_alt": null,
-      "location_text": "Behold Games",
-      "notes": "APR 8 • 8:30 AM (UTC)"
+      "location_text": "Top Table Gaming",
+      "notes": "APR 8 • 4:30 PM (UTC)"
     },
     {
       "month": "2026-04",
@@ -304,29 +288,13 @@
       "event_name": "Upcoming",
       "event_date": "2026-04-08",
       "event_date_display": "Apr 08, 2026",
-      "event_description": "Play | Wednesday Locals | The CollectorSmith | APR 8 • 8:30 AM (UTC)",
+      "event_description": "Play | TCG Ostschweiz Weekly SUL League 8/25 | Calanda Magic | APR 8 • 4:30 PM (UTC)",
       "source_site": "Ravensburger Play Hub",
       "source_url": "https://tcg.ravensburgerplay.com/events",
       "image_url": null,
       "image_alt": null,
-      "location_text": "The CollectorSmith",
-      "notes": "APR 8 • 8:30 AM (UTC)"
-    },
-    {
-      "month": "2026-04",
-      "kind": "play",
-      "game_type": "Disney Lorcana",
-      "event_type": "Play - Weekly Play",
-      "event_name": "Upcoming",
-      "event_date": "2026-04-08",
-      "event_date_display": "Apr 08, 2026",
-      "event_description": "Play - Weekly Play | Wednesday Evening Weekly Play At The Games District - (Core Constructed) | The Games District | APR 8 • 9:00 AM (UTC)",
-      "source_site": "Ravensburger Play Hub",
-      "source_url": "https://tcg.ravensburgerplay.com/events",
-      "image_url": null,
-      "image_alt": null,
-      "location_text": "The Games District",
-      "notes": "APR 8 • 9:00 AM (UTC)"
+      "location_text": "Calanda Magic",
+      "notes": "APR 8 • 4:30 PM (UTC)"
     },
     {
       "month": "2026-04",
@@ -336,13 +304,13 @@
       "event_name": "Upcoming",
       "event_date": "2026-04-08",
       "event_date_display": "Apr 08, 2026",
-      "event_description": "Play | Shuffled Salisbury Weekly Locals - April 08, 2026 | Shuffled LGS - Salisbury | APR 8 • 9:15 AM (UTC)",
+      "event_description": "Play | CommuniTea Gaming Weekly Wednesday Lorcana League | CommuniTea Gaming | APR 8 • 4:30 PM (UTC)",
       "source_site": "Ravensburger Play Hub",
       "source_url": "https://tcg.ravensburgerplay.com/events",
       "image_url": null,
       "image_alt": null,
-      "location_text": "Shuffled LGS - Salisbury",
-      "notes": "APR 8 • 9:15 AM (UTC)"
+      "location_text": "CommuniTea Gaming",
+      "notes": "APR 8 • 4:30 PM (UTC)"
     },
     {
       "month": "2026-04",
@@ -352,13 +320,13 @@
       "event_name": "Upcoming",
       "event_date": "2026-04-08",
       "event_date_display": "Apr 08, 2026",
-      "event_description": "Play | Cardhub Adelaide Lorcana | The Cardhub Adelaide | APR 8 • 9:15 AM (UTC)",
+      "event_description": "Play | Saison 11 T2J3 | Playin Paris Rivoli | APR 8 • 4:30 PM (UTC)",
       "source_site": "Ravensburger Play Hub",
       "source_url": "https://tcg.ravensburgerplay.com/events",
       "image_url": null,
       "image_alt": null,
-      "location_text": "The Cardhub Adelaide",
-      "notes": "APR 8 • 9:15 AM (UTC)"
+      "location_text": "Playin Paris Rivoli",
+      "notes": "APR 8 • 4:30 PM (UTC)"
     },
     {
       "month": "2026-04",
@@ -368,13 +336,93 @@
       "event_name": "Upcoming",
       "event_date": "2026-04-08",
       "event_date_display": "Apr 08, 2026",
-      "event_description": "Play - Weekly Play | OHS Weekly Play (Constructed) | Ongkeco’s Hobby Shop | APR 8 • 10:00 AM (UTC)",
+      "event_description": "Play - Weekly Play | Wednesday Evening Weekly Play (Constructed) | Evo | APR 8 • 5:30 PM (UTC)",
       "source_site": "Ravensburger Play Hub",
       "source_url": "https://tcg.ravensburgerplay.com/events",
       "image_url": null,
       "image_alt": null,
-      "location_text": "Ongkeco’s Hobby Shop",
-      "notes": "APR 8 • 10:00 AM (UTC)"
+      "location_text": "Evo",
+      "notes": "APR 8 • 5:30 PM (UTC)"
+    },
+    {
+      "month": "2026-04",
+      "kind": "play",
+      "game_type": "Disney Lorcana",
+      "event_type": "Play",
+      "event_name": "Upcoming",
+      "event_date": "2026-04-08",
+      "event_date_display": "Apr 08, 2026",
+      "event_description": "Play | Liga Semanal Winterspell - 8 Abril | Freakmondo | APR 8 • 4:30 PM (UTC)",
+      "source_site": "Ravensburger Play Hub",
+      "source_url": "https://tcg.ravensburgerplay.com/events",
+      "image_url": null,
+      "image_alt": null,
+      "location_text": "Freakmondo",
+      "notes": "APR 8 • 4:30 PM (UTC)"
+    },
+    {
+      "month": "2026-04",
+      "kind": "play",
+      "game_type": "Disney Lorcana",
+      "event_type": "Play",
+      "event_name": "Upcoming",
+      "event_date": "2026-04-08",
+      "event_date_display": "Apr 08, 2026",
+      "event_description": "Play | Lorcana Wednesday: Winterspell - Week 8 (8/4/26) | Guild Of Games | APR 8 • 4:30 PM (UTC)",
+      "source_site": "Ravensburger Play Hub",
+      "source_url": "https://tcg.ravensburgerplay.com/events",
+      "image_url": null,
+      "image_alt": null,
+      "location_text": "Guild Of Games",
+      "notes": "APR 8 • 4:30 PM (UTC)"
+    },
+    {
+      "month": "2026-04",
+      "kind": "play",
+      "game_type": "Disney Lorcana",
+      "event_type": "Play",
+      "event_name": "Upcoming",
+      "event_date": "2026-04-08",
+      "event_date_display": "Apr 08, 2026",
+      "event_description": "Play | Lorcana Open Play Template | Moon Mountain Games | APR 8 • 5:00 PM (UTC)",
+      "source_site": "Ravensburger Play Hub",
+      "source_url": "https://tcg.ravensburgerplay.com/events",
+      "image_url": null,
+      "image_alt": null,
+      "location_text": "Moon Mountain Games",
+      "notes": "APR 8 • 5:00 PM (UTC)"
+    },
+    {
+      "month": "2026-04",
+      "kind": "play",
+      "game_type": "Disney Lorcana",
+      "event_type": "Play",
+      "event_name": "Upcoming",
+      "event_date": "2026-04-08",
+      "event_date_display": "Apr 08, 2026",
+      "event_description": "Play | Tournoi Lorcana Du Mercredi | DeouCafe | APR 8 • 5:00 PM (UTC)",
+      "source_site": "Ravensburger Play Hub",
+      "source_url": "https://tcg.ravensburgerplay.com/events",
+      "image_url": null,
+      "image_alt": null,
+      "location_text": "DeouCafe",
+      "notes": "APR 8 • 5:00 PM (UTC)"
+    },
+    {
+      "month": "2026-04",
+      "kind": "play",
+      "game_type": "Disney Lorcana",
+      "event_type": "Play",
+      "event_name": "Upcoming",
+      "event_date": "2026-04-08",
+      "event_date_display": "Apr 08, 2026",
+      "event_description": "Play | Lorcana Weekly League Night | Travelling Man Newcastle | APR 8 • 5:00 PM (UTC)",
+      "source_site": "Ravensburger Play Hub",
+      "source_url": "https://tcg.ravensburgerplay.com/events",
+      "image_url": null,
+      "image_alt": null,
+      "location_text": "Travelling Man Newcastle",
+      "notes": "APR 8 • 5:00 PM (UTC)"
     },
     {
       "month": "2026-04",
@@ -384,13 +432,13 @@
       "event_name": "Upcoming",
       "event_date": "2026-04-08",
       "event_date_display": "Apr 08, 2026",
-      "event_description": "Play - Weekly Play | PK Constructed Weekly Play April #2 (@Ratchayothin) | PK Cardgame (Ratchayothin) | APR 8 • 11:00 AM (UTC)",
+      "event_description": "Play - Weekly Play | Wednesday Night Weekly Play (Constructed) | Koning Bordspel BV | APR 8 • 5:00 PM (UTC)",
       "source_site": "Ravensburger Play Hub",
       "source_url": "https://tcg.ravensburgerplay.com/events",
       "image_url": null,
       "image_alt": null,
-      "location_text": "PK Cardgame (Ratchayothin)",
-      "notes": "APR 8 • 11:00 AM (UTC)"
+      "location_text": "Koning Bordspel BV",
+      "notes": "APR 8 • 5:00 PM (UTC)"
     },
     {
       "month": "2026-04",
@@ -400,13 +448,13 @@
       "event_name": "Upcoming",
       "event_date": "2026-04-08",
       "event_date_display": "Apr 08, 2026",
-      "event_description": "Play | 【兔妞桌遊】聯盟週賽 | 兔妞桌遊 | APR 8 • 11:00 AM (UTC)",
+      "event_description": "Play | Wednesday Evening Lorcana Club | Bridge Troll Boardgame Café | APR 8 • 5:00 PM (UTC)",
       "source_site": "Ravensburger Play Hub",
       "source_url": "https://tcg.ravensburgerplay.com/events",
       "image_url": null,
       "image_alt": null,
-      "location_text": "兔妞桌遊",
-      "notes": "APR 8 • 11:00 AM (UTC)"
+      "location_text": "Bridge Troll Boardgame Café",
+      "notes": "APR 8 • 5:00 PM (UTC)"
     },
     {
       "month": "2026-04",
@@ -416,13 +464,13 @@
       "event_name": "Upcoming",
       "event_date": "2026-04-08",
       "event_date_display": "Apr 08, 2026",
-      "event_description": "Play | Lorcana Play 8/04 | Hasard Ludique | APR 8 • 11:30 AM (UTC)",
+      "event_description": "Play | S11 Weekly | LUDITHORYNQUE | APR 8 • 5:00 PM (UTC)",
       "source_site": "Ravensburger Play Hub",
       "source_url": "https://tcg.ravensburgerplay.com/events",
       "image_url": null,
       "image_alt": null,
-      "location_text": "Hasard Ludique",
-      "notes": "APR 8 • 11:30 AM (UTC)"
+      "location_text": "LUDITHORYNQUE",
+      "notes": "APR 8 • 5:00 PM (UTC)"
     },
     {
       "month": "2026-04",
@@ -432,13 +480,13 @@
       "event_name": "Upcoming",
       "event_date": "2026-04-08",
       "event_date_display": "Apr 08, 2026",
-      "event_description": "Play | Card Arena's Weekly Wednesday Pack Rush/Core APR 8th | Card Arena by MyRepublic | APR 8 • 11:30 AM (UTC)",
+      "event_description": "Play | Wednesday Tournament | d20 Board Game Cafe Watford | APR 8 • 5:00 PM (UTC)",
       "source_site": "Ravensburger Play Hub",
       "source_url": "https://tcg.ravensburgerplay.com/events",
       "image_url": null,
       "image_alt": null,
-      "location_text": "Card Arena by MyRepublic",
-      "notes": "APR 8 • 11:30 AM (UTC)"
+      "location_text": "d20 Board Game Cafe Watford",
+      "notes": "APR 8 • 5:00 PM (UTC)"
     },
     {
       "month": "2026-04",
@@ -448,29 +496,13 @@
       "event_name": "Upcoming",
       "event_date": "2026-04-08",
       "event_date_display": "Apr 08, 2026",
-      "event_description": "Play - Weekly Play | Monday Morning Weekly Play (Constructed) | BANTYO 番長連合 | APR 8 • 12:00 PM (UTC)",
+      "event_description": "Play - Weekly Play | Weekly Play (Constructed) | Pokecard Store | APR 8 • 5:00 PM (UTC)",
       "source_site": "Ravensburger Play Hub",
       "source_url": "https://tcg.ravensburgerplay.com/events",
       "image_url": null,
       "image_alt": null,
-      "location_text": "BANTYO 番長連合",
-      "notes": "APR 8 • 12:00 PM (UTC)"
-    },
-    {
-      "month": "2026-04",
-      "kind": "play",
-      "game_type": "Disney Lorcana",
-      "event_type": "Play - Constructed",
-      "event_name": "Upcoming",
-      "event_date": "2026-04-08",
-      "event_date_display": "Apr 08, 2026",
-      "event_description": "Play - Constructed | Inkwell Rumble: Wednesday Weekly (Constructed) | Atlas Gamers | APR 8 • 12:00 PM (UTC)",
-      "source_site": "Ravensburger Play Hub",
-      "source_url": "https://tcg.ravensburgerplay.com/events",
-      "image_url": null,
-      "image_alt": null,
-      "location_text": "Atlas Gamers",
-      "notes": "APR 8 • 12:00 PM (UTC)"
+      "location_text": "Pokecard Store",
+      "notes": "APR 8 • 5:00 PM (UTC)"
     },
     {
       "month": "2026-04",
@@ -480,13 +512,13 @@
       "event_name": "Upcoming",
       "event_date": "2026-04-08",
       "event_date_display": "Apr 08, 2026",
-      "event_description": "Play | Collect All-Disney Lorcana Weekly Tournament 8-April-2026 | Collect All | APR 8 • 12:00 PM (UTC)",
+      "event_description": "Play | Easter Pack Rush | Shadowdust Gaming Cafe | APR 8 • 5:00 PM (UTC)",
       "source_site": "Ravensburger Play Hub",
       "source_url": "https://tcg.ravensburgerplay.com/events",
       "image_url": null,
       "image_alt": null,
-      "location_text": "Collect All",
-      "notes": "APR 8 • 12:00 PM (UTC)"
+      "location_text": "Shadowdust Gaming Cafe",
+      "notes": "APR 8 • 5:00 PM (UTC)"
     },
     {
       "month": "2026-04",
@@ -496,45 +528,13 @@
       "event_name": "Upcoming",
       "event_date": "2026-04-08",
       "event_date_display": "Apr 08, 2026",
-      "event_description": "Play - Weekly Play | 8April 26 OP Kits Weekly Play Event- Core Constructed (Standard) | 純白鎮 | APR 8 • 12:00 PM (UTC)",
+      "event_description": "Play - Weekly Play | Weekly Play | 08-04-26 | Spellenhuis | APR 8 • 5:15 PM (UTC)",
       "source_site": "Ravensburger Play Hub",
       "source_url": "https://tcg.ravensburgerplay.com/events",
       "image_url": null,
       "image_alt": null,
-      "location_text": "純白鎮",
-      "notes": "APR 8 • 12:00 PM (UTC)"
-    },
-    {
-      "month": "2026-04",
-      "kind": "play",
-      "game_type": "Disney Lorcana",
-      "event_type": "Play - Casual Play",
-      "event_name": "Upcoming",
-      "event_date": "2026-04-08",
-      "event_date_display": "Apr 08, 2026",
-      "event_description": "Play - Casual Play | Dueller's Point Wednesdays Casuals | Dueller's Point | APR 8 • 12:00 PM (UTC)",
-      "source_site": "Ravensburger Play Hub",
-      "source_url": "https://tcg.ravensburgerplay.com/events",
-      "image_url": null,
-      "image_alt": null,
-      "location_text": "Dueller's Point",
-      "notes": "APR 8 • 12:00 PM (UTC)"
-    },
-    {
-      "month": "2026-04",
-      "kind": "play",
-      "game_type": "Disney Lorcana",
-      "event_type": "Play - Constructed",
-      "event_name": "Upcoming",
-      "event_date": "2026-04-08",
-      "event_date_display": "Apr 08, 2026",
-      "event_description": "Play - Constructed | Lorcana - Core Constructed | La Caverne du Gobelin SEMECOURT (GobCorp) | APR 8 • 12:30 PM (UTC)",
-      "source_site": "Ravensburger Play Hub",
-      "source_url": "https://tcg.ravensburgerplay.com/events",
-      "image_url": null,
-      "image_alt": null,
-      "location_text": "La Caverne du Gobelin SEMECOURT (GobCorp)",
-      "notes": "APR 8 • 12:30 PM (UTC)"
+      "location_text": "Spellenhuis",
+      "notes": "APR 8 • 5:15 PM (UTC)"
     },
     {
       "month": "2026-04",
@@ -544,29 +544,13 @@
       "event_name": "Upcoming",
       "event_date": "2026-04-08",
       "event_date_display": "Apr 08, 2026",
-      "event_description": "Play | Wednesday Afternoon Unstructured / Player List Only | Ravensburger Store Dresden (SN) | APR 8 • 12:30 PM (UTC)",
+      "event_description": "Play | Tournoi Construit 08/04/26 | AU BEAU JEU | APR 8 • 5:15 PM (UTC)",
       "source_site": "Ravensburger Play Hub",
       "source_url": "https://tcg.ravensburgerplay.com/events",
       "image_url": null,
       "image_alt": null,
-      "location_text": "Ravensburger Store Dresden (SN)",
-      "notes": "APR 8 • 12:30 PM (UTC)"
-    },
-    {
-      "month": "2026-04",
-      "kind": "play",
-      "game_type": "Disney Lorcana",
-      "event_type": "Play - Constructed",
-      "event_name": "Upcoming",
-      "event_date": "2026-04-08",
-      "event_date_display": "Apr 08, 2026",
-      "event_description": "Play - Constructed | B&B Casual Wednesday April 08, 2026; Core Constructed | Brick & Block - Hobby Store | APR 8 • 12:30 PM (UTC)",
-      "source_site": "Ravensburger Play Hub",
-      "source_url": "https://tcg.ravensburgerplay.com/events",
-      "image_url": null,
-      "image_alt": null,
-      "location_text": "Brick & Block - Hobby Store",
-      "notes": "APR 8 • 12:30 PM (UTC)"
+      "location_text": "AU BEAU JEU",
+      "notes": "APR 8 • 5:15 PM (UTC)"
     },
     {
       "month": "2026-04",
@@ -576,29 +560,13 @@
       "event_name": "Upcoming",
       "event_date": "2026-04-08",
       "event_date_display": "Apr 08, 2026",
-      "event_description": "Play | Lorcana Weekly Im Würfelbecher | Würfelbecher | APR 8 • 12:30 PM (UTC)",
+      "event_description": "Play | Lorcana Weekly April I | City Comics | APR 8 • 5:30 PM (UTC)",
       "source_site": "Ravensburger Play Hub",
       "source_url": "https://tcg.ravensburgerplay.com/events",
       "image_url": null,
       "image_alt": null,
-      "location_text": "Würfelbecher",
-      "notes": "APR 8 • 12:30 PM (UTC)"
-    },
-    {
-      "month": "2026-04",
-      "kind": "play",
-      "game_type": "Disney Lorcana",
-      "event_type": "Play - Weekly Play",
-      "event_name": "Upcoming",
-      "event_date": "2026-04-08",
-      "event_date_display": "Apr 08, 2026",
-      "event_description": "Play - Weekly Play | Wednesday Afternoon Weekly Play (Constructed) | Sod Games | APR 8 • 12:30 PM (UTC)",
-      "source_site": "Ravensburger Play Hub",
-      "source_url": "https://tcg.ravensburgerplay.com/events",
-      "image_url": null,
-      "image_alt": null,
-      "location_text": "Sod Games",
-      "notes": "APR 8 • 12:30 PM (UTC)"
+      "location_text": "City Comics",
+      "notes": "APR 8 • 5:30 PM (UTC)"
     },
     {
       "month": "2026-04",
@@ -608,13 +576,13 @@
       "event_name": "Upcoming",
       "event_date": "2026-04-08",
       "event_date_display": "Apr 08, 2026",
-      "event_description": "Play | Comic Tempel Lorcana Turnier | Comic Tempel | APR 8 • 2:30 PM (UTC)",
+      "event_description": "Play | LORCANA - Open Play | Le Petit Joueur Mandelieu | APR 8 • 5:30 PM (UTC)",
       "source_site": "Ravensburger Play Hub",
       "source_url": "https://tcg.ravensburgerplay.com/events",
       "image_url": null,
       "image_alt": null,
-      "location_text": "Comic Tempel",
-      "notes": "APR 8 • 2:30 PM (UTC)"
+      "location_text": "Le Petit Joueur Mandelieu",
+      "notes": "APR 8 • 5:30 PM (UTC)"
     },
     {
       "month": "2026-04",
@@ -624,13 +592,13 @@
       "event_name": "Upcoming",
       "event_date": "2026-04-08",
       "event_date_display": "Apr 08, 2026",
-      "event_description": "Play | Liga Semanal Winterspell | Wargen Wargames | APR 8 • 3:00 PM (UTC)",
+      "event_description": "Play | Tournoi Lorcana À L'Oasis Bar | Tanigami Geneve | APR 8 • 5:30 PM (UTC)",
       "source_site": "Ravensburger Play Hub",
       "source_url": "https://tcg.ravensburgerplay.com/events",
       "image_url": null,
       "image_alt": null,
-      "location_text": "Wargen Wargames",
-      "notes": "APR 8 • 3:00 PM (UTC)"
+      "location_text": "Tanigami Geneve",
+      "notes": "APR 8 • 5:30 PM (UTC)"
     },
     {
       "month": "2026-04",
@@ -647,6 +615,22 @@
       "image_alt": "NEWTYPE CHALLENGE 2026 MISSION 2 | GUNDAM CARD GAME Official Website",
       "location_text": "Official Gundam event page",
       "notes": "March 20 - April 17, 2026 | https://www.gundam-gcg.com/en/events/ntc_2026mission2.html"
+    },
+    {
+      "month": "2026-04",
+      "kind": "play",
+      "game_type": "One Piece",
+      "event_type": "Play",
+      "event_name": "PAST EVENTS｜ONE PIECE CARD GAME - Official Web Site",
+      "event_date": "2026-04-02",
+      "event_date_display": "Apr 02, 2026",
+      "event_description": "Play | March 27 – April 2, 2026",
+      "source_site": "ONE PIECE Official",
+      "source_url": "https://en.onepiece-cardgame.com/events/list_end.php",
+      "image_url": "https://en.onepiece-cardgame.com/ogp.png",
+      "image_alt": "PAST EVENTS｜ONE PIECE CARD GAME - Official Web Site",
+      "location_text": "",
+      "notes": "March 27 – April 2, 2026"
     },
     {
       "month": "2026-04",
@@ -672,13 +656,29 @@
       "event_name": "In-Progress",
       "event_date": "2026-04-08",
       "event_date_display": "Apr 08, 2026",
-      "event_description": "Play | Wednesday Evening Nexus Nights - 1v1 | Card Merchant Nelson | APR 8 • 7:00 AM (UTC)",
+      "event_description": "Play | CardArena Nexus Night | CardArena GmbH | APR 8 • 4:30 PM (UTC)",
       "source_site": "Riftbound Locator",
       "source_url": "https://locator.riftbound.uvsgames.com/events",
       "image_url": null,
       "image_alt": null,
-      "location_text": "Card Merchant Nelson",
-      "notes": "APR 8 • 7:00 AM (UTC)"
+      "location_text": "CardArena GmbH",
+      "notes": "APR 8 • 4:30 PM (UTC)"
+    },
+    {
+      "month": "2026-04",
+      "kind": "play",
+      "game_type": "Riftbound",
+      "event_type": "Play",
+      "event_name": "In-Progress",
+      "event_date": "2026-04-08",
+      "event_date_display": "Apr 08, 2026",
+      "event_description": "Play | Jeu Libre Riftbound 08/04/26 | L'Antre Temps | APR 8 • 4:30 PM (UTC)",
+      "source_site": "Riftbound Locator",
+      "source_url": "https://locator.riftbound.uvsgames.com/events",
+      "image_url": null,
+      "image_alt": null,
+      "location_text": "L'Antre Temps",
+      "notes": "APR 8 • 4:30 PM (UTC)"
     },
     {
       "month": "2026-04",
@@ -688,13 +688,13 @@
       "event_name": "Upcoming",
       "event_date": "2026-04-08",
       "event_date_display": "Apr 08, 2026",
-      "event_description": "Play | Wednesday Evening Nexus Nights - 1v1 | Black And White Collectibles | APR 8 • 8:30 AM (UTC)",
+      "event_description": "Play | Wednesday Evening Summoner Skirmish - April | Forbidden Planet International | APR 8 • 4:30 PM (UTC)",
       "source_site": "Riftbound Locator",
       "source_url": "https://locator.riftbound.uvsgames.com/events",
       "image_url": null,
       "image_alt": null,
-      "location_text": "Black And White Collectibles",
-      "notes": "APR 8 • 8:30 AM (UTC)"
+      "location_text": "Forbidden Planet International",
+      "notes": "APR 8 • 4:30 PM (UTC)"
     },
     {
       "month": "2026-04",
@@ -704,13 +704,13 @@
       "event_name": "Upcoming",
       "event_date": "2026-04-08",
       "event_date_display": "Apr 08, 2026",
-      "event_description": "Play | Wednesday Nexus Night @ Cerberus Games | Cerberus Games | APR 8 • 6:30 AM (UTC)",
+      "event_description": "Play | Nexus Night | Trading Cards United | APR 8 • 4:30 PM (UTC)",
       "source_site": "Riftbound Locator",
       "source_url": "https://locator.riftbound.uvsgames.com/events",
       "image_url": null,
       "image_alt": null,
-      "location_text": "Cerberus Games",
-      "notes": "APR 8 • 6:30 AM (UTC)"
+      "location_text": "Trading Cards United",
+      "notes": "APR 8 • 4:30 PM (UTC)"
     },
     {
       "month": "2026-04",
@@ -720,13 +720,13 @@
       "event_name": "Upcoming",
       "event_date": "2026-04-08",
       "event_date_display": "Apr 08, 2026",
-      "event_description": "Play | CMD Wednesday Evening Nexus Night | Card Merchant Dunedin | APR 8 • 6:30 AM (UTC)",
+      "event_description": "Play | Wednesday Nexus Nights - 1v1 | Molly's Arena | APR 8 • 4:30 PM (UTC)",
       "source_site": "Riftbound Locator",
       "source_url": "https://locator.riftbound.uvsgames.com/events",
       "image_url": null,
       "image_alt": null,
-      "location_text": "Card Merchant Dunedin",
-      "notes": "APR 8 • 6:30 AM (UTC)"
+      "location_text": "Molly's Arena",
+      "notes": "APR 8 • 4:30 PM (UTC)"
     },
     {
       "month": "2026-04",
@@ -736,13 +736,13 @@
       "event_name": "Upcoming",
       "event_date": "2026-04-08",
       "event_date_display": "Apr 08, 2026",
-      "event_description": "Play | Card Merchant Westcity Nexus Night | Card Merchant Westcity | APR 8 • 6:30 AM (UTC)",
+      "event_description": "Play | Wednesday Evening Nexus Nights - 1v1 | The Gamers' Emporium | APR 8 • 5:00 PM (UTC)",
       "source_site": "Riftbound Locator",
       "source_url": "https://locator.riftbound.uvsgames.com/events",
       "image_url": null,
       "image_alt": null,
-      "location_text": "Card Merchant Westcity",
-      "notes": "APR 8 • 6:30 AM (UTC)"
+      "location_text": "The Gamers' Emporium",
+      "notes": "APR 8 • 5:00 PM (UTC)"
     },
     {
       "month": "2026-04",
@@ -752,13 +752,13 @@
       "event_name": "Upcoming",
       "event_date": "2026-04-08",
       "event_date_display": "Apr 08, 2026",
-      "event_description": "Play | Gungahlin Wednesday Nexus Nights | Good Games Gungahlin | APR 8 • 7:30 AM (UTC)",
+      "event_description": "Play | Bolt The Bird Lunar Revel Bundle Nexus Night | Bolt the Bird | APR 8 • 4:30 PM (UTC)",
       "source_site": "Riftbound Locator",
       "source_url": "https://locator.riftbound.uvsgames.com/events",
       "image_url": null,
       "image_alt": null,
-      "location_text": "Good Games Gungahlin",
-      "notes": "APR 8 • 7:30 AM (UTC)"
+      "location_text": "Bolt the Bird",
+      "notes": "APR 8 • 4:30 PM (UTC)"
     },
     {
       "month": "2026-04",
@@ -768,13 +768,13 @@
       "event_name": "Upcoming",
       "event_date": "2026-04-08",
       "event_date_display": "Apr 08, 2026",
-      "event_description": "Play | Fastbreak Cards & Collectables - Nexus Nights (Wednesday) | Fastbreak Cards & Collectables | APR 8 • 7:30 AM (UTC)",
+      "event_description": "Play | Tournoi Hebdomadaire | Gwenn Ha Deck | APR 8 • 4:30 PM (UTC)",
       "source_site": "Riftbound Locator",
       "source_url": "https://locator.riftbound.uvsgames.com/events",
       "image_url": null,
       "image_alt": null,
-      "location_text": "Fastbreak Cards & Collectables",
-      "notes": "APR 8 • 7:30 AM (UTC)"
+      "location_text": "Gwenn Ha Deck",
+      "notes": "APR 8 • 4:30 PM (UTC)"
     },
     {
       "month": "2026-04",
@@ -784,13 +784,13 @@
       "event_name": "Upcoming",
       "event_date": "2026-04-08",
       "event_date_display": "Apr 08, 2026",
-      "event_description": "Play | Wednesday Night Riftbound Open Play(Wheel Spin Prizes) | Vault Collectables by The Filmsmen | APR 8 • 8:00 AM (UTC)",
+      "event_description": "Play | Nexus Night Dual Dimension | Dual Dimension | APR 8 • 4:30 PM (UTC)",
       "source_site": "Riftbound Locator",
       "source_url": "https://locator.riftbound.uvsgames.com/events",
       "image_url": null,
       "image_alt": null,
-      "location_text": "Vault Collectables by The Filmsmen",
-      "notes": "APR 8 • 8:00 AM (UTC)"
+      "location_text": "Dual Dimension",
+      "notes": "APR 8 • 4:30 PM (UTC)"
     },
     {
       "month": "2026-04",
@@ -800,13 +800,29 @@
       "event_name": "Upcoming",
       "event_date": "2026-04-08",
       "event_date_display": "Apr 08, 2026",
-      "event_description": "Play | Riftbound Nexus Nights @ JustFreak.Es | JustFreak.es | APR 8 • 8:00 AM (UTC)",
+      "event_description": "Play | Mittwoch Nexus Night | 1A Gamer Lounge | APR 8 • 4:30 PM (UTC)",
       "source_site": "Riftbound Locator",
       "source_url": "https://locator.riftbound.uvsgames.com/events",
       "image_url": null,
       "image_alt": null,
-      "location_text": "JustFreak.es",
-      "notes": "APR 8 • 8:00 AM (UTC)"
+      "location_text": "1A Gamer Lounge",
+      "notes": "APR 8 • 4:30 PM (UTC)"
+    },
+    {
+      "month": "2026-04",
+      "kind": "play",
+      "game_type": "Riftbound",
+      "event_type": "Play - Draft",
+      "event_name": "Upcoming",
+      "event_date": "2026-04-08",
+      "event_date_display": "Apr 08, 2026",
+      "event_description": "Play - Draft | Draft Arena - Nexus Night (Me 08.04 - 18:30) | Draft Arena | APR 8 • 4:30 PM (UTC)",
+      "source_site": "Riftbound Locator",
+      "source_url": "https://locator.riftbound.uvsgames.com/events",
+      "image_url": null,
+      "image_alt": null,
+      "location_text": "Draft Arena",
+      "notes": "APR 8 • 4:30 PM (UTC)"
     },
     {
       "month": "2026-04",
@@ -816,13 +832,13 @@
       "event_name": "Upcoming",
       "event_date": "2026-04-08",
       "event_date_display": "Apr 08, 2026",
-      "event_description": "Play | Mighty Cool Games - Wednesday Evening Nexus Nights 1v1 | Mighty Cool Games | APR 8 • 8:00 AM (UTC)",
+      "event_description": "Play | Tournoi Du Mercredi 8 Avril - 18h45 - Ludotrotter Metz | Ludotrotter Metz | APR 8 • 4:45 PM (UTC)",
       "source_site": "Riftbound Locator",
       "source_url": "https://locator.riftbound.uvsgames.com/events",
       "image_url": null,
       "image_alt": null,
-      "location_text": "Mighty Cool Games",
-      "notes": "APR 8 • 8:00 AM (UTC)"
+      "location_text": "Ludotrotter Metz",
+      "notes": "APR 8 • 4:45 PM (UTC)"
     },
     {
       "month": "2026-04",
@@ -832,13 +848,13 @@
       "event_name": "Upcoming",
       "event_date": "2026-04-08",
       "event_date_display": "Apr 08, 2026",
-      "event_description": "Play | 2S Collects Wednesday Nexus Night | 2S Collects Pty Ltd | APR 8 • 8:00 AM (UTC)",
+      "event_description": "Play | CARAB Nexus Night | CARAB | APR 8 • 4:45 PM (UTC)",
       "source_site": "Riftbound Locator",
       "source_url": "https://locator.riftbound.uvsgames.com/events",
       "image_url": null,
       "image_alt": null,
-      "location_text": "2S Collects Pty Ltd",
-      "notes": "APR 8 • 8:00 AM (UTC)"
+      "location_text": "CARAB",
+      "notes": "APR 8 • 4:45 PM (UTC)"
     },
     {
       "month": "2026-04",
@@ -848,13 +864,13 @@
       "event_name": "Upcoming",
       "event_date": "2026-04-08",
       "event_date_display": "Apr 08, 2026",
-      "event_description": "Play | TCC Nexus Nights - 1v1 | The Combat Company | APR 8 • 8:00 AM (UTC)",
+      "event_description": "Play | Wednesday Night Nexus Nights - 1v1 | Koning Bordspel BV | APR 8 • 5:00 PM (UTC)",
       "source_site": "Riftbound Locator",
       "source_url": "https://locator.riftbound.uvsgames.com/events",
       "image_url": null,
       "image_alt": null,
-      "location_text": "The Combat Company",
-      "notes": "APR 8 • 8:00 AM (UTC)"
+      "location_text": "Koning Bordspel BV",
+      "notes": "APR 8 • 5:00 PM (UTC)"
     },
     {
       "month": "2026-04",
@@ -864,13 +880,13 @@
       "event_name": "Upcoming",
       "event_date": "2026-04-08",
       "event_date_display": "Apr 08, 2026",
-      "event_description": "Play | Wednesday Evening Summoner Skirmish - April | Guf Bendigo | APR 8 • 8:15 AM (UTC)",
+      "event_description": "Play | Anniversary Nexus Night @CheckPointRuse | Checkpoint Club Ltd. | APR 8 • 5:00 PM (UTC)",
       "source_site": "Riftbound Locator",
       "source_url": "https://locator.riftbound.uvsgames.com/events",
       "image_url": null,
       "image_alt": null,
-      "location_text": "Guf Bendigo",
-      "notes": "APR 8 • 8:15 AM (UTC)"
+      "location_text": "Checkpoint Club Ltd.",
+      "notes": "APR 8 • 5:00 PM (UTC)"
     },
     {
       "month": "2026-04",
@@ -880,13 +896,13 @@
       "event_name": "Upcoming",
       "event_date": "2026-04-08",
       "event_date_display": "Apr 08, 2026",
-      "event_description": "Play | Wednesday Evening Nexus Night 1v1 | Homoludicus Granollers | APR 8 • 8:22 AM (UTC)",
+      "event_description": "Play | Nexus Nights - 1v1 - LCDB PARIS | Le Coin des Barons - Paris Rivoli | APR 8 • 5:00 PM (UTC)",
       "source_site": "Riftbound Locator",
       "source_url": "https://locator.riftbound.uvsgames.com/events",
       "image_url": null,
       "image_alt": null,
-      "location_text": "Homoludicus Granollers",
-      "notes": "APR 8 • 8:22 AM (UTC)"
+      "location_text": "Le Coin des Barons - Paris Rivoli",
+      "notes": "APR 8 • 5:00 PM (UTC)"
     },
     {
       "month": "2026-04",
@@ -896,13 +912,13 @@
       "event_name": "Upcoming",
       "event_date": "2026-04-08",
       "event_date_display": "Apr 08, 2026",
-      "event_description": "Play | Wednesday Night Nexus Nights 630pm | Good Games Box Hill | APR 8 • 8:30 AM (UTC)",
+      "event_description": "Play | Nexus Night Wednesday | Zadoys | APR 8 • 5:00 PM (UTC)",
       "source_site": "Riftbound Locator",
       "source_url": "https://locator.riftbound.uvsgames.com/events",
       "image_url": null,
       "image_alt": null,
-      "location_text": "Good Games Box Hill",
-      "notes": "APR 8 • 8:30 AM (UTC)"
+      "location_text": "Zadoys",
+      "notes": "APR 8 • 5:00 PM (UTC)"
     },
     {
       "month": "2026-04",
@@ -912,29 +928,13 @@
       "event_name": "Upcoming",
       "event_date": "2026-04-08",
       "event_date_display": "Apr 08, 2026",
-      "event_description": "Play | Mint Nexus Night 8th April | Mint Collectables | APR 8 • 8:30 AM (UTC)",
+      "event_description": "Play | 4/8 Riftbound Open Play | The Dragon's Hoard Murfreesboro | APR 8 • 5:00 PM (UTC)",
       "source_site": "Riftbound Locator",
       "source_url": "https://locator.riftbound.uvsgames.com/events",
       "image_url": null,
       "image_alt": null,
-      "location_text": "Mint Collectables",
-      "notes": "APR 8 • 8:30 AM (UTC)"
-    },
-    {
-      "month": "2026-04",
-      "kind": "play",
-      "game_type": "Riftbound",
-      "event_type": "Play - Constructed",
-      "event_name": "Upcoming",
-      "event_date": "2026-04-08",
-      "event_date_display": "Apr 08, 2026",
-      "event_description": "Play - Constructed | Good Games Newcastle - Constructed - Multiplayer Wednesday | Good Games Newcastle | APR 8 • 8:30 AM (UTC)",
-      "source_site": "Riftbound Locator",
-      "source_url": "https://locator.riftbound.uvsgames.com/events",
-      "image_url": null,
-      "image_alt": null,
-      "location_text": "Good Games Newcastle",
-      "notes": "APR 8 • 8:30 AM (UTC)"
+      "location_text": "The Dragon's Hoard Murfreesboro",
+      "notes": "APR 8 • 5:00 PM (UTC)"
     },
     {
       "month": "2026-04",
@@ -944,29 +944,13 @@
       "event_name": "Upcoming",
       "event_date": "2026-04-08",
       "event_date_display": "Apr 08, 2026",
-      "event_description": "Play | Wednesday Afternoon Nexus Nights - 1v1 | Lion's Den Collectibles Castle Towers | APR 8 • 8:30 AM (UTC)",
+      "event_description": "Play | Wednesday Evening Riftbound Open Play | Ludotrotter Angers | APR 8 • 5:00 PM (UTC)",
       "source_site": "Riftbound Locator",
       "source_url": "https://locator.riftbound.uvsgames.com/events",
       "image_url": null,
       "image_alt": null,
-      "location_text": "Lion's Den Collectibles Castle Towers",
-      "notes": "APR 8 • 8:30 AM (UTC)"
-    },
-    {
-      "month": "2026-04",
-      "kind": "play",
-      "game_type": "Riftbound",
-      "event_type": "Play - Casual Play",
-      "event_name": "Upcoming",
-      "event_date": "2026-04-08",
-      "event_date_display": "Apr 08, 2026",
-      "event_description": "Play - Casual Play | Wednesday Evening Casual 2v2 Nexus Nights | Irresistible Force | APR 8 • 8:30 AM (UTC)",
-      "source_site": "Riftbound Locator",
-      "source_url": "https://locator.riftbound.uvsgames.com/events",
-      "image_url": null,
-      "image_alt": null,
-      "location_text": "Irresistible Force",
-      "notes": "APR 8 • 8:30 AM (UTC)"
+      "location_text": "Ludotrotter Angers",
+      "notes": "APR 8 • 5:00 PM (UTC)"
     },
     {
       "month": "2026-04",
@@ -976,13 +960,13 @@
       "event_name": "Upcoming",
       "event_date": "2026-04-08",
       "event_date_display": "Apr 08, 2026",
-      "event_description": "Play | Nexus Wednesdays | Collectermon | APR 8 • 8:30 AM (UTC)",
+      "event_description": "Play | Nexus Nights - 1v1 LeCoinDesBarons Paris | Le Coin des Barons - Paris Rivoli | APR 8 • 5:00 PM (UTC)",
       "source_site": "Riftbound Locator",
       "source_url": "https://locator.riftbound.uvsgames.com/events",
       "image_url": null,
       "image_alt": null,
-      "location_text": "Collectermon",
-      "notes": "APR 8 • 8:30 AM (UTC)"
+      "location_text": "Le Coin des Barons - Paris Rivoli",
+      "notes": "APR 8 • 5:00 PM (UTC)"
     },
     {
       "month": "2026-04",
@@ -1679,22 +1663,6 @@
       "image_alt": "ONE PIECE CARD GAME Official Shop − EVENTS｜ONE PIECE CARD GAME - Official Web Site",
       "location_text": "",
       "notes": null
-    },
-    {
-      "month": "unknown",
-      "kind": "play",
-      "game_type": "One Piece",
-      "event_type": "Play",
-      "event_name": "PAST EVENTS｜ONE PIECE CARD GAME - Official Web Site",
-      "event_date": null,
-      "event_date_display": "",
-      "event_description": "Play | C2E2 2026",
-      "source_site": "ONE PIECE Official",
-      "source_url": "https://en.onepiece-cardgame.com/events/list_end.php",
-      "image_url": "https://en.onepiece-cardgame.com/ogp.png",
-      "image_alt": "PAST EVENTS｜ONE PIECE CARD GAME - Official Web Site",
-      "location_text": "",
-      "notes": "C2E2 2026"
     },
     {
       "month": "unknown",
