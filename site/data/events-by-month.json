@@ -364,6 +364,22 @@
       "month": "2026-04",
       "kind": "play",
       "game_type": "One Piece",
+      "event_type": "Play",
+      "event_name": "PAST EVENTS｜ONE PIECE CARD GAME - Official Web Site",
+      "event_date": "2026-04-02",
+      "event_date_display": "Apr 02, 2026",
+      "event_description": "Play | March 27 – April 2, 2026",
+      "source_site": "ONE PIECE Official",
+      "source_url": "https://en.onepiece-cardgame.com/events/list_end.php",
+      "image_url": "https://en.onepiece-cardgame.com/ogp.png",
+      "image_alt": "PAST EVENTS｜ONE PIECE CARD GAME - Official Web Site",
+      "location_text": "",
+      "notes": "March 27 – April 2, 2026"
+    },
+    {
+      "month": "2026-04",
+      "kind": "play",
+      "game_type": "One Piece",
       "event_type": "Play - Championship",
       "event_name": "CS26-27 Store Championship April (Season 1) − EVENTS｜ONE PIECE CARD GAME - Official Web Site",
       "event_date": "2026-04-03",
@@ -592,12 +608,12 @@
       "event_name": "Upcoming",
       "event_date": "2026-04-19",
       "event_date_display": "Apr 19, 2026",
-      "event_description": "Play | Games Of Fremont Sunday Evening Nexus Night | Games of Fremont | APR 19 • 6:30 PM (PDT)",
+      "event_description": "Play | Riftbound 1v1 At 6:30 | Game Corner San Jose | APR 19 • 6:30 PM (PDT)",
       "source_site": "Riftbound Locator",
       "source_url": "https://locator.riftbound.uvsgames.com/events",
       "image_url": null,
       "image_alt": null,
-      "location_text": "Games of Fremont",
+      "location_text": "Game Corner San Jose",
       "notes": "APR 19 • 6:30 PM (PDT)"
     },
     {
@@ -608,13 +624,13 @@
       "event_name": "Upcoming",
       "event_date": "2026-04-19",
       "event_date_display": "Apr 19, 2026",
-      "event_description": "Play | Riftbound 1v1 At 7pm | Game Corner San Jose | APR 19 • 7:00 PM (PDT)",
+      "event_description": "Play | Games Of Fremont Sunday Evening Nexus Night | Games of Fremont | APR 19 • 6:30 PM (PDT)",
       "source_site": "Riftbound Locator",
       "source_url": "https://locator.riftbound.uvsgames.com/events",
       "image_url": null,
       "image_alt": null,
-      "location_text": "Game Corner San Jose",
-      "notes": "APR 19 • 7:00 PM (PDT)"
+      "location_text": "Games of Fremont",
+      "notes": "APR 19 • 6:30 PM (PDT)"
     },
     {
       "month": "2026-04",
@@ -1695,22 +1711,6 @@
       "image_alt": "ONE PIECE CARD GAME Official Shop − EVENTS｜ONE PIECE CARD GAME - Official Web Site",
       "location_text": "",
       "notes": null
-    },
-    {
-      "month": "unknown",
-      "kind": "play",
-      "game_type": "One Piece",
-      "event_type": "Play",
-      "event_name": "PAST EVENTS｜ONE PIECE CARD GAME - Official Web Site",
-      "event_date": null,
-      "event_date_display": "",
-      "event_description": "Play | C2E2 2026",
-      "source_site": "ONE PIECE Official",
-      "source_url": "https://en.onepiece-cardgame.com/events/list_end.php",
-      "image_url": "https://en.onepiece-cardgame.com/ogp.png",
-      "image_alt": "PAST EVENTS｜ONE PIECE CARD GAME - Official Web Site",
-      "location_text": "",
-      "notes": "C2E2 2026"
     },
     {
       "month": "unknown",
