@@ -629,22 +629,6 @@
       "image_alt": "Double Pack Set Vol.10 [DP-10]",
       "location_text": "One Piece official release source",
       "notes": "official exact date"
-    },
-    {
-      "month": "2026-04",
-      "kind": "release",
-      "game_type": "Riftbound",
-      "event_type": "Release",
-      "event_name": "Unleashed (China)",
-      "event_date": "2026-04-10",
-      "event_date_display": "Apr 10, 2026",
-      "event_description": "Release | Riftbound official release source | secondary-confirmed exact date; roadmap confirms Unleashed in 2026",
-      "source_site": "Riftbound 2026 Roadmap",
-      "source_url": "https://riftbound.leagueoflegends.com/en-us/news/announcements/2026-roadmap/",
-      "image_url": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/128b08fe426551ad017d0f72145dd968403ff595-1920x1080.jpg?accountingTag=RB?w=1200&h=630&fm=webp&fit=crop&crop=center",
-      "image_alt": "Unleashed (China)",
-      "location_text": "Riftbound official release source",
-      "notes": "secondary-confirmed exact date; roadmap confirms Unleashed in 2026"
     }
   ],
   "2026-05": [
@@ -1147,22 +1131,6 @@
     {
       "month": "2026-05",
       "kind": "release",
-      "game_type": "Riftbound",
-      "event_type": "Release",
-      "event_name": "Unleashed (Global English)",
-      "event_date": "2026-05-08",
-      "event_date_display": "May 08, 2026",
-      "event_description": "Release | Riftbound official release source | secondary-confirmed exact date; roadmap confirms Unleashed in 2026",
-      "source_site": "Riftbound 2026 Roadmap",
-      "source_url": "https://riftbound.leagueoflegends.com/en-us/news/announcements/2026-roadmap/",
-      "image_url": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/128b08fe426551ad017d0f72145dd968403ff595-1920x1080.jpg?accountingTag=RB?w=1200&h=630&fm=webp&fit=crop&crop=center",
-      "image_alt": "Unleashed (Global English)",
-      "location_text": "Riftbound official release source",
-      "notes": "secondary-confirmed exact date; roadmap confirms Unleashed in 2026"
-    },
-    {
-      "month": "2026-05",
-      "kind": "release",
       "game_type": "Star Wars: Unlimited",
       "event_type": "Release",
       "event_name": "Twin Suns Decks",
@@ -1355,22 +1323,6 @@
       "image_alt": "Freedom Ascension [GD05]",
       "location_text": "Gundam Card Game official release source",
       "notes": "official exact date"
-    },
-    {
-      "month": "2026-07",
-      "kind": "release",
-      "game_type": "Riftbound",
-      "event_type": "Release",
-      "event_name": "Vendetta",
-      "event_date": "2026-07-31",
-      "event_date_display": "Jul 31, 2026",
-      "event_description": "Release | Riftbound official release source | secondary-confirmed exact date; official sources confirm later-2026 release window",
-      "source_site": "Riftbound 2026 Roadmap",
-      "source_url": "https://riftbound.leagueoflegends.com/en-us/news/announcements/2026-roadmap/",
-      "image_url": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/128b08fe426551ad017d0f72145dd968403ff595-1920x1080.jpg?accountingTag=RB?w=1200&h=630&fm=webp&fit=crop&crop=center",
-      "image_alt": "Vendetta",
-      "location_text": "Riftbound official release source",
-      "notes": "secondary-confirmed exact date; official sources confirm later-2026 release window"
     }
   ],
   "2026-08": [
@@ -2131,38 +2083,6 @@
       "image_alt": "EXTRA BOOSTER -ONE PIECE HEROINES EDITION- [EB-03]",
       "location_text": "One Piece official release source",
       "notes": "official exact date"
-    },
-    {
-      "month": "2026-02",
-      "kind": "release",
-      "game_type": "Riftbound",
-      "event_type": "Release",
-      "event_name": "Spiritforged Pre-Rift",
-      "event_date": "2026-02-06",
-      "event_date_display": "Feb 06, 2026",
-      "event_description": "Release | Riftbound official release source | official exact start date",
-      "source_site": "Riftbound 2026 Roadmap",
-      "source_url": "https://riftbound.leagueoflegends.com/en-us/news/announcements/2026-roadmap/",
-      "image_url": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/128b08fe426551ad017d0f72145dd968403ff595-1920x1080.jpg?accountingTag=RB?w=1200&h=630&fm=webp&fit=crop&crop=center",
-      "image_alt": "Spiritforged Pre-Rift",
-      "location_text": "Riftbound official release source",
-      "notes": "official exact start date"
-    },
-    {
-      "month": "2026-02",
-      "kind": "release",
-      "game_type": "Riftbound",
-      "event_type": "Release",
-      "event_name": "Spiritforged (English)",
-      "event_date": "2026-02-13",
-      "event_date_display": "Feb 13, 2026",
-      "event_description": "Release | Riftbound official release source | official exact date",
-      "source_site": "Riftbound 2026 Roadmap",
-      "source_url": "https://riftbound.leagueoflegends.com/en-us/news/announcements/2026-roadmap/",
-      "image_url": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/128b08fe426551ad017d0f72145dd968403ff595-1920x1080.jpg?accountingTag=RB?w=1200&h=630&fm=webp&fit=crop&crop=center",
-      "image_alt": "Spiritforged (English)",
-      "location_text": "Riftbound official release source",
-      "notes": "official exact date"
     }
   ],
   "2026-09": [
@@ -2215,22 +2135,6 @@
       "image_alt": "Reality Fracture",
       "location_text": "Magic: The Gathering official release source",
       "notes": "month-only: October 2026"
-    },
-    {
-      "month": "2026-10",
-      "kind": "release",
-      "game_type": "Riftbound",
-      "event_type": "Release",
-      "event_name": "Radiance",
-      "event_date": "2026-10-23",
-      "event_date_display": "Oct 23, 2026",
-      "event_description": "Release | Riftbound official release source | secondary-confirmed exact date; official sources confirm year-end release",
-      "source_site": "Riftbound 2026 Roadmap",
-      "source_url": "https://riftbound.leagueoflegends.com/en-us/news/announcements/2026-roadmap/",
-      "image_url": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/128b08fe426551ad017d0f72145dd968403ff595-1920x1080.jpg?accountingTag=RB?w=1200&h=630&fm=webp&fit=crop&crop=center",
-      "image_alt": "Radiance",
-      "location_text": "Riftbound official release source",
-      "notes": "secondary-confirmed exact date; official sources confirm year-end release"
     },
     {
       "month": "2026-10",
