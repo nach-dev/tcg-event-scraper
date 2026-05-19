@@ -991,6 +991,56 @@
       "notes": "month-only: August 2026"
     }
   ],
+  "2026-09": [
+    {
+      "month": "2026-09",
+      "kind": "play",
+      "game_type": "One Piece",
+      "event_type": "Play - Championship",
+      "event_name": "Championship 26-27 Finals | ONE PIECE CARD GAME - Official Web Site",
+      "event_date": "2026-09-01",
+      "event_date_display": "Sep 01, 2026",
+      "event_description": "Play - Championship | For North America, Europe, and Latin America, there will be two Finals tournaments this year: Season 1 in August and September 2026, and Season 2 in January 2027. When schedules align, these Finals will take place during the BANDAI CARD GAMES Fest 26–27 events.",
+      "source_site": "ONE PIECE Official",
+      "source_url": "https://en.onepiece-cardgame.com/events/26-27_Finals_Season_1.html",
+      "image_url": "https://en.onepiece-cardgame.com/ogp.png",
+      "image_alt": "Championship 26-27 Finals | ONE PIECE CARD GAME - Official Web Site",
+      "location_text": "",
+      "notes": "For North America, Europe, and Latin America, there will be two Finals tournaments this year: Season 1 in August and September 2026, and Season 2 in January 2027. When schedules align, these Finals will take place during the BANDAI CARD GAMES Fest 26–27 events."
+    },
+    {
+      "month": "2026-09",
+      "kind": "release",
+      "game_type": "Dungeons & Dragons",
+      "event_type": "Release",
+      "event_name": "Arcana Unleashed",
+      "event_date": "2026-09-01",
+      "event_date_display": "Sep 01, 2026",
+      "event_description": "Release | Dungeons & Dragons official release source | month-only: September 2026",
+      "source_site": "D&D Beyond",
+      "source_url": "https://www.dndbeyond.com/posts/2136-d-d-2026-calendar-release",
+      "image_url": "https://www.dndbeyond.com/avatars/55131/988/639077987572170144.jpeg",
+      "image_alt": "Arcana Unleashed",
+      "location_text": "Dungeons & Dragons official release source",
+      "notes": "month-only: September 2026"
+    },
+    {
+      "month": "2026-09",
+      "kind": "release",
+      "game_type": "Dungeons & Dragons",
+      "event_type": "Release",
+      "event_name": "Arcana Unleashed: Deadfall",
+      "event_date": "2026-09-01",
+      "event_date_display": "Sep 01, 2026",
+      "event_description": "Release | Dungeons & Dragons official release source | month-only: September 2026",
+      "source_site": "D&D Beyond",
+      "source_url": "https://www.dndbeyond.com/posts/2136-d-d-2026-calendar-release",
+      "image_url": "https://www.dndbeyond.com/avatars/55131/988/639077987572170144.jpeg",
+      "image_alt": "Arcana Unleashed: Deadfall",
+      "location_text": "Dungeons & Dragons official release source",
+      "notes": "month-only: September 2026"
+    }
+  ],
   "2026-12": [
     {
       "month": "2026-12",
@@ -1023,24 +1073,6 @@
       "image_alt": "Icons",
       "location_text": "Star Wars: Unlimited official release source",
       "notes": "officially named as 2026 set; exact month/day not verified in source"
-    }
-  ],
-  "2027-01": [
-    {
-      "month": "2027-01",
-      "kind": "play",
-      "game_type": "One Piece",
-      "event_type": "Play - Championship",
-      "event_name": "Championship 26-27 Finals | ONE PIECE CARD GAME - Official Web Site",
-      "event_date": "2027-01-01",
-      "event_date_display": "Jan 01, 2027",
-      "event_description": "Play - Championship | This year for North America, Europe and Latin America there will be two Finals tournaments, Season 1 in Sept. 2026, and Season 2 in January 2027.",
-      "source_site": "ONE PIECE Official",
-      "source_url": "https://en.onepiece-cardgame.com/events/26-27_Finals_Season_1.html",
-      "image_url": "https://en.onepiece-cardgame.com/ogp.png",
-      "image_alt": "Championship 26-27 Finals | ONE PIECE CARD GAME - Official Web Site",
-      "location_text": "",
-      "notes": "This year for North America, Europe and Latin America there will be two Finals tournaments, Season 1 in Sept. 2026, and Season 2 in January 2027."
     }
   ],
   "unknown": [
@@ -1815,40 +1847,6 @@
       "image_alt": "Spiritforged (English)",
       "location_text": "Riftbound official release source",
       "notes": "official exact date"
-    }
-  ],
-  "2026-09": [
-    {
-      "month": "2026-09",
-      "kind": "release",
-      "game_type": "Dungeons & Dragons",
-      "event_type": "Release",
-      "event_name": "Arcana Unleashed",
-      "event_date": "2026-09-01",
-      "event_date_display": "Sep 01, 2026",
-      "event_description": "Release | Dungeons & Dragons official release source | month-only: September 2026",
-      "source_site": "D&D Beyond",
-      "source_url": "https://www.dndbeyond.com/posts/2136-d-d-2026-calendar-release",
-      "image_url": "https://www.dndbeyond.com/avatars/55131/988/639077987572170144.jpeg",
-      "image_alt": "Arcana Unleashed",
-      "location_text": "Dungeons & Dragons official release source",
-      "notes": "month-only: September 2026"
-    },
-    {
-      "month": "2026-09",
-      "kind": "release",
-      "game_type": "Dungeons & Dragons",
-      "event_type": "Release",
-      "event_name": "Arcana Unleashed: Deadfall",
-      "event_date": "2026-09-01",
-      "event_date_display": "Sep 01, 2026",
-      "event_description": "Release | Dungeons & Dragons official release source | month-only: September 2026",
-      "source_site": "D&D Beyond",
-      "source_url": "https://www.dndbeyond.com/posts/2136-d-d-2026-calendar-release",
-      "image_url": "https://www.dndbeyond.com/avatars/55131/988/639077987572170144.jpeg",
-      "image_alt": "Arcana Unleashed: Deadfall",
-      "location_text": "Dungeons & Dragons official release source",
-      "notes": "month-only: September 2026"
     }
   ],
   "2026-10": [
