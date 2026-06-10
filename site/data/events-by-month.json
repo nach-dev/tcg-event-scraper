@@ -1625,22 +1625,6 @@
       "kind": "play",
       "game_type": "Riftbound",
       "event_type": "Play",
-      "event_name": "JUN 9 • 5:00 PM (EDT)",
-      "event_date": null,
-      "event_date_display": "",
-      "event_description": "Play | Upcoming | Riftbound - League Play 5:00p-9:00p | Tuesday, June 9, 2026",
-      "source_site": "Riftbound Locator",
-      "source_url": "https://locator.riftbound.uvsgames.com/events",
-      "image_url": null,
-      "image_alt": null,
-      "location_text": "Riftbound - League Play 5:00p-9:00p",
-      "notes": "Tuesday, June 9, 2026"
-    },
-    {
-      "month": "unknown",
-      "kind": "play",
-      "game_type": "Riftbound",
-      "event_type": "Play",
       "event_name": "SEP 12 • 11:00 AM (EDT)",
       "event_date": null,
       "event_date_display": "",
@@ -1667,6 +1651,22 @@
       "image_alt": null,
       "location_text": "Thursday Evening Vendetta Summoner Skirmish II",
       "notes": "Thursday, September 17, 2026"
+    },
+    {
+      "month": "unknown",
+      "kind": "play",
+      "game_type": "Riftbound",
+      "event_type": "Play",
+      "event_name": "SEP 26 • 11:00 AM (EDT)",
+      "event_date": null,
+      "event_date_display": "",
+      "event_description": "Play | Upcoming | Riftbound Vendetta Summoner Skirmish II | Saturday, September 26, 2026",
+      "source_site": "Riftbound Locator",
+      "source_url": "https://locator.riftbound.uvsgames.com/events",
+      "image_url": null,
+      "image_alt": null,
+      "location_text": "Riftbound Vendetta Summoner Skirmish II",
+      "notes": "Saturday, September 26, 2026"
     }
   ],
   "2026-01": [
