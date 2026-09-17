@@ -4,7 +4,7 @@ import asyncio
 import re
 from datetime import datetime
 from typing import Iterable, List
-from urllib.parse import urljoin
+from urllib.parse import urlencode, urljoin
 
 import httpx
 from bs4 import BeautifulSoup
@@ -19,6 +19,30 @@ HEADERS = {
         "Chrome/145.0.0.0 Safari/537.36"
     )
 }
+
+RAVEN_FORGE_NAME = "Raven Forge Games"
+RAVEN_FORGE_ADDRESS = "132 S. Steele St., Sanford, NC 27330"
+RAVEN_FORGE_LORCANA_URL = (
+    "https://tcg.ravensburgerplay.com/stores/"
+    "d9a4caf9-daf1-43d2-8c26-83879cccd8a9"
+)
+RAVEN_FORGE_MAGIC_URL = "https://locator.wizards.com/store/14156"
+RAVEN_FORGE_POKEMON_BASE_URL = "https://events.pokemon.com/EventLocator/LocationDetail"
+
+
+def raven_forge_pokemon_url() -> str:
+    return f"{RAVEN_FORGE_POKEMON_BASE_URL}?{urlencode({
+        'EventDetailGUID': '',
+        'LocationName': 'RAVEN FORGE GAMES',
+        'LocationGuid': 'f6cba702-09c8-c1d4-cf12-ad908a8096fd',
+        'latitude': '35.4798757',
+        'iskm': 'false',
+        'locale': 'en-US',
+        'storename': 'RAVEN FORGE GAMES',
+        'range': '25',
+        'longitude': '-79.1802994',
+        'startdate': datetime.utcnow().strftime('%Y-%m-%d'),
+    })}"
 
 
 # -----------------------------
@@ -60,6 +84,17 @@ def looks_like_short_month_date(line: str) -> bool:
         or re.search(
             r"^[A-Z]{3}\s+\d{1,2}\s+[•\-]\s+\d{1,2}:\d{2}",
             line,
+        )
+    )
+
+
+def looks_like_month_day_year(line: str) -> bool:
+    return bool(
+        re.search(
+            r"^(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)"
+            r"[a-z]*\s+\d{1,2},?\s+20\d{2}$",
+            line.strip(),
+            re.IGNORECASE,
         )
     )
 
@@ -582,6 +617,135 @@ async def scrape_lorcana_locator() -> List[Event]:
         i += 1
 
     return events
+
+
+async def scrape_raven_forge_lorcana_events() -> List[Event]:
+    """Return only events listed on Raven Forge's official Lorcana store page."""
+    url = RAVEN_FORGE_LORCANA_URL
+    text = await fetch_page_text(url, wait_ms=7000)
+    lines = clean_lines(text)
+    events: List[Event] = []
+
+    for i, line in enumerate(lines):
+        if not (
+            looks_like_day_date(line)
+            or looks_like_short_month_date(line)
+            or looks_like_month_day_year(line)
+        ):
+            continue
+
+        parsed_date = parse_date_to_iso(line)
+        if not parsed_date:
+            continue
+
+        nearby = lines[max(0, i - 3): min(len(lines), i + 7)]
+        title = next(
+            (
+                value for value in lines[i + 1: min(len(lines), i + 5)]
+                if value not in {RAVEN_FORGE_NAME, "Event Details", "EVENT DETAILS"}
+                and not looks_like_month_day_year(value)
+                and len(value) > 3
+            ),
+            "Disney Lorcana Event",
+        )
+        nearby_text = " | ".join(nearby)
+        subtype = infer_event_type(
+            nearby_text,
+            {
+                "Set Championship": "Set Championship",
+                "Collection Quest": "Collection Quest",
+                "Weekly Play": "Weekly Play",
+                "Draft": "Draft",
+                "Sealed": "Sealed",
+                "Constructed": "Constructed",
+            },
+        )
+
+        events.append(
+            Event(
+                source="Ravensburger Play Hub — Raven Forge Games",
+                game="Disney Lorcana",
+                title=title,
+                event_type=f"Play - {subtype}" if subtype else "Play",
+                start_date=parsed_date,
+                venue=RAVEN_FORGE_NAME,
+                city="Sanford",
+                region="NC",
+                country="US",
+                location_text=RAVEN_FORGE_ADDRESS,
+                notes=line,
+                url=url,
+            )
+        )
+
+    deduped = {event.dedupe_key(): event for event in events}
+    return list(deduped.values())
+
+
+async def scrape_raven_forge_magic_events() -> List[Event]:
+    """Return only events from Raven Forge's exact Wizards store page."""
+    events = await scrape_locator_style_events(
+        url=RAVEN_FORGE_MAGIC_URL,
+        game="Magic: The Gathering",
+        source="Wizards Store & Event Locator — Raven Forge Games",
+        type_keywords={
+            "Commander": "Commander",
+            "Draft": "Draft",
+            "Modern": "Modern",
+            "Standard": "Standard",
+            "Prerelease": "Prerelease",
+            "cEDH": "cEDH",
+        },
+    )
+    for event in events:
+        event.venue = RAVEN_FORGE_NAME
+        event.city = "Sanford"
+        event.region = "NC"
+        event.country = "US"
+        event.location_text = RAVEN_FORGE_ADDRESS
+        event.url = RAVEN_FORGE_MAGIC_URL
+    return events
+
+
+async def scrape_raven_forge_pokemon_events() -> List[Event]:
+    """Return only events from Raven Forge's exact Play! Pokémon location."""
+    url = raven_forge_pokemon_url()
+    events = await scrape_locator_style_events(
+        url=url,
+        game="Pokémon",
+        source="Play! Pokémon — Raven Forge Games",
+        type_keywords={
+            "League Challenge": "League Challenge",
+            "League Cup": "League Cup",
+            "Prerelease": "Prerelease",
+            "League": "League",
+        },
+    )
+    for event in events:
+        event.venue = RAVEN_FORGE_NAME
+        event.city = "Sanford"
+        event.region = "NC"
+        event.country = "US"
+        event.location_text = RAVEN_FORGE_ADDRESS
+        event.url = url
+    return events
+
+
+async def scrape_raven_forge_events() -> List[Event]:
+    """Build the strict store feed; never include unverified national listings."""
+    batches = await asyncio.gather(
+        scrape_raven_forge_lorcana_events(),
+        scrape_raven_forge_magic_events(),
+        scrape_raven_forge_pokemon_events(),
+        return_exceptions=True,
+    )
+    events: List[Event] = []
+    for batch in batches:
+        if isinstance(batch, Exception):
+            print(f"Raven Forge scraper failed: {batch}")
+            continue
+        events.extend(batch)
+    return sorted(events, key=lambda event: (event.start_date or "9999-99-99", event.title))
 
 
 async def scrape_riftbound_events() -> List[Event]:

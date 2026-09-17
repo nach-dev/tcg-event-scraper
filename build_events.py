@@ -8,7 +8,15 @@ from pathlib import Path
 
 import orjson
 
-from scrapers import scrape_all
+from scrapers import (
+    RAVEN_FORGE_ADDRESS,
+    RAVEN_FORGE_LORCANA_URL,
+    RAVEN_FORGE_MAGIC_URL,
+    RAVEN_FORGE_NAME,
+    raven_forge_pokemon_url,
+    scrape_all,
+    scrape_raven_forge_events,
+)
 
 
 def event_month(value: str | None) -> str:
@@ -49,6 +57,7 @@ def event_kind(event_type: str | None) -> str:
 
 def main() -> None:
     events = asyncio.run(scrape_all())
+    raven_forge_events = asyncio.run(scrape_raven_forge_events())
 
     rows = []
     for e in events:
@@ -101,6 +110,63 @@ def main() -> None:
         orjson.dumps(dict(grouped), option=orjson.OPT_INDENT_2)
     )
 
+    raven_forge_rows = []
+    for event in raven_forge_events:
+        raven_forge_rows.append(
+            {
+                "game_type": event.game,
+                "event_type": event.event_type,
+                "event_name": event.title,
+                "event_date": event.start_date,
+                "event_date_display": display_date(event.start_date, event.notes),
+                "event_description": event.notes,
+                "source_site": event.source,
+                "source_url": event.url,
+                "location_text": event.location_text,
+                "verified_store": True,
+            }
+        )
+
+    raven_forge_feed = {
+        "store": {
+            "name": RAVEN_FORGE_NAME,
+            "address": RAVEN_FORGE_ADDRESS,
+            "city": "Sanford",
+            "state": "NC",
+        },
+        "sources": [
+            {
+                "game_type": "Disney Lorcana",
+                "status": "connected",
+                "url": RAVEN_FORGE_LORCANA_URL,
+            },
+            {
+                "game_type": "Magic: The Gathering",
+                "status": "connected",
+                "url": RAVEN_FORGE_MAGIC_URL,
+            },
+            {
+                "game_type": "Pokémon",
+                "status": "connected",
+                "url": raven_forge_pokemon_url(),
+            },
+            {
+                "game_type": "One Piece",
+                "status": "needs_store_url",
+                "url": "https://www.bandai-tcg-plus.com/",
+            },
+            {
+                "game_type": "Gundam Card Game",
+                "status": "needs_store_url",
+                "url": "https://www.bandai-tcg-plus.com/",
+            },
+        ],
+        "events": raven_forge_rows,
+    }
+    (out_dir / "raven-forge-events.json").write_bytes(
+        orjson.dumps(raven_forge_feed, option=orjson.OPT_INDENT_2)
+    )
+
     with (out_dir / "events-verification.csv").open(
         "w", newline="", encoding="utf-8"
     ) as f:
@@ -126,7 +192,7 @@ def main() -> None:
         writer.writeheader()
         writer.writerows(rows)
 
-    print(f"Wrote {len(rows)} rows")
+    print(f"Wrote {len(rows)} global rows and {len(raven_forge_rows)} Raven Forge rows")
 
 
 if __name__ == "__main__":
