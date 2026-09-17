@@ -777,7 +777,7 @@ def parse_ics_datetime(raw_key: str, value: str) -> datetime | None:
     return None
 
 
-def calendar_game(title: str, description: str) -> str | None:
+def calendar_game(title: str, description: str) -> str:
     text = f"{title} {description}".lower()
     if "one piece" in text:
         return "One Piece"
@@ -793,11 +793,17 @@ def calendar_game(title: str, description: str) -> str | None:
     )
     if any(term in text for term in magic_terms):
         return "Magic: The Gathering"
-    return None
+    if "dice throne" in text or "board game" in text:
+        return "Board Games"
+    if "d&d" in text or "dungeons & dragons" in text or "rpg" in text:
+        return "Roleplaying Games"
+    if "warhammer" in text or "miniature" in text:
+        return "Miniatures"
+    return "Community Event"
 
 
 async def scrape_raven_forge_calendar_events() -> List[Event]:
-    """Read Raven Forge's public calendar and retain only the five website TCGs."""
+    """Read every event on Raven Forge's public calendar."""
     text = await fetch_html(RAVEN_FORGE_CALENDAR_ICS_URL)
     blocks: List[dict[str, List[tuple[str, str]]]] = []
     current: dict[str, List[tuple[str, str]]] | None = None
@@ -828,8 +834,6 @@ async def scrape_raven_forge_calendar_events() -> List[Event]:
         title = (item.get("SUMMARY") or [("", "")])[0][1]
         description = (item.get("DESCRIPTION") or [("", "")])[0][1]
         game = calendar_game(title, description)
-        if not game:
-            continue
 
         start_property = (item.get("DTSTART") or [("", "")])[0]
         start = parse_ics_datetime(*start_property)
