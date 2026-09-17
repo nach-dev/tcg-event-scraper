@@ -2,13 +2,15 @@ from __future__ import annotations
 
 import asyncio
 import re
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 from typing import Iterable, List
 from urllib.parse import urlencode, urljoin
 
 import httpx
 from bs4 import BeautifulSoup
+from dateutil.rrule import rrulestr
 from playwright.async_api import async_playwright
+from zoneinfo import ZoneInfo
 
 from models import Event
 
@@ -28,10 +30,15 @@ RAVEN_FORGE_LORCANA_URL = (
 )
 RAVEN_FORGE_MAGIC_URL = "https://locator.wizards.com/store/14156"
 RAVEN_FORGE_POKEMON_BASE_URL = "https://events.pokemon.com/EventLocator/LocationDetail"
+RAVEN_FORGE_CALENDAR_URL = "https://www.ravenforgegames.com/"
+RAVEN_FORGE_CALENDAR_ICS_URL = (
+    "https://calendar.google.com/calendar/ical/"
+    "c_gf9jlg1ud1dohgpaqsiamhd5q8%40group.calendar.google.com/public/basic.ics"
+)
 
 
 def raven_forge_pokemon_url() -> str:
-    return f"{RAVEN_FORGE_POKEMON_BASE_URL}?{urlencode({
+    query = {
         'EventDetailGUID': '',
         'LocationName': 'RAVEN FORGE GAMES',
         'LocationGuid': 'f6cba702-09c8-c1d4-cf12-ad908a8096fd',
@@ -42,7 +49,8 @@ def raven_forge_pokemon_url() -> str:
         'range': '25',
         'longitude': '-79.1802994',
         'startdate': datetime.utcnow().strftime('%Y-%m-%d'),
-    })}"
+    }
+    return f"{RAVEN_FORGE_POKEMON_BASE_URL}?{urlencode(query)}"
 
 
 # -----------------------------
@@ -731,12 +739,144 @@ async def scrape_raven_forge_pokemon_events() -> List[Event]:
     return events
 
 
+def unfold_ics(text: str) -> List[str]:
+    lines: List[str] = []
+    for raw in text.replace("\r\n", "\n").split("\n"):
+        if raw.startswith((" ", "\t")) and lines:
+            lines[-1] += raw[1:]
+        else:
+            lines.append(raw)
+    return lines
+
+
+def clean_ics_value(value: str) -> str:
+    return (
+        value.replace("\\n", " | ")
+        .replace("\\,", ",")
+        .replace("\\;", ";")
+        .replace("\\\\", "\\")
+        .strip()
+    )
+
+
+def parse_ics_datetime(raw_key: str, value: str) -> datetime | None:
+    eastern = ZoneInfo("America/New_York")
+    clean = value.strip()
+    is_utc = clean.endswith("Z")
+    if is_utc:
+        clean = clean[:-1]
+
+    for fmt in ("%Y%m%dT%H%M%S", "%Y%m%dT%H%M", "%Y%m%d"):
+        try:
+            parsed = datetime.strptime(clean, fmt)
+            if is_utc:
+                return parsed.replace(tzinfo=timezone.utc).astimezone(eastern)
+            return parsed.replace(tzinfo=eastern)
+        except ValueError:
+            continue
+    return None
+
+
+def calendar_game(title: str, description: str) -> str | None:
+    text = f"{title} {description}".lower()
+    if "one piece" in text:
+        return "One Piece"
+    if "gundam" in text:
+        return "Gundam Card Game"
+    if "lorcana" in text:
+        return "Disney Lorcana"
+    if "pokemon" in text or "pokémon" in text:
+        return "Pokémon"
+    magic_terms = (
+        "magic", "mtg", "commander", "modern", "standard", "pauper",
+        "cedh", "rcq", "draft", "prerelease",
+    )
+    if any(term in text for term in magic_terms):
+        return "Magic: The Gathering"
+    return None
+
+
+async def scrape_raven_forge_calendar_events() -> List[Event]:
+    """Read Raven Forge's public calendar and retain only the five website TCGs."""
+    text = await fetch_html(RAVEN_FORGE_CALENDAR_ICS_URL)
+    blocks: List[dict[str, List[tuple[str, str]]]] = []
+    current: dict[str, List[tuple[str, str]]] | None = None
+
+    for line in unfold_ics(text):
+        if line == "BEGIN:VEVENT":
+            current = {}
+            continue
+        if line == "END:VEVENT":
+            if current is not None:
+                blocks.append(current)
+            current = None
+            continue
+        if current is None or ":" not in line:
+            continue
+        raw_key, value = line.split(":", 1)
+        key = raw_key.split(";", 1)[0]
+        current.setdefault(key, []).append((raw_key, clean_ics_value(value)))
+
+    eastern = ZoneInfo("America/New_York")
+    today = datetime.now(eastern).replace(hour=0, minute=0, second=0, microsecond=0)
+    horizon = today + timedelta(days=180)
+    events: List[Event] = []
+
+    for item in blocks:
+        if (item.get("STATUS") or [("", "")])[0][1] == "CANCELLED":
+            continue
+        title = (item.get("SUMMARY") or [("", "")])[0][1]
+        description = (item.get("DESCRIPTION") or [("", "")])[0][1]
+        game = calendar_game(title, description)
+        if not game:
+            continue
+
+        start_property = (item.get("DTSTART") or [("", "")])[0]
+        start = parse_ics_datetime(*start_property)
+        if not start:
+            continue
+
+        occurrences = [start]
+        recurrence = (item.get("RRULE") or [("", "")])[0][1]
+        if recurrence:
+            try:
+                occurrences = list(
+                    rrulestr(recurrence, dtstart=start).between(today, horizon, inc=True)
+                )
+            except Exception as exc:
+                print(f"Calendar recurrence failed for {title}: {exc}")
+
+        for occurrence in occurrences:
+            if not (today <= occurrence <= horizon):
+                continue
+            events.append(
+                Event(
+                    source="Raven Forge Games Calendar",
+                    game=game,
+                    title=title,
+                    event_type="Play - Store Calendar",
+                    start_date=occurrence.strftime("%Y-%m-%d"),
+                    start_time=occurrence.strftime("%-I:%M %p"),
+                    venue=RAVEN_FORGE_NAME,
+                    city="Sanford",
+                    region="NC",
+                    country="US",
+                    location_text=RAVEN_FORGE_ADDRESS,
+                    url=RAVEN_FORGE_CALENDAR_URL,
+                    notes=description or "Raven Forge public calendar",
+                )
+            )
+
+    return events
+
+
 async def scrape_raven_forge_events() -> List[Event]:
     """Build the strict store feed; never include unverified national listings."""
     batches = await asyncio.gather(
         scrape_raven_forge_lorcana_events(),
         scrape_raven_forge_magic_events(),
         scrape_raven_forge_pokemon_events(),
+        scrape_raven_forge_calendar_events(),
         return_exceptions=True,
     )
     events: List[Event] = []
@@ -745,7 +885,11 @@ async def scrape_raven_forge_events() -> List[Event]:
             print(f"Raven Forge scraper failed: {batch}")
             continue
         events.extend(batch)
-    return sorted(events, key=lambda event: (event.start_date or "9999-99-99", event.title))
+    deduped = {event.dedupe_key(): event for event in events}
+    return sorted(
+        deduped.values(),
+        key=lambda event: (event.start_date or "9999-99-99", event.start_time or "", event.title),
+    )
 
 
 async def scrape_riftbound_events() -> List[Event]:
