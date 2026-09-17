@@ -152,7 +152,7 @@
     },
     {
       "game_type": "Disney Lorcana",
-      "event_type": "Play - Set Championship",
+      "event_type": "Play - Weekly Play",
       "event_name": "Upcoming",
       "event_date": "2026-09-19",
       "event_date_display": "Sep 19, 2026",
@@ -1049,7 +1049,7 @@
     },
     {
       "game_type": "Disney Lorcana",
-      "event_type": "Play - Weekly Play",
+      "event_type": "Play - Constructed",
       "event_name": "Upcoming",
       "event_date": "2026-10-03",
       "event_date_display": "Oct 03, 2026",
@@ -1933,7 +1933,7 @@
     },
     {
       "game_type": "Disney Lorcana",
-      "event_type": "Play - Weekly Play",
+      "event_type": "Play - Sealed",
       "event_name": "Upcoming",
       "event_date": "2026-10-17",
       "event_date_display": "Oct 17, 2026",
