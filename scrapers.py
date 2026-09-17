@@ -686,7 +686,12 @@ async def scrape_raven_forge_lorcana_events() -> List[Event]:
             )
         )
 
-    deduped = {event.dedupe_key(): event for event in events}
+    # Locator sources are gathered before the store calendar. Keep the first
+    # copy so a real registration URL is not replaced by the calendar's
+    # generic Raven Forge website URL.
+    deduped = {}
+    for event in events:
+        deduped.setdefault(event.dedupe_key(), event)
     return list(deduped.values())
 
 
