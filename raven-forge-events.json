@@ -1,0 +1,36 @@
+{
+  "store": {
+    "name": "Raven Forge Games",
+    "address": "132 S. Steele St., Sanford, NC 27330",
+    "city": "Sanford",
+    "state": "NC"
+  },
+  "sources": [
+    {
+      "game_type": "Disney Lorcana",
+      "status": "connected",
+      "url": "https://tcg.ravensburgerplay.com/stores/d9a4caf9-daf1-43d2-8c26-83879cccd8a9"
+    },
+    {
+      "game_type": "Magic: The Gathering",
+      "status": "connected",
+      "url": "https://locator.wizards.com/store/14156"
+    },
+    {
+      "game_type": "Pokémon",
+      "status": "connected",
+      "url": "https://events.pokemon.com/EventLocator/LocationDetail?LocationName=RAVEN+FORGE+GAMES&LocationGuid=f6cba702-09c8-c1d4-cf12-ad908a8096fd&latitude=35.4798757&iskm=false&locale=en-US&storename=RAVEN+FORGE+GAMES&range=25&longitude=-79.1802994"
+    },
+    {
+      "game_type": "One Piece",
+      "status": "needs_store_url",
+      "url": "https://www.bandai-tcg-plus.com/"
+    },
+    {
+      "game_type": "Gundam Card Game",
+      "status": "needs_store_url",
+      "url": "https://www.bandai-tcg-plus.com/"
+    }
+  ],
+  "events": []
+}
