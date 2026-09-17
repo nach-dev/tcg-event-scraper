@@ -1049,7 +1049,7 @@
     },
     {
       "game_type": "Disney Lorcana",
-      "event_type": "Play - Constructed",
+      "event_type": "Play - Weekly Play",
       "event_name": "Upcoming",
       "event_date": "2026-10-03",
       "event_date_display": "Oct 03, 2026",
@@ -3193,19 +3193,6 @@
       "verified_store": true
     },
     {
-      "game_type": "Disney Lorcana",
-      "event_type": "Play - Weekly Play",
-      "event_name": "Upcoming",
-      "event_date": "2026-11-07",
-      "event_date_display": "Nov 07, 2026",
-      "event_time_display": null,
-      "event_description": "NOV 7 • 1:00 PM (EST)",
-      "source_site": "Ravensburger Play Hub — Raven Forge Games",
-      "source_url": "https://tcg.ravensburgerplay.com/stores/d9a4caf9-daf1-43d2-8c26-83879cccd8a9",
-      "location_text": "132 S. Steele St., Sanford, NC 27330",
-      "verified_store": true
-    },
-    {
       "game_type": "Community Event",
       "event_type": "Play - Store Calendar",
       "event_name": "Open Play: All Games",
@@ -3384,19 +3371,6 @@
       "event_description": "Raven Forge public calendar",
       "source_site": "Raven Forge Games Calendar",
       "source_url": "https://www.ravenforgegames.com/",
-      "location_text": "132 S. Steele St., Sanford, NC 27330",
-      "verified_store": true
-    },
-    {
-      "game_type": "Disney Lorcana",
-      "event_type": "Play - Weekly Play",
-      "event_name": "Upcoming",
-      "event_date": "2026-11-10",
-      "event_date_display": "Nov 10, 2026",
-      "event_time_display": null,
-      "event_description": "NOV 10 • 6:00 PM (EST)",
-      "source_site": "Ravensburger Play Hub — Raven Forge Games",
-      "source_url": "https://tcg.ravensburgerplay.com/stores/d9a4caf9-daf1-43d2-8c26-83879cccd8a9",
       "location_text": "132 S. Steele St., Sanford, NC 27330",
       "verified_store": true
     },
