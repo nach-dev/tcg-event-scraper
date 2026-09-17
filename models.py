@@ -11,6 +11,7 @@ class Event(BaseModel):
     event_type: Optional[str] = None
     format: Optional[str] = None
     start_date: Optional[str] = None
+    start_time: Optional[str] = None
     end_date: Optional[str] = None
     city: Optional[str] = None
     region: Optional[str] = None

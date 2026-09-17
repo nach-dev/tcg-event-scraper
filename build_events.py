@@ -10,6 +10,7 @@ import orjson
 
 from scrapers import (
     RAVEN_FORGE_ADDRESS,
+    RAVEN_FORGE_CALENDAR_URL,
     RAVEN_FORGE_LORCANA_URL,
     RAVEN_FORGE_MAGIC_URL,
     RAVEN_FORGE_NAME,
@@ -119,6 +120,7 @@ def main() -> None:
                 "event_name": event.title,
                 "event_date": event.start_date,
                 "event_date_display": display_date(event.start_date, event.notes),
+                "event_time_display": event.start_time,
                 "event_description": event.notes,
                 "source_site": event.source,
                 "source_url": event.url,
@@ -152,13 +154,13 @@ def main() -> None:
             },
             {
                 "game_type": "One Piece",
-                "status": "needs_store_url",
-                "url": "https://www.bandai-tcg-plus.com/",
+                "status": "connected_calendar",
+                "url": RAVEN_FORGE_CALENDAR_URL,
             },
             {
                 "game_type": "Gundam Card Game",
-                "status": "needs_store_url",
-                "url": "https://www.bandai-tcg-plus.com/",
+                "status": "connected_calendar",
+                "url": RAVEN_FORGE_CALENDAR_URL,
             },
         ],
         "events": raven_forge_rows,
