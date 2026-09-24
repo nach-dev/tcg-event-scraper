@@ -216,19 +216,6 @@
       "verified_store": true
     },
     {
-      "game_type": "Magic: The Gathering",
-      "event_type": "Play - Store Calendar",
-      "event_name": "Reality Fracture Prerelease",
-      "event_date": "2026-09-26",
-      "event_date_display": "Sep 26, 2026",
-      "event_time_display": "2:00 PM",
-      "event_description": "Raven Forge public calendar",
-      "source_site": "Raven Forge Games Calendar",
-      "source_url": "https://www.ravenforgegames.com/",
-      "location_text": "132 S. Steele St., Sanford, NC 27330",
-      "verified_store": true
-    },
-    {
       "game_type": "Community Event",
       "event_type": "Play - Store Calendar",
       "event_name": "Riftbound Vendetta Summoner Skirmish",
@@ -248,6 +235,19 @@
       "event_date": "2026-09-26",
       "event_date_display": "Sep 26, 2026",
       "event_time_display": "7:00 PM",
+      "event_description": "Raven Forge public calendar",
+      "source_site": "Raven Forge Games Calendar",
+      "source_url": "https://www.ravenforgegames.com/",
+      "location_text": "132 S. Steele St., Sanford, NC 27330",
+      "verified_store": true
+    },
+    {
+      "game_type": "Magic: The Gathering",
+      "event_type": "Play - Store Calendar",
+      "event_name": "Reality Fracture Prerelease",
+      "event_date": "2026-09-26",
+      "event_date_display": "Sep 26, 2026",
+      "event_time_display": "7:30 PM",
       "event_description": "Raven Forge public calendar",
       "source_site": "Raven Forge Games Calendar",
       "source_url": "https://www.ravenforgegames.com/",
@@ -2803,12 +2803,12 @@
       "verified_store": true
     },
     {
-      "game_type": "Magic: The Gathering",
+      "game_type": "Gundam Card Game",
       "event_type": "Play - Store Calendar",
-      "event_name": "Star Trek Prerelease",
+      "event_name": "Gundam GD06 Release Event",
       "event_date": "2026-11-07",
       "event_date_display": "Nov 07, 2026",
-      "event_time_display": "2:00 PM",
+      "event_time_display": "7:00 PM",
       "event_description": "Raven Forge public calendar",
       "source_site": "Raven Forge Games Calendar",
       "source_url": "https://www.ravenforgegames.com/",
@@ -2816,12 +2816,12 @@
       "verified_store": true
     },
     {
-      "game_type": "Gundam Card Game",
+      "game_type": "Magic: The Gathering",
       "event_type": "Play - Store Calendar",
-      "event_name": "Gundam GD06 Release Event",
+      "event_name": "Star Trek Prerelease",
       "event_date": "2026-11-07",
       "event_date_display": "Nov 07, 2026",
-      "event_time_display": "7:00 PM",
+      "event_time_display": "7:30 PM",
       "event_description": "Raven Forge public calendar",
       "source_site": "Raven Forge Games Calendar",
       "source_url": "https://www.ravenforgegames.com/",
