@@ -19,7 +19,7 @@
     {
       "game_type": "Pokémon",
       "status": "connected",
-      "url": "https://events.pokemon.com/EventLocator/LocationDetail?EventDetailGUID=&LocationName=RAVEN+FORGE+GAMES&LocationGuid=f6cba702-09c8-c1d4-cf12-ad908a8096fd&latitude=35.4798757&iskm=false&locale=en-US&storename=RAVEN+FORGE+GAMES&range=25&longitude=-79.1802994&startdate=2026-09-23"
+      "url": "https://events.pokemon.com/EventLocator/LocationDetail?EventDetailGUID=&LocationName=RAVEN+FORGE+GAMES&LocationGuid=f6cba702-09c8-c1d4-cf12-ad908a8096fd&latitude=35.4798757&iskm=false&locale=en-US&storename=RAVEN+FORGE+GAMES&range=25&longitude=-79.1802994&startdate=2026-09-24"
     },
     {
       "game_type": "One Piece",
@@ -33,58 +33,6 @@
     }
   ],
   "events": [
-    {
-      "game_type": "Community Event",
-      "event_type": "Play - Store Calendar",
-      "event_name": "Open Play: All Games",
-      "event_date": "2026-09-23",
-      "event_date_display": "Sep 23, 2026",
-      "event_time_display": "12:00 AM",
-      "event_description": "Raven Forge public calendar",
-      "source_site": "Raven Forge Games Calendar",
-      "source_url": "https://www.ravenforgegames.com/",
-      "location_text": "132 S. Steele St., Sanford, NC 27330",
-      "verified_store": true
-    },
-    {
-      "game_type": "Roleplaying Games",
-      "event_type": "Play - Store Calendar",
-      "event_name": "D&D Organized Play",
-      "event_date": "2026-09-23",
-      "event_date_display": "Sep 23, 2026",
-      "event_time_display": "6:00 PM",
-      "event_description": "Raven Forge public calendar",
-      "source_site": "Raven Forge Games Calendar",
-      "source_url": "https://www.ravenforgegames.com/",
-      "location_text": "132 S. Steele St., Sanford, NC 27330",
-      "verified_store": true
-    },
-    {
-      "game_type": "Magic: The Gathering",
-      "event_type": "Play - Store Calendar",
-      "event_name": "D&D Season of Magic Weekly Play",
-      "event_date": "2026-09-23",
-      "event_date_display": "Sep 23, 2026",
-      "event_time_display": "6:00 PM",
-      "event_description": "Raven Forge public calendar",
-      "source_site": "Raven Forge Games Calendar",
-      "source_url": "https://www.ravenforgegames.com/",
-      "location_text": "132 S. Steele St., Sanford, NC 27330",
-      "verified_store": true
-    },
-    {
-      "game_type": "Community Event",
-      "event_type": "Play - Store Calendar",
-      "event_name": "Riftbound Nexus Night",
-      "event_date": "2026-09-23",
-      "event_date_display": "Sep 23, 2026",
-      "event_time_display": "6:30 PM",
-      "event_description": "Raven Forge public calendar",
-      "source_site": "Raven Forge Games Calendar",
-      "source_url": "https://www.ravenforgegames.com/",
-      "location_text": "132 S. Steele St., Sanford, NC 27330",
-      "verified_store": true
-    },
     {
       "game_type": "Community Event",
       "event_type": "Play - Store Calendar",
@@ -9464,6 +9412,45 @@
       "event_name": "Open Play: All Games",
       "event_date": "2027-03-22",
       "event_date_display": "Mar 22, 2027",
+      "event_time_display": "12:00 AM",
+      "event_description": "Raven Forge public calendar",
+      "source_site": "Raven Forge Games Calendar",
+      "source_url": "https://www.ravenforgegames.com/",
+      "location_text": "132 S. Steele St., Sanford, NC 27330",
+      "verified_store": true
+    },
+    {
+      "game_type": "Magic: The Gathering",
+      "event_type": "Play - Store Calendar",
+      "event_name": "Modern Monday",
+      "event_date": "2027-03-22",
+      "event_date_display": "Mar 22, 2027",
+      "event_time_display": "7:00 PM",
+      "event_description": "$10 entry. Store credit awarded to winner based on participation",
+      "source_site": "Raven Forge Games Calendar",
+      "source_url": "https://www.ravenforgegames.com/",
+      "location_text": "132 S. Steele St., Sanford, NC 27330",
+      "verified_store": true
+    },
+    {
+      "game_type": "Gundam Card Game",
+      "event_type": "Play - Store Calendar",
+      "event_name": "Gundam TCG Weekly Tournaments",
+      "event_date": "2027-03-22",
+      "event_date_display": "Mar 22, 2027",
+      "event_time_display": "7:15 PM",
+      "event_description": "Raven Forge public calendar",
+      "source_site": "Raven Forge Games Calendar",
+      "source_url": "https://www.ravenforgegames.com/",
+      "location_text": "132 S. Steele St., Sanford, NC 27330",
+      "verified_store": true
+    },
+    {
+      "game_type": "Community Event",
+      "event_type": "Play - Store Calendar",
+      "event_name": "Open Play: All Games",
+      "event_date": "2027-03-23",
+      "event_date_display": "Mar 23, 2027",
       "event_time_display": "12:00 AM",
       "event_description": "Raven Forge public calendar",
       "source_site": "Raven Forge Games Calendar",
