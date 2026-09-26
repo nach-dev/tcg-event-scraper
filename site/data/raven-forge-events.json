@@ -19,7 +19,7 @@
     {
       "game_type": "Pokémon",
       "status": "connected",
-      "url": "https://events.pokemon.com/EventLocator/LocationDetail?EventDetailGUID=&LocationName=RAVEN+FORGE+GAMES&LocationGuid=f6cba702-09c8-c1d4-cf12-ad908a8096fd&latitude=35.4798757&iskm=false&locale=en-US&storename=RAVEN+FORGE+GAMES&range=25&longitude=-79.1802994&startdate=2026-09-25"
+      "url": "https://events.pokemon.com/EventLocator/LocationDetail?EventDetailGUID=&LocationName=RAVEN+FORGE+GAMES&LocationGuid=f6cba702-09c8-c1d4-cf12-ad908a8096fd&latitude=35.4798757&iskm=false&locale=en-US&storename=RAVEN+FORGE+GAMES&range=25&longitude=-79.1802994&startdate=2026-09-26"
     },
     {
       "game_type": "One Piece",
@@ -33,71 +33,6 @@
     }
   ],
   "events": [
-    {
-      "game_type": "Community Event",
-      "event_type": "Play - Store Calendar",
-      "event_name": "Open Play: All Games",
-      "event_date": "2026-09-25",
-      "event_date_display": "Sep 25, 2026",
-      "event_time_display": "12:00 AM",
-      "event_description": "Raven Forge public calendar",
-      "source_site": "Raven Forge Games Calendar",
-      "source_url": "https://www.ravenforgegames.com/",
-      "location_text": "132 S. Steele St., Sanford, NC 27330",
-      "verified_store": true
-    },
-    {
-      "game_type": "Roleplaying Games",
-      "event_type": "Play - Store Calendar",
-      "event_name": "D&D Organized Play",
-      "event_date": "2026-09-25",
-      "event_date_display": "Sep 25, 2026",
-      "event_time_display": "6:00 PM",
-      "event_description": "Raven Forge public calendar",
-      "source_site": "Raven Forge Games Calendar",
-      "source_url": "https://www.ravenforgegames.com/",
-      "location_text": "132 S. Steele St., Sanford, NC 27330",
-      "verified_store": true
-    },
-    {
-      "game_type": "Magic: The Gathering",
-      "event_type": "Play - Store Calendar",
-      "event_name": "D&D Organized Play & Season of Magic Makeup Play",
-      "event_date": "2026-09-25",
-      "event_date_display": "Sep 25, 2026",
-      "event_time_display": "6:00 PM",
-      "event_description": "Raven Forge public calendar",
-      "source_site": "Raven Forge Games Calendar",
-      "source_url": "https://www.ravenforgegames.com/",
-      "location_text": "132 S. Steele St., Sanford, NC 27330",
-      "verified_store": true
-    },
-    {
-      "game_type": "Magic: The Gathering",
-      "event_type": "Play - Store Calendar",
-      "event_name": "Friday Night Magic",
-      "event_date": "2026-09-25",
-      "event_date_display": "Sep 25, 2026",
-      "event_time_display": "7:00 PM",
-      "event_description": "Friday Night Magic Organized Play.  Visit <a href=\"https://locator.wizards.com/store/14156\">https://locator.wizards.com/store/14156</a> for details on our events.",
-      "source_site": "Raven Forge Games Calendar",
-      "source_url": "https://www.ravenforgegames.com/",
-      "location_text": "132 S. Steele St., Sanford, NC 27330",
-      "verified_store": true
-    },
-    {
-      "game_type": "Magic: The Gathering",
-      "event_type": "Play - Store Calendar",
-      "event_name": "Reality Fracture Prerelease",
-      "event_date": "2026-09-25",
-      "event_date_display": "Sep 25, 2026",
-      "event_time_display": "7:00 PM",
-      "event_description": "Friday Night Magic Organized Play.  Visit <a href=\"https://locator.wizards.com/store/14156\">https://locator.wizards.com/store/14156</a> for details on our events.",
-      "source_site": "Raven Forge Games Calendar",
-      "source_url": "https://www.ravenforgegames.com/",
-      "location_text": "132 S. Steele St., Sanford, NC 27330",
-      "verified_store": true
-    },
     {
       "game_type": "Disney Lorcana",
       "event_type": "Play - Weekly Play",
@@ -164,6 +99,19 @@
       "verified_store": true
     },
     {
+      "game_type": "Magic: The Gathering",
+      "event_type": "Play - Store Calendar",
+      "event_name": "Reality Fracture Prerelease",
+      "event_date": "2026-09-26",
+      "event_date_display": "Sep 26, 2026",
+      "event_time_display": "2:00 PM",
+      "event_description": "Raven Forge public calendar",
+      "source_site": "Raven Forge Games Calendar",
+      "source_url": "https://www.ravenforgegames.com/",
+      "location_text": "132 S. Steele St., Sanford, NC 27330",
+      "verified_store": true
+    },
+    {
       "game_type": "Community Event",
       "event_type": "Play - Store Calendar",
       "event_name": "Riftbound Vendetta Summoner Skirmish",
@@ -183,19 +131,6 @@
       "event_date": "2026-09-26",
       "event_date_display": "Sep 26, 2026",
       "event_time_display": "7:00 PM",
-      "event_description": "Raven Forge public calendar",
-      "source_site": "Raven Forge Games Calendar",
-      "source_url": "https://www.ravenforgegames.com/",
-      "location_text": "132 S. Steele St., Sanford, NC 27330",
-      "verified_store": true
-    },
-    {
-      "game_type": "Magic: The Gathering",
-      "event_type": "Play - Store Calendar",
-      "event_name": "Reality Fracture Prerelease",
-      "event_date": "2026-09-26",
-      "event_date_display": "Sep 26, 2026",
-      "event_time_display": "7:30 PM",
       "event_description": "Raven Forge public calendar",
       "source_site": "Raven Forge Games Calendar",
       "source_url": "https://www.ravenforgegames.com/",
@@ -9451,6 +9386,45 @@
       "event_name": "Open Play: All Games",
       "event_date": "2027-03-24",
       "event_date_display": "Mar 24, 2027",
+      "event_time_display": "12:00 AM",
+      "event_description": "Raven Forge public calendar",
+      "source_site": "Raven Forge Games Calendar",
+      "source_url": "https://www.ravenforgegames.com/",
+      "location_text": "132 S. Steele St., Sanford, NC 27330",
+      "verified_store": true
+    },
+    {
+      "game_type": "Roleplaying Games",
+      "event_type": "Play - Store Calendar",
+      "event_name": "D&D Organized Play",
+      "event_date": "2027-03-24",
+      "event_date_display": "Mar 24, 2027",
+      "event_time_display": "6:00 PM",
+      "event_description": "Raven Forge public calendar",
+      "source_site": "Raven Forge Games Calendar",
+      "source_url": "https://www.ravenforgegames.com/",
+      "location_text": "132 S. Steele St., Sanford, NC 27330",
+      "verified_store": true
+    },
+    {
+      "game_type": "Community Event",
+      "event_type": "Play - Store Calendar",
+      "event_name": "Riftbound Nexus Night",
+      "event_date": "2027-03-24",
+      "event_date_display": "Mar 24, 2027",
+      "event_time_display": "6:30 PM",
+      "event_description": "Raven Forge public calendar",
+      "source_site": "Raven Forge Games Calendar",
+      "source_url": "https://www.ravenforgegames.com/",
+      "location_text": "132 S. Steele St., Sanford, NC 27330",
+      "verified_store": true
+    },
+    {
+      "game_type": "Community Event",
+      "event_type": "Play - Store Calendar",
+      "event_name": "Open Play: All Games",
+      "event_date": "2027-03-25",
+      "event_date_display": "Mar 25, 2027",
       "event_time_display": "12:00 AM",
       "event_description": "Raven Forge public calendar",
       "source_site": "Raven Forge Games Calendar",
