@@ -34,19 +34,6 @@
   ],
   "events": [
     {
-      "game_type": "Disney Lorcana",
-      "event_type": "Play - Weekly Play",
-      "event_name": "Upcoming",
-      "event_date": "2026-10-03",
-      "event_date_display": "Oct 03, 2026",
-      "event_time_display": null,
-      "event_description": "OCT 3 • 1:00 PM (EDT)",
-      "source_site": "Ravensburger Play Hub — Raven Forge Games",
-      "source_url": "https://tcg.ravensburgerplay.com/stores/d9a4caf9-daf1-43d2-8c26-83879cccd8a9",
-      "location_text": "132 S. Steele St., Sanford, NC 27330",
-      "verified_store": true
-    },
-    {
       "game_type": "Community Event",
       "event_type": "Play - Store Calendar",
       "event_name": "Big Steele Birthday Bash",
