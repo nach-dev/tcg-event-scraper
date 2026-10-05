@@ -19,7 +19,7 @@
     {
       "game_type": "Pokémon",
       "status": "connected",
-      "url": "https://events.pokemon.com/EventLocator/LocationDetail?EventDetailGUID=&LocationName=RAVEN+FORGE+GAMES&LocationGuid=f6cba702-09c8-c1d4-cf12-ad908a8096fd&latitude=35.4798757&iskm=false&locale=en-US&storename=RAVEN+FORGE+GAMES&range=25&longitude=-79.1802994&startdate=2026-10-04"
+      "url": "https://events.pokemon.com/EventLocator/LocationDetail?EventDetailGUID=&LocationName=RAVEN+FORGE+GAMES&LocationGuid=f6cba702-09c8-c1d4-cf12-ad908a8096fd&latitude=35.4798757&iskm=false&locale=en-US&storename=RAVEN+FORGE+GAMES&range=25&longitude=-79.1802994&startdate=2026-10-05"
     },
     {
       "game_type": "One Piece",
@@ -33,97 +33,6 @@
     }
   ],
   "events": [
-    {
-      "game_type": "Community Event",
-      "event_type": "Play - Store Calendar",
-      "event_name": "Open Play: All Games",
-      "event_date": "2026-10-04",
-      "event_date_display": "Oct 04, 2026",
-      "event_time_display": "12:00 AM",
-      "event_description": "Raven Forge public calendar",
-      "source_site": "Raven Forge Games Calendar",
-      "source_url": "https://www.ravenforgegames.com/",
-      "location_text": "132 S. Steele St., Sanford, NC 27330",
-      "verified_store": true
-    },
-    {
-      "game_type": "Community Event",
-      "event_type": "Play - Store Calendar",
-      "event_name": "Puzzle Sundays - Drop In",
-      "event_date": "2026-10-04",
-      "event_date_display": "Oct 04, 2026",
-      "event_time_display": "12:00 PM",
-      "event_description": "Raven Forge public calendar",
-      "source_site": "Raven Forge Games Calendar",
-      "source_url": "https://www.ravenforgegames.com/",
-      "location_text": "132 S. Steele St., Sanford, NC 27330",
-      "verified_store": true
-    },
-    {
-      "game_type": "Pokémon",
-      "event_type": "Play - Store Calendar",
-      "event_name": "Pokémon Casual Tournament",
-      "event_date": "2026-10-04",
-      "event_date_display": "Oct 04, 2026",
-      "event_time_display": "1:00 PM",
-      "event_description": "Expanded format everyone gets a pack for playing.",
-      "source_site": "Raven Forge Games Calendar",
-      "source_url": "https://www.ravenforgegames.com/",
-      "location_text": "132 S. Steele St., Sanford, NC 27330",
-      "verified_store": true
-    },
-    {
-      "game_type": "Pokémon",
-      "event_type": "Play - Store Calendar",
-      "event_name": "Pokémon October League Challenge",
-      "event_date": "2026-10-04",
-      "event_date_display": "Oct 04, 2026",
-      "event_time_display": "1:00 PM",
-      "event_description": "Expanded format everyone gets a pack for playing.",
-      "source_site": "Raven Forge Games Calendar",
-      "source_url": "https://www.ravenforgegames.com/",
-      "location_text": "132 S. Steele St., Sanford, NC 27330",
-      "verified_store": true
-    },
-    {
-      "game_type": "Magic: The Gathering",
-      "event_type": "Play - Store Calendar",
-      "event_name": "cEDH Weekly",
-      "event_date": "2026-10-04",
-      "event_date_display": "Oct 04, 2026",
-      "event_time_display": "2:00 PM",
-      "event_description": "A more casual weekly cEDH tournament for players to test the waters. You may use as many Proxys as you want in the weekly.  $5 Entry Fee prizes and promos just for playing",
-      "source_site": "Raven Forge Games Calendar",
-      "source_url": "https://www.ravenforgegames.com/",
-      "location_text": "132 S. Steele St., Sanford, NC 27330",
-      "verified_store": true
-    },
-    {
-      "game_type": "Community Event",
-      "event_type": "Play - Store Calendar",
-      "event_name": "Star Wars Unlimited",
-      "event_date": "2026-10-04",
-      "event_date_display": "Oct 04, 2026",
-      "event_time_display": "4:00 PM",
-      "event_description": "Sunday Star Wars Unlimited Organized Play. Free play most weeks. Promo packs and a booster pack just for playing.  Visit <a href=\"https://www.melee.gg/Hub/Organization/2766\" target=\"_blank\"><u>https://www.melee.gg/Hub/Organization/2766</u></a> for details on our events.",
-      "source_site": "Raven Forge Games Calendar",
-      "source_url": "https://www.ravenforgegames.com/",
-      "location_text": "132 S. Steele St., Sanford, NC 27330",
-      "verified_store": true
-    },
-    {
-      "game_type": "Magic: The Gathering",
-      "event_type": "Play - Store Calendar",
-      "event_name": "Star Wars Unlimited Homeworlds Prerelease",
-      "event_date": "2026-10-04",
-      "event_date_display": "Oct 04, 2026",
-      "event_time_display": "4:00 PM",
-      "event_description": "Sunday Star Wars Unlimited Organized Play. Free play most weeks. Promo packs and a booster pack just for playing.  Visit <a href=\"https://www.melee.gg/Hub/Organization/2766\" target=\"_blank\"><u>https://www.melee.gg/Hub/Organization/2766</u></a> for details on our events.",
-      "source_site": "Raven Forge Games Calendar",
-      "source_url": "https://www.ravenforgegames.com/",
-      "location_text": "132 S. Steele St., Sanford, NC 27330",
-      "verified_store": true
-    },
     {
       "game_type": "Community Event",
       "event_type": "Play - Store Calendar",
@@ -9282,6 +9191,45 @@
       "event_name": "Open Play: All Games",
       "event_date": "2027-04-02",
       "event_date_display": "Apr 02, 2027",
+      "event_time_display": "12:00 AM",
+      "event_description": "Raven Forge public calendar",
+      "source_site": "Raven Forge Games Calendar",
+      "source_url": "https://www.ravenforgegames.com/",
+      "location_text": "132 S. Steele St., Sanford, NC 27330",
+      "verified_store": true
+    },
+    {
+      "game_type": "Roleplaying Games",
+      "event_type": "Play - Store Calendar",
+      "event_name": "D&D Organized Play",
+      "event_date": "2027-04-02",
+      "event_date_display": "Apr 02, 2027",
+      "event_time_display": "6:00 PM",
+      "event_description": "Raven Forge public calendar",
+      "source_site": "Raven Forge Games Calendar",
+      "source_url": "https://www.ravenforgegames.com/",
+      "location_text": "132 S. Steele St., Sanford, NC 27330",
+      "verified_store": true
+    },
+    {
+      "game_type": "Magic: The Gathering",
+      "event_type": "Play - Store Calendar",
+      "event_name": "Friday Night Magic",
+      "event_date": "2027-04-02",
+      "event_date_display": "Apr 02, 2027",
+      "event_time_display": "7:00 PM",
+      "event_description": "Friday Night Magic Organized Play.  Visit <a href=\"https://locator.wizards.com/store/14156\">https://locator.wizards.com/store/14156</a> for details on our events.",
+      "source_site": "Raven Forge Games Calendar",
+      "source_url": "https://www.ravenforgegames.com/",
+      "location_text": "132 S. Steele St., Sanford, NC 27330",
+      "verified_store": true
+    },
+    {
+      "game_type": "Community Event",
+      "event_type": "Play - Store Calendar",
+      "event_name": "Open Play: All Games",
+      "event_date": "2027-04-03",
+      "event_date_display": "Apr 03, 2027",
       "event_time_display": "12:00 AM",
       "event_description": "Raven Forge public calendar",
       "source_site": "Raven Forge Games Calendar",
