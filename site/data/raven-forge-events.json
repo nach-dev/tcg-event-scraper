@@ -3219,6 +3219,19 @@
       "verified_store": true
     },
     {
+      "game_type": "Disney Lorcana",
+      "event_type": "Play - Weekly Play",
+      "event_name": "Upcoming",
+      "event_date": "2026-12-08",
+      "event_date_display": "Dec 08, 2026",
+      "event_time_display": null,
+      "event_description": "DEC 8 • 6:00 PM (EST)",
+      "source_site": "Ravensburger Play Hub — Raven Forge Games",
+      "source_url": "https://tcg.ravensburgerplay.com/stores/d9a4caf9-daf1-43d2-8c26-83879cccd8a9",
+      "location_text": "132 S. Steele St., Sanford, NC 27330",
+      "verified_store": true
+    },
+    {
       "game_type": "Community Event",
       "event_type": "Play - Store Calendar",
       "event_name": "Open Play: All Games",
@@ -3410,6 +3423,19 @@
       "event_description": "Friday Night Magic Organized Play.  Visit <a href=\"https://locator.wizards.com/store/14156\">https://locator.wizards.com/store/14156</a> for details on our events.",
       "source_site": "Raven Forge Games Calendar",
       "source_url": "https://www.ravenforgegames.com/",
+      "location_text": "132 S. Steele St., Sanford, NC 27330",
+      "verified_store": true
+    },
+    {
+      "game_type": "Disney Lorcana",
+      "event_type": "Play - Weekly Play",
+      "event_name": "Upcoming",
+      "event_date": "2026-12-12",
+      "event_date_display": "Dec 12, 2026",
+      "event_time_display": null,
+      "event_description": "DEC 12 • 1:00 PM (EST)",
+      "source_site": "Ravensburger Play Hub — Raven Forge Games",
+      "source_url": "https://tcg.ravensburgerplay.com/stores/d9a4caf9-daf1-43d2-8c26-83879cccd8a9",
       "location_text": "132 S. Steele St., Sanford, NC 27330",
       "verified_store": true
     },
