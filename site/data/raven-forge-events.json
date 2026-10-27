@@ -73,19 +73,6 @@
       "verified_store": true
     },
     {
-      "game_type": "Disney Lorcana",
-      "event_type": "Play - Weekly Play",
-      "event_name": "Upcoming",
-      "event_date": "2026-10-27",
-      "event_date_display": "Oct 27, 2026",
-      "event_time_display": null,
-      "event_description": "OCT 27 • 6:00 PM (EDT)",
-      "source_site": "Ravensburger Play Hub — Raven Forge Games",
-      "source_url": "https://tcg.ravensburgerplay.com/stores/d9a4caf9-daf1-43d2-8c26-83879cccd8a9",
-      "location_text": "132 S. Steele St., Sanford, NC 27330",
-      "verified_store": true
-    },
-    {
       "game_type": "Community Event",
       "event_type": "Play - Store Calendar",
       "event_name": "Open Play: All Games",
@@ -4742,6 +4729,19 @@
     {
       "game_type": "Disney Lorcana",
       "event_type": "Play - Store Calendar",
+      "event_name": "Lorcana Hyperia City Set Championship",
+      "event_date": "2027-01-09",
+      "event_date_display": "Jan 09, 2027",
+      "event_time_display": "1:00 PM",
+      "event_description": "Saturday Lorcana Organized Play.  Visit <a href=\"https://tcg.ravensburgerplay.com/stores/d9a4caf9-daf1-43d2-8c26-83879cccd8a9\">https://tcg.ravensburgerplay.com/stores/d9a4caf9-daf1-43d2-8c26-83879cccd8a9</a> for details on our events.",
+      "source_site": "Raven Forge Games Calendar",
+      "source_url": "https://www.ravenforgegames.com/",
+      "location_text": "132 S. Steele St., Sanford, NC 27330",
+      "verified_store": true
+    },
+    {
+      "game_type": "Disney Lorcana",
+      "event_type": "Play - Store Calendar",
       "event_name": "Lorcana League",
       "event_date": "2027-01-09",
       "event_date_display": "Jan 09, 2027",
@@ -6146,6 +6146,19 @@
     {
       "game_type": "Disney Lorcana",
       "event_type": "Play - Store Calendar",
+      "event_name": "Lorcana Into the Inkdark Prerelease (Sealed)",
+      "event_date": "2027-02-06",
+      "event_date_display": "Feb 06, 2027",
+      "event_time_display": "1:00 PM",
+      "event_description": "Saturday Lorcana Organized Play.  Visit <a href=\"https://tcg.ravensburgerplay.com/stores/d9a4caf9-daf1-43d2-8c26-83879cccd8a9\">https://tcg.ravensburgerplay.com/stores/d9a4caf9-daf1-43d2-8c26-83879cccd8a9</a> for details on our events.",
+      "source_site": "Raven Forge Games Calendar",
+      "source_url": "https://www.ravenforgegames.com/",
+      "location_text": "132 S. Steele St., Sanford, NC 27330",
+      "verified_store": true
+    },
+    {
+      "game_type": "Disney Lorcana",
+      "event_type": "Play - Store Calendar",
       "event_name": "Lorcana League",
       "event_date": "2027-02-06",
       "event_date_display": "Feb 06, 2027",
@@ -6281,6 +6294,19 @@
       "event_date_display": "Feb 09, 2027",
       "event_time_display": "5:00 PM",
       "event_description": "Play, trade, and geek out with all things Pokémon TCG. Our Free Pokémon League is for all ages, and everyone who participates gets a free promo pack!",
+      "source_site": "Raven Forge Games Calendar",
+      "source_url": "https://www.ravenforgegames.com/",
+      "location_text": "132 S. Steele St., Sanford, NC 27330",
+      "verified_store": true
+    },
+    {
+      "game_type": "Disney Lorcana",
+      "event_type": "Play - Store Calendar",
+      "event_name": "Lorcana Into the Inkdark Prerelease (Pack Rush)",
+      "event_date": "2027-02-09",
+      "event_date_display": "Feb 09, 2027",
+      "event_time_display": "6:00 PM",
+      "event_description": "Raven Forge public calendar",
       "source_site": "Raven Forge Games Calendar",
       "source_url": "https://www.ravenforgegames.com/",
       "location_text": "132 S. Steele St., Sanford, NC 27330",
